@@ -1,0 +1,15 @@
+title: Smona LiteWeb
+email: silbertmonaphia@gmail.com
+description: 这是自留地 
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: silbertmonaphia
+github_username:  silbertmonaphia 
+
+# Build settings
+markdown: kramdown
+
+# Pagination
+gems: [jekyll-paginate]
+paginate: 20
+paginate_path: "page/:num/"
