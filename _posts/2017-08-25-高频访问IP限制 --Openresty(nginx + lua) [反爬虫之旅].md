@@ -41,7 +41,7 @@ Nginx本身就有根据ip访问频率的设置，比如[“服务器访问频率
   
 P.s.补充一点，其实Lua在Nginx的应用只是Lua应用中很小的一个点而已，它在游戏中才是被广泛地应用，因为：第一，游戏在乎性能体验，所以很多Engine都是用C/C++写的，自然需要Lua做一点粘合性补充; 第二，Lua的性能仅仅次于C/C++，而且还有为了榨干lua性能的LuaJIT的存在，让lua的性能得到进一步地提升,故Lua是C/C++后的第二选择
   
-  OpenResty本身没有什么好讲的，它最大的功劳就是把Lua比较舒服地捆绑到了Nginx上，其他特性都是Lua本身的东西，所以想把Nginx玩的更加溜，除了彻底玩转Nginx本身以外(Nginx本身的配置就有点像一门小语言了)，Lua会是你不二的选择。
+OpenResty本身没有什么好讲的，它最大的功劳就是把Lua比较舒服地捆绑到了Nginx上，其他特性都是Lua本身的东西，所以想把Nginx玩的更加溜，除了彻底玩转Nginx本身以外(Nginx本身的配置就有点像一门小语言了)，Lua会是你不二的选择。
 
 ##  下载安装OpenResty
   下载安装可以直接参考官网的教程(看安装和新手上路就可以了，以后有空想稍微深入一点的，可以直接看[OpenResty最佳实践](https://www.gitbook.com/book/moonbingbing/openresty-best-practices))
