@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 # Bio
-Hello! 我系@silbertmonaphia, 简写smona   
+Hello! 我系@silbertmonaphia, 简写S.Mona或smona   
 一直都妄想做一个出色的Hacker和一名优秀的Dancer  
 喜欢#cool的,#swag的,或者是"有味道"的东西  
 
