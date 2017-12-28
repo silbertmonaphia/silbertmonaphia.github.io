@@ -18,9 +18,3 @@ paginate_path: "page/:num/"
 prose:
     rooturl: '_posts'
     siteurl: 'https://silbertmonaphia.github.io'
-    metadata:
-        _posts:
-          - name: "layout"
-            field:
-              element: "hidden"
-              value: "blog"
