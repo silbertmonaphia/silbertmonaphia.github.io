@@ -84,7 +84,7 @@ layout: post
 　　Windows 能做的那些没用的事情 Linux 永远做不好  
 
 ##  电脑游戏  
-　　有些人说 Linux 下不能玩 Windows 下所能得到的所有游戏.的确，Linux 下虽然也有少量的游戏，比如 Quake.但是它没有 Counter Strike, 没有 Star Craft, ……
+　　有些人说 Linux 下不能玩 Windows 下所能得到的所有游戏.的确，Linux 下虽然也有少量的游戏，比如 Quake.但是它没有 Counter Strike, 没有 Star Craft, ……  
 　　并不是说电脑游戏不该玩，但是应该适可而止.电脑是用来处理事务，帮助你学习，解决问题的工具，而不是一个玩具！整天沉迷于电脑游戏中，而不出去感觉外面的世界，你会变得越来越冷酷，越来越缺乏人情味.你与真实的世界越来越远.  
 　　你可以在 CS 里杀人，你可以在 Tomb Raider 里探险，你甚至可以在 Tony Hawk's Pro Skaters 里滑板…… 但是 It's not real！你虽然有很高的"反恐技巧"，但是遇到歹徒的时候，你是那么的怯懦；你虽然控制 Laura 伸手敏捷，但是你打篮球的时候怎么总是被人断球？你虽然可以轻易的在 THPS 里作出一个 "360 kickflip to hangten grind to fakie"，但是你踩在自己的滑板上的时候还不会 ollie！  
 　　说回来，如果你偶尔玩一下电脑游戏未尝不可.但是世界上有远比 Windows + PC 更好的游戏方式.**Sony 的 PlayStation2, SEGA 的 DreamCast, Nintendo 的 N64，Namco的街机**……每一个都比 Windows 游戏精彩，每一个都有如此高的3D性能，以至于Pentium4, Itanium + GForce4 都无法与它们比美！  
