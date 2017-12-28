@@ -1,8 +1,8 @@
 ---
-title:  "LinuxMint安装报错（使用磁盘的最小对齐，这可能造成非常差的性能），安装无法继续"
+title: LinuxMint安装报错（使用磁盘的最小对齐，这可能造成非常差的性能），安装无法继续
 author: smona
-published: True
-date: 2016-03-19 23:08:18
+published: true
+date: {}
 layout: post
 ---
   没想到第一篇csdn的博文竟然是一篇Linux安装出错的问题，而且是很奇葩的问题，以下是求解过程。
