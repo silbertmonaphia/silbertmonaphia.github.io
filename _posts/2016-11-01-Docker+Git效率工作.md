@@ -316,7 +316,7 @@ docker中文支持问题
   
 17.9.23更新:  
   最近调优的时候学到的:原来并不是什么都适合用docker打包! 数据库(mysql,postgresql,redis,mongodb等)最好不要也放到docker容器里面:  
-  因为第一，会让查询隔多了一层docker的容器，查询速度变慢(从docker容器里面拿出数据库，查询至少可以快一倍);  
+  第一，会让查询隔多了一层docker的容器，查询速度变慢(从docker容器里面拿出数据库，查询至少可以快一倍);  
   第二，数据也不是经常需要重新启动的存在，不像web应用那样有点新功能就要重新部署  
 Ref:[WHY DATABASES ARE NOT FOR CONTAINERS](https://myopsblog.wordpress.com/2017/02/06/why-databases-is-not-for-containers/)
 
