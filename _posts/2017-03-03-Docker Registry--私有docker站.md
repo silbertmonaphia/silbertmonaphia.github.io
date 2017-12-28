@@ -37,7 +37,7 @@ curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2
 
   　docker  push/pull  操作不知道从哪个版本开始需要https了，所以我们得给我们的主机弄一个https先.
    
-  　我的主机是挂了域名的(用domain.com代表吧)，而从[官网Get a certificate](https://docs.docker.com/registry/deploying/#get-a-certificate)]可以看出，docker registry如果要https，则需要两个东西，一个是.crt文件,一个是.key文件，有了这两个就可以让我们的docker registry走https，验证ssl了  
+  　我的主机是挂了域名的(用domain.com代表吧)，而从[官网Get a certificate](https://docs.docker.com/registry/deploying/#get-a-certificate)可以看出，docker registry如果要https，则需要两个东西，一个是.crt文件,一个是.key文件，有了这两个就可以让我们的docker registry走https，验证ssl了  
    
   　其实这两个文件都可以自签署，详细办法后面再说，是使用openssl生成的，这种办法比较麻烦，而且docker还不一定认这种自签署的证书,会出现"Get https://domain.com:5000/v1/_ping: x509: certificate signed by unknown authority"问题.  
    
