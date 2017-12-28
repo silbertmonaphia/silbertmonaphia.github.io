@@ -291,7 +291,7 @@ Bat $battery_percent%$battery_bar
 **【调节】Cpufreqd** 
 ----
 
-http://skyao.github.io/2015/08/08/linux-cpufreqd/
+<http://skyao.github.io/2015/08/08/linux-cpufreqd/>
 
 
 P.s.什么？你说还有硬盘发热？不好意思我用SSD的，SSD基本最高也就45度，根本不成问题
