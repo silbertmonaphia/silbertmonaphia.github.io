@@ -146,8 +146,8 @@ syntax on
 因为现在网页上的视频大多数还在用Flash播放（可怜的我不装Flash连B站视频都看不了，B站何时升级成HTML5啊！），HTML5还没有普及，所以安装一个Flash是有必要的，虽然对于Flash，linux一直支持不好，各种消耗资源，只有期待HTML5快点普及，那时候就可以把Flash卸载了.
 从源安装flash即可，apt-get install flashplugin-nonfree
 
-  17.2.20更新："Adobe Flash 无法正常使用"的问题
-
+17.2.20更新：
+"Adobe Flash 无法正常使用"的问题
 嗯，2017鸡年春节已经过了，chrome的也更新了，但貌似在更新中也把浏览器的flash插件禁用了，所以有些网页上有些flash会看不了，之前flashplugin-nonfree的方法不太可以了，然后稍微谷歌了一下，发现chrome的帮助里面就有["Adobe Flash 无法正常使用"](https://support.google.com/chrome/answer/6258784?hl=zh-Hans),跟着做就可以fix这个问题，提个醒，第二步在chrome://components中更新中需要走代理更新，不然的 Adobe Flash Player显示的还是0.0.0.0,然后其实我这会儿已经是 24.0.0.221这个版本了，至于其他浏览器，应该就有其他浏览器的办法，我只是以最常用也最爱用的chrome做例子，不过网页flash的问题不大，因为以后都是html5的天下，随着各种页面的升级改造，flash就快成为过去式了，而H5页面的视频播放才会成为主流
 
 
