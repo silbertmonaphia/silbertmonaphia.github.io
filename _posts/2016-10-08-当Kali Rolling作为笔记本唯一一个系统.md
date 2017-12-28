@@ -317,7 +317,7 @@ QQ和微信都是现在社交甚至工作都不可少的东西（这两样还都
 
 wechat的github项目地址：
 
-https://github.com/geeeeeeeeek/electronic-wechat/blob/master/README_zh.md
+<https://github.com/geeeeeeeeek/electronic-wechat/blob/master/README_zh.md>
 
 16.7.3更新：注意一下nodejs直接apt-get install nodejs就可以了,然后如果发生node:not found 的错误，别担心，这里http://stackoverflow.com/questions/21168141/cannot-install-packages-using-node-package-manager-in-ubuntu 说了，"In summer 2012 Debian maintainers decided to rename Node.js executable to prevent some kind of namespace collision with another package",改名以后就会有新旧名称兼容问题，因为虽然人知道nodejs就是node但是程序很死板，nodejs你不说它就不知道等于node，这里单纯用ln -s /usr/bin/nodejs /usr/bin/node，再npm install 还是会报错，所以还是从源里面再下载一个nodejs-legacy ，sudo apt-get install nodejs-legacy,亲测后面这种下载nodejs-legacy以后再运行npm install以后可以成功安装完不报错，然后npm start也能成功启动～  
 
