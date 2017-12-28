@@ -69,7 +69,7 @@ P.s因为我目前工作的本本是MBP，所以是用homebrew安装的，感觉
 ```
 
 ##  Nginx配置
-   在openresty下接入Lua脚本就一句话，下面给出nginx.conf示范:
+在openresty下接入Lua脚本就一句话，下面给出nginx.conf示范:
 ```
 worker_processes  1;
 error_log logs/error.log;
