@@ -7,7 +7,7 @@ layout: post
 ---
 
 
-# **前言**  
+# 前言  
   
 　原来一直用的是docker hub来push和pull自己的镜像，可是国内pull/push到dockerhub速度实在不敢恭维，而且经常出现handshake timeout的问题，所以思索着能不能有国内的镜像源选择，daocloud是不错的国内选择，可提供pull的镜像也挺多的，但是pull可以，push得另外收费(200一个月)。我自己有三个私有的镜像需要push/pull的，所以思考着干脆自己搭建一个私有的docker registry，国内的服务器上/下载速度怎么都会比直接到docker hub拉取和推送镜像快，但是在搭建过程中遇到了各种各样的琐碎的问题，这里就做一个梳理.
 
