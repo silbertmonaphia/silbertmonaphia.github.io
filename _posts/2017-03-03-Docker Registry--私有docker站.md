@@ -107,7 +107,7 @@ docker push domain.com:5000/ubuntu:haha
 
 ## **docker-compose!**
 
-　不感觉刚才那一大串命令，第一容易打错，打错就GG了，第二，不容易复用么？
+　不感觉刚才那一大串命令，第一容易打错，打错就GG了;第二，不容易复用么？
 　所以我们用docker-compose,懒人必备！
 ```
 #安装docker-compose,官网给出好多种办法，我推荐是“镜像--容器”的办法，因为还是依赖回docker本身，这样对系统的关系就不大了
