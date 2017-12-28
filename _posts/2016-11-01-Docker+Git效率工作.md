@@ -149,10 +149,10 @@ P.s. 在我用git的时候发生过一个小错误：
 > 你如果习惯了上面的git工作流中的dev/demo测试没问题直接合到master，你会发现新的工作流会不太适应，特别是如果master和dev/demo历史不平行的时候。
 > 当你发现你用github工作流，然后要处理很多conflict，说明你的使用方式存在问题。基于这条工作流的特点，你得把你的要做功能分解到更加细小的更新上，然后尽可能快的完成，提交到测试(合并到dev/demo分支)，然后尽可能快地验证，ok就直接merge到master推到线上去，你会感受到整个节奏比以往更加快捷，而且更新粒度会更加小，master会波动更加频繁，所以最好你的部署方式是用户无感的，不然这种master频繁波动会导致频繁部署，而频繁部署会造成频繁的服务中断，用户。解决办法是:要么你就寻找一种平滑过渡的部署方式(docker & docker compose)，要么就是还是用回Git工作流那种，一个版本更新一次master好了，即先不断把功能提交到dev/demo，最后统一测试过了，再merge到master，这样也才1-2周中断一次，而不是每天都中断，而githubflow就是持续地提交，部署，提交部署，至少每天一次...
  
- 扩展推荐：
- 1.[廖雪峰老师的git基础教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/)
- 2.[阮一峰老师的git工作流讲解](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
- 3.[Linus Torvalds on git](https://www.youtube.com/watch?v=4XpnKHJAok8)   [Highly Recommended !!! ]
+ 扩展推荐：  
+ 1.[廖雪峰老师的git基础教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/)  
+ 2.[阮一峰老师的git工作流讲解](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)  
+ 3.[Linus Torvalds on git](https://www.youtube.com/watch?v=4XpnKHJAok8)   [Highly Recommended !!! ]  
    
 
 >   **闲话**   
