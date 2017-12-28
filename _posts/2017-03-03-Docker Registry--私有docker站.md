@@ -29,6 +29,7 @@ curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2
 　其实就是下载一个set_mirror.sh脚本并运行它，脚本好像会在/etc/docker/目录下创建一个daemon.json的文件，至少我看到是这样的，具体其他做了什么操作可以仔细看看它给的set_mirror.sh脚本　
  
 **[官方对set_mirror.sh说明：该脚本可以将 --registry-mirror 加入到你的 Docker 配置文件 /etc/default/docker 中(不是/etc/docker/?)]**  　
+
 再去把registry  pull回来，可以感觉明显快很多
 
 
