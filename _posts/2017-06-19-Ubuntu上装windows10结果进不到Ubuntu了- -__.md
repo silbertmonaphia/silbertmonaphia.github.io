@@ -70,9 +70,10 @@ mount -t ext4 -o remount  rw /dev/sda3 /boot
 4.加密Grub;  
 具体实现得你自己去搜索了~  
 
-"Once someone has access to the machine it becomes very hard to completely secure it."
-"One of the reasons I can see to be this way is that an admin can allways forget his password and needs a way to get in the system"
-所以建议还是要尽可能防止别人物理接触你的电脑
+> "Once someone has access to the machine it becomes very hard to completely secure it."  
+> "One of the reasons I can see to be this way is that an admin can allways forget his password and needs a way to get in the system"
+
+所以建议还是要尽可能防止别人物理接触你的电脑  
 
 
 2017.7.27补充：
