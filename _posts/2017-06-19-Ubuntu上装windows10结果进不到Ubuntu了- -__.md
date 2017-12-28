@@ -38,6 +38,7 @@ layout: post
 其实对于主引导记录来说就，它并不是存放于/dev/sda3，也不是/dev/sda1，更加不是/dev/sda4上，而是有一个单独的小空间给他，所以这里只用写/dev/sda就可以了，而不用写/dev/sda3或者/dev/sda1了
 ```
 Reference：[Ubuntu 系统的引导修复](http://www.dreamxu.com/ubuntu-boot-repair/)  
+
 搞定以后重启，惊喜地发现，又出现了熟悉的grub启动选择，然而问题在我enter进入第一个选项ubuntu，又出现了一个新问题，这次不是"只有一条下划线一直在跳动....跳动......跳动"的问题，而是没有完全进入系统，只是返回了一个rescovery mode一样的shell给我
 
 ##  Read-Only file system?
