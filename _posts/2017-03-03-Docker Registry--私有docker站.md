@@ -16,7 +16,7 @@ layout: post
 
 ----------
 　
-# Docker Registry  
+# 一.Docker Registry  
 
 　首先我们确保我们安装了docker engine，这是我们的前提，然后我们先拉取docker registry的镜像
 ```
@@ -151,7 +151,7 @@ sudo docker-compose up -d
 ----------
 
 
-# **HTTPS化基于Flask的网站**
+# 二.HTTPS化基于Flask的网站
 　既然现在有domain.crt和domain.key,为何不顺便也把自己的小博客换成https？我的博客是用flask写的，因为本身不是做web开发，所以写起来也经历了一段艰难的过程，详细的写在这里[Web之个人小站](http://blog.csdn.net/qq_29245097/article/details/51440667)，我们现在就来说说flask怎么配置https吧  
  
 　google了很多博文，有直接用import OpenSSL的，有用import ssl的,最后发现其实flask本身包含的Werkzeug不知道什么版本开始就自带了openssl这玩意，所以不用另外import什么东西了，可以直接用，比如：
