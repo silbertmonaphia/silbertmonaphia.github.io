@@ -91,7 +91,7 @@ cat /proc/sys/net/ipv4/ip_forward
 ```
 driftnet -i wlan0 -a -d /home/smona/桌面/pic
 ```
-其中 -a 是后台，意思是不打印到显示框；而-d 是捕获图片地址路径。
+其中 -a 是后台运行，意思是不打印到显示框,而-d 是捕获图片地址路径。
 受害方B所浏览的所有图片内容会一一保存到你所指定的目录内。
 	
 
