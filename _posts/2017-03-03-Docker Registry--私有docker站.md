@@ -7,7 +7,7 @@ layout: post
 ---
 
 
-#**前言**  
+# **前言**  
   
 　原来一直用的是docker hub来push和pull自己的镜像，可是国内pull/push到dockerhub速度实在不敢恭维，而且经常出现handshake timeout的问题，所以思索着能不能有国内的镜像源选择，daocloud是不错的国内选择，可提供pull的镜像也挺多的，但是pull可以，push得另外收费(200一个月)。我自己有三个私有的镜像需要push/pull的，所以思考着干脆自己搭建一个私有的docker registry，国内的服务器上/下载速度怎么都会比直接到docker hub拉取和推送镜像快，但是在搭建过程中遇到了各种各样的琐碎的问题，这里就做一个梳理.
 
@@ -16,7 +16,7 @@ layout: post
 
 ----------
 　
-#**Docker Registry**
+# **Docker Registry**
 
 　首先我们确保我们安装了docker engine，这是我们的前提，然后我们先拉取docker registry的镜像
 ```
@@ -31,7 +31,7 @@ curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2
 再去把registry  pull回来，可以感觉明显快很多
 
 
-##**获取证书**
+## **获取证书**
 
   　docker  push/pull  操作不知道从哪个版本开始需要https了，所以我们得给我们的主机弄一个https先.
   　我的主机是挂了域名的(用domain.com代表吧)，而从[[官网Get a certificate](https://docs.docker.com/registry/deploying/#get-a-certificate)]可以看出，docker registry如果要https，则需要两个东西，一个是.crt文件,一个是.key文件，有了这两个就可以让我们的docker registry走https，验证ssl了
@@ -39,7 +39,7 @@ curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2
   　所以为了提高一次性成功率，我决定先折腾DV颁发的权威机构签署的证书（还有OV,EV，相关CA证书说明可以看[这篇](http://www.barretlee.com/blog/2016/04/24/detail-about-ca-and-certs/)）,因为正好腾讯云自己有提供DV SSL免费一年的证书[你要说我穷，我也没办法]，之前没搞过https和证书这些东西，借这个免费一年的DV SSL先上上手,具体怎么操作我就是按照腾讯云自己给出的文档，为我的域名提交了申请，然后添加了CNAME，然后耐心等待验证通过，验证通过以后，你就可以在上面下载到一个zip压缩包，解压后Nginx/那个文件夹里面有两个文件，**刚好就是我们所需要的，一个是.crt，一个是.key，所以所谓权威机构颁发的证书一般就是指这两个东西，准确来说是.crt文件**
 
   
-##**配置证书**
+## **配置证书**
 
   　我们从权威CA机构拿到crt和key以后(假设一个名字是domain.crt ,一个是domain.key,以方便后面说明)，在当前目录(下面的`pwd`就是指当前目录),比如是/root新建一个certs/目录，然后把domain.crt和domain.key丢进去，就可以准备启动docker registry了：
 
@@ -54,7 +54,7 @@ docker run -d -p 5000:5000 --restart=always --name registry \
 ```
 
 
-##**配置密码**
+## **配置密码**
 
 　在使用docker hub的过程中，一般在push的时候都会要你先login，登陆的好处就不用我说了吧，不然不加登陆验证的话，到时候什么人都可以往你的Registry塞镜像，你还不知道谁push来的
 
@@ -97,7 +97,7 @@ docker push domain.com:5000/ubuntu:haha
 ```
 
 
-##**docker-compose!**
+## **docker-compose!**
 
 　不感觉刚才那一大串命令，第一容易打错，打错就GG了，第二，不容易复用么？
 　所以我们用docker-compose,懒人必备！
@@ -143,7 +143,7 @@ sudo docker-compose up -d
 ----------
 
 
-#**HTTPS化基于Flask的网站**
+# **HTTPS化基于Flask的网站**
 　　
 　既然现在有domain.crt和domain.key,为何不顺便也把自己的小博客换成https？我的博客是用flask写的，因为本身不是做web开发，所以写起来也经历了一段艰难的过程，详细的写在这里[Web之个人小站](http://blog.csdn.net/qq_29245097/article/details/51440667)，我们现在就来说说flask怎么配置https吧
 　google了很多博文，有直接用import OpenSSL的，有用import ssl的,最后发现其实flask本身包含的Werkzeug不知道什么版本开始就自带了openssl这玩意，所以不用另外import什么东西了，可以直接用，比如：
@@ -154,7 +154,7 @@ if __name__ == '__main__':
     #5000给了刚才docker了，只能另外找个4777端口给网站了
 ```
 
-#**Nginx统一管理**
+# **Nginx统一管理**
 
 　待补充
 
@@ -162,11 +162,11 @@ if __name__ == '__main__':
 ----------
 
 
-#**自签署证书[不推荐]**
+# **自签署证书[不推荐]**
 
 　其实自签署证书可以理解为之前由权威机构签署的过程变成了我们自己来签署，然而这个并不具备公信力的，而且一般的浏览器都不会认可你这个证书，浏览器一般内置的都是一些比较出名的权威CA的公钥，这种出来的https是会有个小绿锁的～所以一般都不推荐自签署证书，但是不是说不能做，做起来 ：/
 
-##**For Docker**  
+## **For Docker**  
 ```
 #服务器端
 
@@ -190,7 +190,7 @@ scp　/root/certs/domainself.crt　/etc/docker/certs.d/domainself.com:5000/domai
 service docker restart
 ```
 
-##**For Chrome** 
+## **For Chrome** 
 
 　这个时候虽然docker是通过了，但是浏览器却还是不识别，直接浏览器访问 https://domain.com:5000/v2/不会变成小绿锁.
 我们可以往浏览器里面导入我们刚才domain.crt文件
