@@ -43,7 +43,6 @@ curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2
 ```
 Get https://domain.com:5000/v1/_ping: x509: certificate signed by unknown authority
 ```
-   
   　所以为了提高一次性成功率，我决定先折腾DV颁发的权威机构签署的证书（还有OV,EV，相关CA证书说明可以看[这篇](http://www.barretlee.com/blog/2016/04/24/detail-about-ca-and-certs/)）,因为正好腾讯云自己有提供DV SSL免费一年的证书[你要说我穷，我也没办法]，之前没搞过https和证书这些东西，借这个免费一年的DV SSL先上上手,具体怎么操作我就是按照腾讯云自己给出的文档，为我的域名提交了申请，然后添加了CNAME，然后耐心等待验证通过，验证通过以后，你就可以在上面下载到一个zip压缩包，解压后Nginx/那个文件夹里面有两个文件，**刚好就是我们所需要的，一个是.crt，一个是.key，所以所谓权威机构颁发的证书一般就是指这两个东西，准确来说是.crt文件**
 
   
