@@ -16,7 +16,7 @@ layout: post
 
 ----------
 　
-# **Docker Registry**
+# Docker Registry  
 
 　首先我们确保我们安装了docker engine，这是我们的前提，然后我们先拉取docker registry的镜像
 ```
