@@ -40,7 +40,7 @@ layout: post
 Reference：[Ubuntu 系统的引导修复](http://www.dreamxu.com/ubuntu-boot-repair/)
 搞定以后重启，惊喜地发现，又出现了熟悉的grub启动选择，然而问题在我enter进入第一个选项ubuntu，又出现了一个新问题，这次不是"只有一条下划线一直在跳动....跳动......跳动"的问题，而是没有完全进入系统，只是返回了一个rescovery mode一样的shell给我
 
-##Read-Only file system?
+##  Read-Only file system?
 
   首先shell根据给出的提示，去查看系统日志 journal -xb，发现出错的地方有好几个，经验告诉我得直接看到最下面最新的标红的错误，然后向前面找历史的第一次报错(一般都是标红)的地方，发现是启动的时候挂载/home到某个磁盘的时候timeout了，回想之前的删除/home所挂载的磁盘空间来装windows的操作，故我分析可能是这个/home的挂载的问题导致timeout。
   
@@ -60,7 +60,7 @@ mount -t ext4 -o remount  rw /dev/sda3 /boot
   如果忘记在家目录新建一个和之前用户同名的目录，那也不打紧，我们手贱reboot了，然后正常启动了，输入对了密码还是登不进去的原因是/home原来的磁盘空间没有了，所以/home下原本的用户目录也被删除了，导致即使账户密码正确也无法加载用户配置。
   而我们重新进入recovery mode的方法是在grub启动选择的时候，选择ubuntu advanced，然后就是选recovery mode即可，进去后新建一个用户目录，重启，登入系统，OK!
   
-## Recovery Mode安全问题
+##  Recovery Mode安全问题
 
 经过上面的操作，有些处女座可能会有疑惑了，这recovery mode不需要密码就可以进去了(bypass)，而且权限还那么高，那岂不是很不安全？有没有办法可以让它稍微安全一点，至少不是那种傻瓜学一下就可以break我的OS的程度呢？
 提供几个思路:
@@ -95,9 +95,9 @@ GRUB_DISABLE_RECOVERY="true"
 sudo update-grub
 ```
 
-Reference:
-1.[Migrating To Encrypted Home Directory](http://blog.dustinkirkland.com/2009/06/migrating-to-encrypted-home-directory.html)
-2.[How To Secure Grub Recovery Mode](https://askubuntu.com/questions/31605/how-to-secure-grub-recovery-mode)
-2.[How Can I Prevent Someone From Resetting My Password With A Live CD](https://askubuntu.com/questions/76987/how-can-i-prevent-someone-from-resetting-my-password-with-a-live-cd/78051#78051)
-3.[How To Disable Recovery Mode Single User Mode](https://askubuntu.com/questions/186176/how-to-disable-recovery-mode-single-user-mode)
-4.[Password protect your GRUB entries](https://ubuntuforums.org/showthread.php?t=7353)
+Reference:  
+1.[Migrating To Encrypted Home Directory](http://blog.dustinkirkland.com/2009/06/migrating-to-encrypted-home-directory.html)  
+2.[How To Secure Grub Recovery Mode](https://askubuntu.com/questions/31605/how-to-secure-grub-recovery-mode)  
+2.[How Can I Prevent Someone From Resetting My Password With A Live CD](https://askubuntu.com/questions/76987/how-can-i-prevent-someone-from-resetting-my-password-with-a-live-cd/78051#78051)  
+3.[How To Disable Recovery Mode Single User Mode](https://askubuntu.com/questions/186176/how-to-disable-recovery-mode-single-user-mode)  
+4.[Password protect your GRUB entries](https://ubuntuforums.org/showthread.php?t=7353)  
