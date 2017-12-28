@@ -1,8 +1,8 @@
 ---
-title:  "Ubuntu上装windows10结果进不到Ubuntu了- -||"
+title: Ubuntu上装windows10结果进不到Ubuntu了- -||
 author: smona
-published: True
-date: 2017-06-19 23:09:01
+published: true
+date: '2017-06-19 23:09:01'
 layout: post
 ---
 
@@ -101,4 +101,3 @@ Reference:
 2.[How Can I Prevent Someone From Resetting My Password With A Live CD](https://askubuntu.com/questions/76987/how-can-i-prevent-someone-from-resetting-my-password-with-a-live-cd/78051#78051)
 3.[How To Disable Recovery Mode Single User Mode](https://askubuntu.com/questions/186176/how-to-disable-recovery-mode-single-user-mode)
 4.[Password protect your GRUB entries](https://ubuntuforums.org/showthread.php?t=7353)
-
