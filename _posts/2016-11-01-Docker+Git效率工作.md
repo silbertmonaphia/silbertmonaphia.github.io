@@ -6,7 +6,7 @@ date: '2016-11-01 16:05:07'
 layout: post
 ---
 
-#**前言**
+# **前言**
 
 
   事情是这样的，首先之前不知道git这个利器，就把代码复制来粘贴去，一个人写代码还好，几个人，特别是一个团队协同工作，这种复制粘贴，U盘拷贝代码，QQ发来发去代码的方式简直就是噩梦，非但麻烦，而且非常凌乱，反正我是受不了。然后，知道git以后才发现自己和它相见恨晚，先别说什么版本控制工具，首先光是托管代码就让我爽一番(svn工作流模式)，请注意，我现在是以完全菜鸟的视角阐述，大神们请掠过。
@@ -20,7 +20,7 @@ layout: post
 ----------
 
 
-##**Git**
+## **Git**
 
   Git相信大家都不陌生，git是linus大神继linux内核以后又一个杰作之一，关于git的历史，可以上Wikipedia看一看，然而在说git之前，我想聊聊svn。
   
@@ -125,10 +125,10 @@ git stash pop 相当于 git stash apply 加 git stash drop
 
 ```
 Reference:
-1.[Git Stash用法](http://www.cppblog.com/deercoder/archive/2011/11/13/160007.aspx)
-2.[Difference Between Git Stash Pop And Git Stash Apply](https://stackoverflow.com/questions/15286075/difference-between-git-stash-pop-and-git-stash-apply)
-3.[Git Stash Pop Considered Harmful](https://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/)
-4.[(Highly Recommended!) Git Stash Tutorial](https://www.atlassian.com/git/tutorials/git-stash)
+1.[Git Stash用法](http://www.cppblog.com/deercoder/archive/2011/11/13/160007.aspx)  
+2.[Difference Between Git Stash Pop And Git Stash Apply](https://stackoverflow.com/questions/15286075/difference-between-git-stash-pop-and-git-stash-apply)  
+3.[Git Stash Pop Considered Harmful](https://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/)  
+4.[(Highly Recommended!) Git Stash Tutorial](https://www.atlassian.com/git/tutorials/git-stash)  
 
 P.s. 在我用git的时候发生过一个小错误：
     "fatal:refusing to merge unrelated histories",我用的是git2.9.3的版本，然后想要合并远程仓库，可能本地和远程仓库提交历史区别太大，所以会产生这种错误，幸好网上都有答案,其实是git在2.9版本后添加的一个安全措施，避免无相关历史的两个仓库合并在一起，防止误操作的发生，以避免污染了两个代码仓库--"since git 2.9.* 'git merge' used to allow merging into branches that havo no common base by default ,which led to a branch new history of an existing project created and then pulled by an unsuspecting maintainer which allow an unnecessary parrallel history merged into the existing project.Here is an escape hatch(逃生舱)"
