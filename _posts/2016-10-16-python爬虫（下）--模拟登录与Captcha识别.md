@@ -88,7 +88,7 @@ for j in range(15):
 
 ③然后丢给了TesseractOCR做识别，一开始我是用Kali源里面的Tesseract直接用apt-get直接装的，不过后面会发现出现一些奇奇怪怪的问题，所以还是推荐用github里面Tesseract项目的源码安装比较好，而且源码安装后不要把源码安装包给删除了，因为源码安装目录内一般安装成功后都会生成一个卸载的脚本，万一遇到Tesseract出问题需要卸载重装的情况(尽管这种情况在源码安装的情况下发生不多，但还是有可能有发生，(我就遇到一次在用unicharset_extractor这一Tesseract训练工具之一生成.tr文件的时候，死活生成的是.txt不是.tr的文件)，虽然说自己慢慢找到来删除是可以，可是这样并不干净，而且非常劳累，所以还是别在装软件上折腾太多时间，这并不是我们的关注点.
 
->**这里提一句TesseractOCR的源码安装：**
+> **这里提一句TesseractOCR的源码安装：**
   TesseractOCR的github项目地址在[这里](https://github.com/tesseract-ocr/tesseract)，其实它的安装就是平时安装源码的那一套，不过首先你得先源码安装好Leptonica，因为Tesseract是依赖于这个库的，Leptonica的官网在[这里](http://www.leptonica.org/)，解压并进入Leptonica源码目录，./configure==>make==>sudo make install==>make check，就安装完毕，然后配置好环境变量[我这里以linux为例子，修改~/.bashrc或者/etc/environment，增加$PATH环境变量内容/usr/local/lib/(不然Tesseract编译的时候就找不到Leptonica了)]，接下来请按照TesseractOCR官方源码安装教程安装，链接点[这里](https://github.com/tesseract-ocr/tesseract/wiki/Compiling)，这个页面还包含Tesseract训练工具的安装，这个训练工具是为了方便我们可以用足够多的样本形成一个针对性的专用训练集(fonttype.traineddata)存在的，这个训练集是提高识别率重要的一环，安装方法也是依照刚才的官方教程就好了，顺便提一句，我墙裂推荐调整box的工具用jTessBoxEditor，图形化界面，而且启动方便简单，我现在总算是看破了，要集中注意力在你想要实现的东西上，而不要被其他事情分散注意力，尽管它们都是一些很有趣的事情
 最后安装完Tesseract以后，别忘记新建一个环境变量$TESSDATA_PREFIX=/usr/local/share/tessdata/或者其他Tesseract放置语言包的地方，然后把你训练好的训练集(fonttype.traineddata)放进这个目录,其实Tesseract也有自己的已经做好的语言训练集(Language Data)，你可以到[这里](https://github.com/tesseract-ocr/tessdata/archive/master.zip)下载全部语言的.traineddata，不过这个包不具备针对性就是了，要想识别率进一步提高，还是得对症下药，取足够多的样本然后自己弄成一个训练集	
 
