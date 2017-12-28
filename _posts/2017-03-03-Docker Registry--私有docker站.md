@@ -201,7 +201,7 @@ service docker restart
 ## **For Chrome** 
 
 　这个时候虽然docker是通过了，但是浏览器却还是不识别，直接浏览器访问 https://domain.com:5000/v2/不会变成小绿锁.
-我们可以往浏览器里面导入我们刚才domain.crt文件
+我们可以往浏览器里面导入我们刚才domain.crt文件,来让浏览器访问我们的域名时候带上小绿锁(简直就是自我安慰，毕竟其他人浏览器里面可不会这样
 
 　用chrome浏览器为栗子,地址栏输入chrome://settings/certificates==>授权中心(Authorities)==>导入==>把我们的domain.crt文件导入
 
