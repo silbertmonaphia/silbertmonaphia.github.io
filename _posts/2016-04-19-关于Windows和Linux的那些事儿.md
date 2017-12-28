@@ -218,43 +218,43 @@ layout: post
 　　我希望小学，中学的计算机老师能够提高自己的素质，在孩子们的启蒙教育中充分利用Linux 神秘的特点，引起孩子们对数学，对符号的好奇心.诱导他们用计算机来解决世界上的有趣问题，而不要把教学的范围局限于计算机的操作和它自身的问题.  
 
 ##  附录: 我用来处理日常事务的 Linux 程序
-　　好了好了.我知道你发现自己应该转向 Linux，你很后悔当初为什么中了微软的邪.但是不要着急.因为这些东西本来只是工具，它们是用来完成你的主要任务的辅助而已.你以前选错了工具，这不 要紧.你还是拥有你自己原来的专业技能，那才是最重要的.工具的东西只有慢慢适应转换，不能一蹴而就，否则你会感到非常没意思，甚至放弃.
-　　如果你只想做一个像我这样的普通用户，主要目的是用 Linux 来完成自己的任务，那就可以不用系统管理员或者网络管理员的标准来要求自己，因为当一个系统和网络管理员确实很辛苦.这里我对实验室的网管同学鞠一躬，谢 谢你的指点和帮助. 不用把你的机器当成网络服务器，不用开放没有必要的服务，设置好 ssh, ftp 已经足够了.这样会省去了解很多没必要了解的东西的时间.不用过度考虑"安全"，因为 Linux 缺省已经很安全了.不过你有兴趣了解更多那也无妨.
-　　下面给出一些推荐使用的可以处理一般事情的程序.至于你的专业上要用到的科学和工程软件比如 Matlab, Mathematica, Maple, HSpice, Design Compiler, …… 还有其它物理上的，化学上的，生物上的 …… 都必然有 Linux 和 UNIX 的版本.当然他们很多不是免费的，不要总是觉得什么都应该免费，自由不等于免费.它们是经过很多人辛勤劳动的产物，是可靠的程序，它们物有所值.
-　　下面列出我常用的一些 Linux 程序.一个列表里可能有很多，那是为了方便你来选择，我列出了比较信得过的.但其实很多只有第一个是我真正在用的，我不喜欢试用程序.我不是一个合格的网络管理员，我的服务器都只设置了我自己需要的功能，那样可以省去我很多麻烦.
-　　Shell: bash.它结合了 csh 和 ksh 的优点，并且有 readline 功能，你可以随意绑定自己的键盘.
-　　编辑器： VIM, Emacs.
-　　程序开发： GCC, make, ld, Scheme48, j2sdk, Perl, Python, Tcl/Tk ...
-　　论文，幻灯工具：LaTeX, ConTeXt
-　　绘图工具：MetaPost.这个语言太强了，以至于我只用它了.你不熟悉的话可以用xfig, dia 来画一些流程图之类的图片.
-　　图像处理：ImageMagick.其中的 import 程序可以屏幕抓图，convert 程序可以转换图像格式，display 可以显示图片和简单编辑(缩放，换质量，转格式，简单绘图，简单虑镜).通常我就这么点需要.如果你要更强大的图像工具可以用 Gimp, 它几乎和Photoshop差不多.
-　　自动管理工具：make.我可以用make来自动编译程序，自动编译文档，自动更新插图…… 全自动，而且不会重复劳动.
-　　数值计算程序：SciLab.这个程序基本上可以代替 Matlab.
-　　代数计算程序：MAXIMA.这个程序基于世界上最老的计算机代数系统之一: 由美国能源部(DOE)发行的 MIT Macsyma 系统.它是用 Common Lisp 实现的.很多现在的符号计算程序比如 Maple 都从 MAXIMA 身上学到很多东西.它现在经过 DOE 批准以GPL发行，永远是一个自由软件.
-　　加密程序：GnuPG.我的 PGP 密钥就是它搞出来的.
-　　打包，压缩程序.什么都有: tar, gzip, bzip2, zip, rar, ...
-　　虚拟光驱程序.Linux 不需要虚拟光驱程序，直接 mount 就行了.
-　　ftp 服务器：proftpd, vsftpd.proftpd 功能很强，但是我只用了最简单的一种设置.
-　　WWW 服务器：apache.(我一般没有开)
-　　ftp 客户程序：lftp，ncftp.它们都是文本方式操作的，但是比起图形界面的方便的多.比如 lftp 几乎具有 bash 的所有方便功能，Tab 补全，bookmark, queue, 后台下载，镜像…… Linux 也有图形界面的 ftp 客户程序，但是大多不稳定，有很多问题.这就是很多人抱怨 Linux 不如 Windows 的一个小原因.还有很多人用 Wine 模拟 Windows 的leapftp，其实 lftp 比 leapftp 好很多，你需要的只是适应一下.
-　　自动下载工具：wget.它非常稳定，有一次我下载一个程序，用 IE 和 Mozilla 下载回来的文件都是坏的，最后还是 wget 可靠的传输了数据.用它甚至可以镜像整个网站，比起WebZip 这样的 Windows 程序强多了，而且不会因为你不付钱就在下载回来的网页里强制插入广告.
-　　虚拟终端：rxvt, xterm, gnome-terminal, mlterm, ...
-　　X server: XFree86
-　　窗口管理器：FVWM.编译加入了 libstroke.
-　　中文输入：XSIM.被我修改过以适应 FVWM 的需要.另外推荐你还可以用 SCIM.
-　　email 处理：Mutt + Postfix + fetchmail
-　　看 PDF, PS, DJVU 文件：Acrobat Reader, xpdf, GhostScript, gv, djvu工具包和netscape 插件.
-　　看CAJ文档.我从来不看CAJ之类的文档，如果找不到PDF或PS，直接去图书馆借最好.
-　　看网页：Mozilla, Phoenix, lynx.Mozilla-Xft 的显示效果比IE 好很多.
-　　英汉字典：IBM智能词典，星际译王.
-　　编辑网页：我用VIM 直接写 HTML.你如果想要图形方式的可以用其它的比如screem, BlueFish.
-　　登录其它 UNIX, Linux 机器：openSSH, telnet. 我喜欢用 openSSH 把其它机器的X 程序通过 ssh 加密的隧道传到我机器上显示.
-　　登录 Windows2000 server 的 display service: rdesktop，...我有一天试了一下，不错.后来就没有用过了.
-　　同步程序：rsync.我用 rsync 通过 ssh 来跟某些机器同步数据，或者做自己机器上不同目录间的同步.
-　　上BBS：rxvt(或任何一种终端) + telnet + chatbot(helloooo 机器人的程序)
+　　好了好了.我知道你发现自己应该转向 Linux，你很后悔当初为什么中了微软的邪.但是不要着急.因为这些东西本来只是工具，它们是用来完成你的主要任务的辅助而已.你以前选错了工具，这不 要紧.你还是拥有你自己原来的专业技能，那才是最重要的.工具的东西只有慢慢适应转换，不能一蹴而就，否则你会感到非常没意思，甚至放弃.  
+　　如果你只想做一个像我这样的普通用户，主要目的是用 Linux 来完成自己的任务，那就可以不用系统管理员或者网络管理员的标准来要求自己，因为当一个系统和网络管理员确实很辛苦.这里我对实验室的网管同学鞠一躬，谢 谢你的指点和帮助. 不用把你的机器当成网络服务器，不用开放没有必要的服务，设置好 ssh, ftp 已经足够了.这样会省去了解很多没必要了解的东西的时间.不用过度考虑"安全"，因为 Linux 缺省已经很安全了.不过你有兴趣了解更多那也无妨.   
+　　下面给出一些推荐使用的可以处理一般事情的程序.至于你的专业上要用到的科学和工程软件比如 Matlab, Mathematica, Maple, HSpice, Design Compiler, …… 还有其它物理上的，化学上的，生物上的 …… 都必然有 Linux 和 UNIX 的版本.当然他们很多不是免费的，不要总是觉得什么都应该免费，自由不等于免费.它们是经过很多人辛勤劳动的产物，是可靠的程序，它们物有所值.  
+　　下面列出我常用的一些 Linux 程序.一个列表里可能有很多，那是为了方便你来选择，我列出了比较信得过的.但其实很多只有第一个是我真正在用的，我不喜欢试用程序.我不是一个合格的网络管理员，我的服务器都只设置了我自己需要的功能，那样可以省去我很多麻烦.  
+　　Shell: bash.它结合了 csh 和 ksh 的优点，并且有 readline 功能，你可以随意绑定自己的键盘.  
+　　编辑器： VIM, Emacs.  
+　　程序开发： GCC, make, ld, Scheme48, j2sdk, Perl, Python, Tcl/Tk ...  
+　　论文，幻灯工具：LaTeX, ConTeXt  
+　　绘图工具：MetaPost.这个语言太强了，以至于我只用它了.你不熟悉的话可以用xfig, dia 来画一些流程图之类的图片.  
+　　图像处理：ImageMagick.其中的 import 程序可以屏幕抓图，convert 程序可以转换图像格式，display 可以显示图片和简单编辑(缩放，换质量，转格式，简单绘图，简单虑镜).通常我就这么点需要.如果你要更强大的图像工具可以用 Gimp, 它几乎和Photoshop差不多.  
+　　自动管理工具：make.我可以用make来自动编译程序，自动编译文档，自动更新插图…… 全自动，而且不会重复劳动.  
+　　数值计算程序：SciLab.这个程序基本上可以代替 Matlab.  
+　　代数计算程序：MAXIMA.这个程序基于世界上最老的计算机代数系统之一: 由美国能源部(DOE)发行的 MIT Macsyma 系统.它是用 Common Lisp 实现的.很多现在的符号计算程序比如 Maple 都从 MAXIMA 身上学到很多东西.它现在经过 DOE 批准以GPL发行，永远是一个自由软件.  
+　　加密程序：GnuPG.我的 PGP 密钥就是它搞出来的.  
+　　打包，压缩程序.什么都有: tar, gzip, bzip2, zip, rar, ...  
+　　虚拟光驱程序.Linux 不需要虚拟光驱程序，直接 mount 就行了.  
+　　ftp 服务器：proftpd, vsftpd.proftpd 功能很强，但是我只用了最简单的一种设置.  
+　　WWW 服务器：apache.(我一般没有开)  
+　　ftp 客户程序：lftp，ncftp.它们都是文本方式操作的，但是比起图形界面的方便的多.比如 lftp 几乎具有 bash 的所有方便功能，Tab 补全，bookmark, queue, 后台下载，镜像…… Linux 也有图形界面的 ftp 客户程序，但是大多不稳定，有很多问题.这就是很多人抱怨 Linux 不如 Windows 的一个小原因.还有很多人用 Wine 模拟 Windows 的leapftp，其实 lftp 比 leapftp 好很多，你需要的只是适应一下.  
+　　自动下载工具：wget.它非常稳定，有一次我下载一个程序，用 IE 和 Mozilla 下载回来的文件都是坏的，最后还是 wget 可靠的传输了数据.用它甚至可以镜像整个网站，比起WebZip 这样的 Windows 程序强多了，而且不会因为你不付钱就在下载回来的网页里强制插入广告.  
+　　虚拟终端：rxvt, xterm, gnome-terminal, mlterm, ...  
+　　X server: XFree86  
+　　窗口管理器：FVWM.编译加入了 libstroke.  
+　　中文输入：XSIM.被我修改过以适应 FVWM 的需要.另外推荐你还可以用 SCIM.  
+　　email 处理：Mutt + Postfix + fetchmail  
+　　看 PDF, PS, DJVU 文件：Acrobat Reader, xpdf, GhostScript, gv, djvu工具包和netscape 插件.  
+　　看CAJ文档.我从来不看CAJ之类的文档，如果找不到PDF或PS，直接去图书馆借最好.  
+　　看网页：Mozilla, Phoenix, lynx.Mozilla-Xft 的显示效果比IE 好很多.  
+　　英汉字典：IBM智能词典，星际译王.  
+　　编辑网页：我用VIM 直接写 HTML.你如果想要图形方式的可以用其它的比如screem, BlueFish.  
+　　登录其它 UNIX, Linux 机器：openSSH, telnet. 我喜欢用 openSSH 把其它机器的X 程序通过 ssh 加密的隧道传到我机器上显示.  
+　　登录 Windows2000 server 的 display service: rdesktop，...我有一天试了一下，不错.后来就没有用过了.  
+　　同步程序：rsync.我用 rsync 通过 ssh 来跟某些机器同步数据，或者做自己机器上不同目录间的同步.  
+　　上BBS：rxvt(或任何一种终端) + telnet + chatbot(helloooo 机器人的程序)  
 　　QQ, ICQ: 我没有 QQ 或 ICQ.不过你可以用 Gaim, 它同时支持 QQ, ICQ 和很多其它的即时通信方式.ICQ 用户也可以用 Licq.
-　　放录像：MPlayer, RealPlayer.MPlayer 太好了，直接就可以放 VCD, DVD, divx, wma, wmv ... 用 Windows 的同学都很羡慕我，说 Windows 要放这个需要大堆插件.rm 最好还是用 realplayer 放，它也是免费的.
-　　放音乐： xmms(mp3,ogg都可以), mpg321(放mp3), ogg123(放ogg).mpg321 不如xmms管理音乐文件那么方便，但是有时我还是用 mpg321 放 mp3 作为背景音乐，因为懒得开一个xmms窗口
+　　放录像：MPlayer, RealPlayer.MPlayer 太好了，直接就可以放 VCD, DVD, divx, wma, wmv ... 用 Windows 的同学都很羡慕我，说 Windows 要放这个需要大堆插件.rm 最好还是用 realplayer 放，它也是免费的.  
+　　放音乐： xmms(mp3,ogg都可以), mpg321(放mp3), ogg123(放ogg).mpg321 不如xmms管理音乐文件那么方便，但是有时我还是用 mpg321 放 mp3 作为背景音乐，因为懒得开一个xmms窗口  
 
 ##  我的见解    
 这篇文章讲的很到位，也告诉我们为什么我们非要从windows折腾到Linux去.    
