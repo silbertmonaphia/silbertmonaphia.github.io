@@ -205,7 +205,7 @@ Ref:
 > 容器是不会自动保存改动到原来的镜像的，除非你commit容器形成一个快照，但是这个操作其实就是将现在改动过的动态的容器新存为一个静态的镜像，而不是保存为原来的镜像。
 
 
-> Docker的安装和启动具体教程请参照官网的文档页面的docker engine下的install就足够了，https://docs.docker.com/ ，然后如果你发现sudo service docker start去启动docker服务，输入docker的指令后却没有反应，然后sudo service docker stop + sudo service docker start/sudo service docker restart重启docker 服务却没有反应，请ps -ef|grep docker察看所有docker进程，并且kill掉它们，再sudo service docker start就没有问题了，我试过两次，亲测可行，考虑应该是之前docker的服务没有正确关闭的原因，如果还出问题，那就请自行谷歌.
+> Docker的安装和启动具体教程请参照官网的文档页面的docker engine下的install就足够了，https://docs.docker.com/ ，然后如果你发现sudo service docker start去启动docker服务，输入docker的指令后却没有反应，然后sudo service docker stop + sudo service docker start/sudo service docker restart重启docker 服务却没有反应，请`ps -ef|grep docker`察看所有docker进程，并且kill掉它们，再sudo service docker start就没有问题了，我试过两次，亲测可行，考虑应该是之前docker的服务没有正确关闭的原因，如果还出问题，那就请自行谷歌.
 
  同样也是梳理了下命令
 ```
