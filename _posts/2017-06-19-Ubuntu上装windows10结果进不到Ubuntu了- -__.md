@@ -63,12 +63,12 @@ mount -t ext4 -o remount  rw /dev/sda3 /boot
 ##  Recovery Mode安全问题
 
 经过上面的操作，有些处女座可能会有疑惑了，这recovery mode不需要密码就可以进去了(bypass)，而且权限还那么高，那岂不是很不安全？有没有办法可以让它稍微安全一点，至少不是那种傻瓜学一下就可以break我的OS的程度呢？
-提供几个思路:
-1.加密你的数据盘;
-2.无论何时,root都需要密码;
-3.禁用recovery mode;
-4.加密Grub;
-具体实现得你自己去搜索了~
+提供几个思路:  
+1.加密你的数据盘;  
+2.无论何时,root都需要密码;  
+3.禁用recovery mode;  
+4.加密Grub;  
+具体实现得你自己去搜索了~  
 
 "Once someone has access to the machine it becomes very hard to completely secure it."
 "One of the reasons I can see to be this way is that an admin can allways forget his password and needs a way to get in the system"
