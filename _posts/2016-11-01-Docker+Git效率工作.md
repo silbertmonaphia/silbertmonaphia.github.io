@@ -101,6 +101,7 @@ layout: post
   
   #貌似把上面的file 换成*(wildcard)通配符来代指所有是可以的.我就经常多文件撤销工作区修改的时候git checkout -- * ，纯粹因为懒得一个个输入... 
 ```
+
 ```
 git stash
 #真是没有遇到问题就找不到来学习，用了那么久的git，现在才知道git stash这东西
@@ -119,8 +120,8 @@ git stash list 当前的git stash栈打印出来
 git stash pop  恢复所缓存内容
 git stash clear 清除全部所缓存内容
 git stash pop 相当于 git stash apply 加 git stash drop
-
 ```
+
 Reference:  
 1.[Git Stash用法](http://www.cppblog.com/deercoder/archive/2011/11/13/160007.aspx)  
 2.[Difference Between Git Stash Pop And Git Stash Apply](https://stackoverflow.com/questions/15286075/difference-between-git-stash-pop-and-git-stash-apply)  
