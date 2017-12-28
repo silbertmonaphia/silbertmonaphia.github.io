@@ -140,8 +140,10 @@ layout: post
 　　但是我们实验室的网速可够快，Windows 机器都有 Exceed 啊，而且 Sun 机器有全套X 客户程序包括 GVIM.他说他是 CLI 的坚决拥护者，但是他却在用 Windows，他后来打开了好几个 SecureCRT，每次从文本框输入地址，用户名和密码，从下拉菜单选择"SSH2"，然后点击"Connnect".他还不断的夸SecureCRT 是"网络管理员投票选出的最受欢迎的登录方式".老天，SecureCRT 本身就是个 GUI 啊，他其实没有明白Xwindow 的好处.  
 　　你说我是 GUI 的？我虽然很少在 console 下工作.但是我对 bash, VIM 很熟悉，我可以让 bash 按照我的键绑定方式来工作.我可以在 rxvt 里使用 Mutt 来收发 email.我的每个桌面上都常常堆放着一打不同大小的 rxvt.我用 VIM 编辑 LaTeX.我自己写Makefile 来维护 LaTeX 文档.我有时用 mpg321 来放 mp3.我上BBS用的我自己写的expect 脚本. 好了，CLI 派的朋友可以收我做盟友了  
 　　你说我是 CLI 的老古董？我的 FVWM 被我配置为可以"手写操作"，我只要画一个"r"就可以启动 rxvt，我只要画一个 "U" 就可以启动 GVIM，…… 我用 GVIM 语法加亮模式编辑程序，我用 Mozilla 浏览网页，…… GUI 派的现在好像认我做朋友了  
-　　好了.CLI 派的朋友，虽然我很喜欢命令行，但是我有时在屏幕上左右画一下就可以执行:  
+　　好了.CLI 派的朋友，虽然我很喜欢命令行，但是我有时在屏幕上左右画一下就可以执行: 
+ ```
 　　Module FvwmConsole -terminal rxvt -geometry 45x5-0+0 -bg gold -fg midnightblue -fn "-adobe-courier-medium-r-*-*-14-*-*-*-*-*-*-*"  
+```
 　　你是不是现在又想把我逐出师门？  
 　　GUI 派的朋友，虽然我很喜欢窗口.但是我可以在 FvwmConsole 里输入：  
 　　All (rxvt) MoveToDesk  
