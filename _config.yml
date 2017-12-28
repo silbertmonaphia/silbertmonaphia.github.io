@@ -16,5 +16,5 @@ paginate_path: "page/:num/"
 
 # prose.io config
 prose:
-    rooturl: '_posts'
+    #rooturl: '_posts'
     siteurl: 'https://silbertmonaphia.github.io'
