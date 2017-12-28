@@ -1,8 +1,8 @@
 ---
-title:  "高频访问IP限制 --Openresty(nginx + lua) [反爬虫之旅]"
+title: '高频访问IP限制 --Openresty(nginx + lua) [反爬虫之旅]'
 author: smona
-published: True
-date: 2017-08-25 22:45:47
+published: true
+date: '2017-08-25 22:45:47.000'
 layout: post
 ---
 
@@ -276,4 +276,3 @@ def pc_ajax_validate():
     return json.dumps(result)
 ```
 以上后端就改好了，再启动start.py，那么统览图里面的Captcha WebApi的验证码验证服务就起来了~至于前端代码要怎么改?对不起，那得你自己看官方文档研究去，不过我感觉，他们的前端文档写的比后端文档好.......
-  
