@@ -196,7 +196,6 @@ Lua脚本里面有statistic_ban_ip和statistic_total_ip两个统计数据，分�
     
     
 ----------
-
 #  极验 
   现在来讲讲统览图里面的Captcha WebApi的构建,在上面Lua的脚本里面有一句跳转到验证码接口的:
 ```
