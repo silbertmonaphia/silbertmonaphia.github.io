@@ -1,8 +1,8 @@
 ---
-title:  "当Kali Rolling作为笔记本唯一一个系统"
+title: 当Kali Rolling作为笔记本唯一一个系统
 author: smona
-published: True
-date: 2016-10-08 13:53:21
+published: true
+date: '2016-10-08 13:53:21'
 layout: post
 ---
 #**前言**
@@ -379,5 +379,3 @@ EndSection
 **15.CAJ文件**
 ----
   最近在看准备毕业设计的论文，可是有些文献是caj格式,linux中打开CAJ文件的确麻烦先apt-get install装playonlinux(python写的wine前端)，然后打开playonlinux，搜索cajviewer,如果没有就得自己下一个cajviewer的exe文件，至于怎么安装你可以上网查一下“怎么用playonlinux去安装本地的exe文件”，安装好以后，在playonlinux中打开cajviewer，再打开你要打开的caj文献文件，选择文件＝>打印，如果提示说找不到打印机，就sudo at-get install cups-pdf装一个打印PDF的printer，重启cajviewer，再打印即可转为pdf格式的文件
-   
-
