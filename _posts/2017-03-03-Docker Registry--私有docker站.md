@@ -22,7 +22,7 @@ layout: post
 ```
 sudo docker pull registry  
 ```
-　**Tips** 这个默认是从docker hub拉取的，不是很大，可以挂着慢慢等，如果还是嫌慢的话，还有个办法来自[daocloud官网给出的配置 Docker 加速器](https://www.daocloud.io/mirror#accelerator-doc),提取出来就是下面这一行的linux命令：
+　**Tips**:这个默认是从docker hub拉取的，不是很大，可以挂着慢慢等，如果还是嫌慢的话，还有个办法来自[daocloud官网给出的配置 Docker 加速器](https://www.daocloud.io/mirror#accelerator-doc),提取出来就是下面这一行的linux命令：
 ```
 curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0835afe2.m.daocloud.io
 ```
