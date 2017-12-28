@@ -122,10 +122,9 @@ Evernote for Sublime Text的github地址：https://github.com/bordaigorl/sublime
 而对于vim，说它好用，前提是你要折腾它好多遍，原生没有配置的vim并不好用，而好用的，那些人说的六到飞起来的vim是经过配置的适合自己的vim，所以你不要刚用了会儿原生的vim，就说不好用，你学会配置后就不会这样了，配置时候比较痛苦吧，不过也是一劳永逸的事情，因为它的配置文件可以带走，你还可以把配置丢到你的博客，在新的需要配置的vim，你可以直接拷贝过去，所以说vim神器就是这么来的  
 
 16.10.4更新:  
-最近要经常用到vim了，所以就稍微做了点常用的vim设置，这里贴出来备忘(/etc/vim/vimrc):
-
+最近要经常用到vim了，所以就稍微做了点常用的vim设置，这里贴出来备忘:
 ```
-
+" /etc/vim/vimrc
 syntax on
  set nu             "设置行号
  set cursorline     "高亮当前行
