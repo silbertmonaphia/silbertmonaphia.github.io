@@ -1,8 +1,8 @@
 ---
-title:  "python爬虫（下）--模拟登录与Captcha识别"
+title: python爬虫（下）--模拟登录与Captcha识别
 author: smona
-published: True
-date: 2016-10-16 21:46:30
+published: true
+date: '2016-10-16 21:46:30'
 layout: post
 ---
 
@@ -616,4 +616,3 @@ def Drops(im):
 [1]LI Xingguo, GAO Wei. Segmentation method for merged characters in CAPTCHA based on drop fall algorithm.
 Computer Engineering and Applications, 2014, 50 (1): 163-166.
 [2]Yan J, El Ahmad A S.A low-cost attack on a Microsoft CAPTCHA[C]//Proceedings of the 15th ACM Conference on Computer and Communications Security, 2008: 543-554.
-
