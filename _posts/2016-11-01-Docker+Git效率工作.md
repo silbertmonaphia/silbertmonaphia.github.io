@@ -175,7 +175,7 @@ P.s. 在我用git的时候发生过一个小错误：
   
   但是这种办法仅仅适合个人项目，简单粗暴，像公司项目就要慢慢用git gc还有git filter-branch之类一点点清理了,或者如果你只是关心Jenkins自动部署中git拉取代码体积太大的问题，可以看看jenkins的shadow clone
 
-Ref:
+Ref:  
 1.[Removing sensitive data from a repository](https://help.github.com/articles/removing-sensitive-data-from-a-repository/)  
 2.[Jenkins hints for large git repos](https://jenkins.io/files/2016/jenkins-world/large-git-repos.pdf)  
 3.pro git书里面也有提到git filter-branch[7.6 Git 工具 - 重写历史](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2#_rewriting_history)  
