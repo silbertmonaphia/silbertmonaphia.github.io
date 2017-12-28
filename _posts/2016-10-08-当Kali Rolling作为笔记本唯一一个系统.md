@@ -324,7 +324,7 @@ wechat的github项目地址：
 16.8.19更新：如果在npm install过程中中断的话，如果这时候node_modules下面的模块没有下载完的话，会出现"npm warn unmet dependency ..which is version x.x.x"的错误，而且没有办法跳过，解决办法是用npm uninstall把原来已经部分安装的模块先卸载干净，再npm install.  
 
 16.8.20更新：本版本今天崩了，请看[issue 318](https://github.com/geeeeeeeeek/electronic-wechat/issues/318)
-可以用着CLI界面的顶着，如果你能接受的话，这是[link])https://github.com/sjdy521/Mojo-Weixin)
+可以用着CLI界面的顶着，如果你能接受的话，这是[link](https://github.com/sjdy521/Mojo-Weixin)
 
 
 **11.PPA的问题**
