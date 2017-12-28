@@ -48,7 +48,8 @@ export PYTHONPATH=/usr/local/bin/可以往到python解释器sys.path最前面添
 
 virtualenv+virtualenvwrapper
 --
-  其实以前我用过virtualenv，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin中，然后source activate才能启动，就觉得它不行。后面发现了docker，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，就拼命说docker好。
+  其实以前我用过virtualenv，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin中，然后source activate才能启动，就觉得它不行。后面发现了docker，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，就拼命说docker好。  
+  
   直到前些日子知道有virtualenvwrapper这么一个工具以后，才开始觉得其实在单纯的只有python的开发中，对于python模块依赖管理来说，virtualenv+virtualenvwrapper就够了，没有必要上docker(前提是真的只有python代码和python模块)，virtualenv管理环境，而virtualenvwrapper简化原来的操作(其实我觉得就是拿来包装virtualenv的)，使得原来要先deactivate，再切换到目标的虚拟环境目录下的bin/目录再source activate的操作，现在只用一句work on就搞定在不同python环境之间的切换了。
 
 ```
