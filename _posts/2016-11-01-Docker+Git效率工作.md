@@ -124,7 +124,7 @@ git stash clear 清除全部所缓存内容
 git stash pop 相当于 git stash apply 加 git stash drop
 
 ```
-Reference:
+Reference:  
 1.[Git Stash用法](http://www.cppblog.com/deercoder/archive/2011/11/13/160007.aspx)  
 2.[Difference Between Git Stash Pop And Git Stash Apply](https://stackoverflow.com/questions/15286075/difference-between-git-stash-pop-and-git-stash-apply)  
 3.[Git Stash Pop Considered Harmful](https://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/)  
