@@ -68,6 +68,7 @@ layout: post
   
   git status  #查看当前所在git仓库情况
   git log     #查看提交历史，你会看到你自己之前commit时候的说明，各种blablabla
+  git log --stat #查看文件改动状况(新增?修改?删除?)
   git reflog  #查看操作历史
   
   git clone HTTPS/SSH #克隆一个项目
