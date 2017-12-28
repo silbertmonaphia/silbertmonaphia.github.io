@@ -170,17 +170,17 @@ syntax on
 
 **【监控】Conky** 
 
-https://github.com/brndnmtthws/conky/wiki/User-Configs
+<https://github.com/brndnmtthws/conky/wiki/User-Configs>
 
 2016.6.11补充：光是上面的github的东西还不够，那里面的东西看的一头雾水，感觉并没有讲清楚conky的配置，里面值得一用的只是那些大神给出来的超赞的配置方案.而对于第一次用conky的人，如果你英文好，建议先用man仔细看下conky的说明，然后打开默认的/etc/conky.conf，对着这份配置文件先一条条看看，再对照manpage的说明，了解每一句都代表什么，主要关注点在conky.config和conky.text后面两个大括号里面的内容
 
 manpage不方便就这个
-http://conky.sourceforge.net/config_settings.html
+<http://conky.sourceforge.net/config_settings.html>
 
 如果你看不懂英文，没问题，有人做了部分翻译，对比着看吧
-http://www.mikewootc.com/wiki/linux/usage/conky.html
-http://zoomq.qiniudn.com/ZQScrapBook/ZqFLOSS/data/20091213015339/
-http://www.coctec.com/docs/linux/show-post-177305.html
+<http://www.mikewootc.com/wiki/linux/usage/conky.html>
+<http://zoomq.qiniudn.com/ZQScrapBook/ZqFLOSS/data/20091213015339/>
+<http://www.coctec.com/docs/linux/show-post-177305.html>
 
 最后给出我自己的配置，先上图：
 ![这里写图片描述](http://img.blog.csdn.net/20160611145325108)
