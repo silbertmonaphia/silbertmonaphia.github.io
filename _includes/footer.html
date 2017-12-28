@@ -4,24 +4,27 @@
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-2">
+        <div style="text-align:center;">
           {% if site.github_username %}
-          <li>
+          <div style="display:inline-block">
             {% include icon-github.html username=site.github_username %}
-          </li>
+          </div>
           {% endif %}
 
           {% if site.twitter_username %}
-          <li>
+          <div style="display:inline-block">
             {% include icon-twitter.html username=site.twitter_username %}
-          </li>
+          </div>
           {% endif %}
-      </div>
 
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description | escape }}</p>
+          {% if site.email %}
+          <div style="display:inline-block">
+            {% include icon-email.html email=site.email %}
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
-
   </div>
 
 </footer>

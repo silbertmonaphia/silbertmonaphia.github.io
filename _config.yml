@@ -1,10 +1,10 @@
 title: Smona LiteWeb
-email: silbertmonaphia@gmail.com
 description: ""
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+email: silbertmonaphia@gmail.com
 twitter_username: silbertmonaphia
-github_username:  silbertmonaphia 
+github_username:  silbertmonaphia
 
 # Build settings
 markdown: kramdown
