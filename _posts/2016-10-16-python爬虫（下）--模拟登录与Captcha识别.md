@@ -133,8 +133,8 @@ for j in range(15):
 ```
 
   
-  附上一段我的链接TesseractOCR的链接代码作为参考，github的Tesseract项目那里也有相关代码示范
-  [不得不说python的粘合能力，一个ctypes模块就可以调用C/C++的函数库存，这大大扩展了python解决问题的能力和效率]
+  附上一段我的链接TesseractOCR的链接代码作为参考，github的Tesseract项目那里也有相关代码示范  
+  [不得不说python的粘合能力，一个ctypes模块就可以调用C/C++的函数库存，这大大扩展了python解决问题的能力和效率]  
 ```
 #! /usr/bin/env python
 #encoding:utf-8
