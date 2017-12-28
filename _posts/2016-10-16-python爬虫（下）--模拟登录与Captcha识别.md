@@ -130,8 +130,6 @@ for j in range(15):
 
   9.合并前面的训练文件，并生成.traineddata
     combine_tessdata fonttype  .
-    
-    
 ```
 
   
