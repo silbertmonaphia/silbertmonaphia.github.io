@@ -1,8 +1,8 @@
 ---
-title:  "Docker Registry--私有docker站"
+title: Docker Registry--私有docker站
 author: smona
-published: True
-date: 2017-03-03 12:55:31
+published: true
+date: '2017-03-03 12:55:31'
 layout: post
 ---
 
