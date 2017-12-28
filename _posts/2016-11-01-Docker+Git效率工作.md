@@ -181,8 +181,6 @@ Ref:
 3.pro git书里面也有提到git filter-branch[7.6 Git 工具 - 重写历史](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2#_rewriting_history)  
 建议可以看看pro git这本书对git 原理的讲解，我觉得写的很好，它也有线上版本——[Pro Git book](https://git-scm.com/book/zh/v2)，理解git原理是你熟悉了一般协作的git命令以后必须要去做的事情~
 
-----------
-
 ## **Docker**
 
   作为现在比较火的技术之一，我真不敢说自己能道出其中真理，可是光是用的话，我还是能说说使用感受的。
