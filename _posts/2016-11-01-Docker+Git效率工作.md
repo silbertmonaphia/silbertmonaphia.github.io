@@ -130,8 +130,8 @@ Reference:
 3.[Git Stash Pop Considered Harmful](https://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/)  
 4.[(Highly Recommended!) Git Stash Tutorial](https://www.atlassian.com/git/tutorials/git-stash)  
 
-P.s. 在我用git的时候发生过一个小错误：
-    "fatal:refusing to merge unrelated histories",我用的是git2.9.3的版本，然后想要合并远程仓库，可能本地和远程仓库提交历史区别太大，所以会产生这种错误，幸好网上都有答案,其实是git在2.9版本后添加的一个安全措施，避免无相关历史的两个仓库合并在一起，防止误操作的发生，以避免污染了两个代码仓库--"since git 2.9.* 'git merge' used to allow merging into branches that havo no common base by default ,which led to a branch new history of an existing project created and then pulled by an unsuspecting maintainer which allow an unnecessary parrallel history merged into the existing project.Here is an escape hatch(逃生舱)"
+P.s. 在我用git的时候发生过一个小错误：  
+    "fatal:refusing to merge unrelated histories",我用的是git2.9.3的版本，然后想要合并远程仓库，可能本地和远程仓库提交历史区别太大，所以会产生这种错误，幸好网上都有答案,其实是git在2.9版本后添加的一个安全措施，避免无相关历史的两个仓库合并在一起，防止误操作的发生，以避免污染了两个代码仓库--"since git 2.9.* 'git merge' used to allow merging into branches that havo no common base by default ,which led to a branch new history of an existing project created and then pulled by an unsuspecting maintainer which allow an unnecessary parrallel history merged into the existing project.Here is an escape hatch(逃生舱)"  
     解决的办法 : 在merge的时候加上--allow-unrelated-histories就可以了
     
  Git本身如果只是要用的话没什么好说的，就是一堆指令，它的精华的地方在于它与它的一些工作流(WorkFlow)结合。不过其实所谓工作流说白了就是开发人员之间，团队内要怎么配合和协调，人与人之间沟通都做不好，工具再好也只是一个空壳而已。
