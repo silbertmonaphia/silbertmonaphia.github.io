@@ -284,7 +284,8 @@ Bat $battery_percent%$battery_bar
 ]]
 
 ```
-注意上面代码中conky.text后字段的/usr/bin/sensors说明要用到sensors，用apt-get install lm-sensors即可，不然显示不出来。
+注意上面代码中conky.text后字段的/usr/bin/sensors说明要用到sensors，用apt-get install lm-sensors即可，不然显示不出来  
+
 16.10.4更新：真的不建议你复制粘贴，因为我今天把上面这个配置文件替换掉我在Ubuntu的配置文件就位置错乱，而且不一会儿就自己消失了，呵呵....
 
 
