@@ -9,7 +9,7 @@ layout: post
 完全用Linux工作
 ----------
 
-http://dsec.pku.edu.cn/~rli/WiKi/linux.html 这里看完的觉得挺好的就转载了，以下是正文.
+<http://dsec.pku.edu.cn/~rli/WiKi/linux.html> 这里看完的觉得挺好的就转载了，以下是正文.
 
 　　我已经半年没有使用 Windows 的方式工作了.Linux 高效的完成了我所有的工作   
 　　GNU/Linux 不是每个人都想用的.如果你只需要处理一般的事务，打游戏，那么你不需要了解下面这些了  
