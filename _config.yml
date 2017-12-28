@@ -13,3 +13,12 @@ markdown: kramdown
 gems: [jekyll-paginate]
 paginate: 20
 paginate_path: "page/:num/"
+
+# prose.io config
+prose:
+    metadata:
+        _posts:
+          - name: "layout"
+            field:
+              element: "hidden"
+              value: "blog"
