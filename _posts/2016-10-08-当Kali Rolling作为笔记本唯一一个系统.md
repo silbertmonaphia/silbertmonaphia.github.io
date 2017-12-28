@@ -54,7 +54,7 @@ fcitx在源里面就有，所以直接apt-get install fcitx (安装输入法框�
 Firefox比chrome好在扩展好，而且和chrome内核不一样，两个互相补充，基本能应对绝大多数网页.
 
 
-**2.VPN/SS**
+**2.VPN/SS/SSR/V2ray**
 ----
 
 首先把OpenVPN,和PPTP装上,你要愿意还可以装上network-manager-ssh
