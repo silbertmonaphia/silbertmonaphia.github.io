@@ -273,7 +273,7 @@ sudo docker rm $(sudo docker ps -aq)
   **最后放一个docker的WebApp应用简易模型**：
   (强烈推荐[ProcessOn在线作图](https://www.processon.com/))
 
-  下图说明：
+  下图说明：  
   ①首先是两个容器App代表应用容器(以Tomcat为例)，而db代表数据库容器(以Mysql为例)，并且两个容器通过--link name相连，准确来说是App容器去--link 连接db容器;  
   ②两个容器分别通过-v向下挂载数据卷，App容器挂载物理机的项目代码目录/project(/project和容器分离，使得代码和环境互相更加干净而不会相互影响),而db容器则挂载物理机的数据存放目录/data;  
   ③两个容器都通过-p 和物理机器端口做了映射，App容器的8080端口和物理机的8080端口对应了起来，而同样的db容器的3306端口和物理机的3306端口对应了起来
