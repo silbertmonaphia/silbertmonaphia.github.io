@@ -319,9 +319,10 @@ wechat的github项目地址：
 
 https://github.com/geeeeeeeeek/electronic-wechat/blob/master/README_zh.md
 
-16.7.3更新：注意一下nodejs直接apt-get install nodejs就可以了,然后如果发生node:not found 的错误，别担心，这里http://stackoverflow.com/questions/21168141/cannot-install-packages-using-node-package-manager-in-ubuntu 说了，"In summer 2012 Debian maintainers decided to rename Node.js executable to prevent some kind of namespace collision with another package",改名以后就会有新旧名称兼容问题，因为虽然人知道nodejs就是node但是程序很死板，nodejs你不说它就不知道等于node，这里单纯用ln -s /usr/bin/nodejs /usr/bin/node，再npm install 还是会报错，所以还是从源里面再下载一个nodejs-legacy ，sudo apt-get install nodejs-legacy,亲测后面这种下载nodejs-legacy以后再运行npm install以后可以成功安装完不报错，然后npm start也能成功启动～
+16.7.3更新：注意一下nodejs直接apt-get install nodejs就可以了,然后如果发生node:not found 的错误，别担心，这里http://stackoverflow.com/questions/21168141/cannot-install-packages-using-node-package-manager-in-ubuntu 说了，"In summer 2012 Debian maintainers decided to rename Node.js executable to prevent some kind of namespace collision with another package",改名以后就会有新旧名称兼容问题，因为虽然人知道nodejs就是node但是程序很死板，nodejs你不说它就不知道等于node，这里单纯用ln -s /usr/bin/nodejs /usr/bin/node，再npm install 还是会报错，所以还是从源里面再下载一个nodejs-legacy ，sudo apt-get install nodejs-legacy,亲测后面这种下载nodejs-legacy以后再运行npm install以后可以成功安装完不报错，然后npm start也能成功启动～  
 
-16.8.19更新：如果在npm install过程中中断的话，如果这时候node_modules下面的模块没有下载完的话，会出现"npm warn unmet dependency ..which is version x.x.x"的错误，而且没有办法跳过，解决办法是用npm uninstall把原来已经部分安装的模块先卸载干净，再npm install.
+16.8.19更新：如果在npm install过程中中断的话，如果这时候node_modules下面的模块没有下载完的话，会出现"npm warn unmet dependency ..which is version x.x.x"的错误，而且没有办法跳过，解决办法是用npm uninstall把原来已经部分安装的模块先卸载干净，再npm install.  
+
 16.8.20更新：本版本今天崩了，请看[issue 318](https://github.com/geeeeeeeeek/electronic-wechat/issues/318)
 可以用着CLI界面的顶着，如果你能接受的话，这是link：https://github.com/sjdy521/Mojo-Weixin
 
