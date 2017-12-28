@@ -178,10 +178,10 @@ local ok , err = cache:close()
 
 ```
 Reference:
-1.[nginx和lua](http://blog.csdn.net/yanggd1987/article/details/46679989)
-2.[nginx+lua+redis实现验证码防采集](http://blog.csdn.net/yanggd1987/article/details/46914039)
+1.[nginx和lua](http://blog.csdn.net/yanggd1987/article/details/46679989)  
+2.[nginx+lua+redis实现验证码防采集](http://blog.csdn.net/yanggd1987/article/details/46914039)  
 3.[Nginx+Lua+Redis访问频率控制
-](http://homeway.me/2015/08/11/nginx-lua-redis-access-control/)
+](http://homeway.me/2015/08/11/nginx-lua-redis-access-control/)  
 
 ##  启动/重启nginx
 ```
