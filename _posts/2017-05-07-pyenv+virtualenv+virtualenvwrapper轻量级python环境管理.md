@@ -1,8 +1,8 @@
 ---
-title:  "pyenv+virtualenv+virtualenvwrapper轻量级python环境管理"
+title: pyenv+virtualenv+virtualenvwrapper轻量级python环境管理
 author: smona
-published: True
-date: 2017-05-07 20:54:15
+published: true
+date: '2017-05-07 20:54:15'
 layout: post
 ---
 
@@ -59,5 +59,4 @@ virtualenv+virtualenvwrapper
 4.rmvirtualenv blabla
 #删除 blabla虚拟环境
 更多命令：http://pythonguidecn.readthedocs.io/zh/latest/dev/virtualenvs.html
-```  
-
+```
