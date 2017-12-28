@@ -171,7 +171,7 @@ P.s. 在我用git的时候发生过一个小错误：
 
 原来我虽然已经把项目中删除了那几个大文件，但是.git还帮我保存了一份，这就是为什么git能回滚的原因- -，这真的是呵呵呵了，以后再也不敢commit大文件了，其实主要是Dockerfile要用到的一些软件，我也打包进去了  
 
-现在push的话项目太大了，而且容易出现超时失败的问题，我的解决办法是，把本地的.git删除（我不敢reset回滚，因为我在commit时候除了大文件还有一些源代码的修改，回滚的话我修改就没了），然后init一个，再checkout -b一条本地的dev分支，add&commit，最后push，push受限，再pull，发现冲突，解决冲突，再add&commit，最后再push就解决了，所以以后除了源代码，一些依赖的很大的软件最好就不要commit到本地分支了，你push都得有排等.
+现在push的话项目太大了，而且容易出现超时失败的问题，我的解决办法是:把本地的.git删除（我不敢reset回滚，因为我在commit时候除了大文件还有一些源代码的修改，回滚的话我修改就没了），然后init一个，再checkout -b一条本地的dev分支，add&commit，最后push，push受限，再pull，发现冲突，解决冲突，再add&commit，最后再push就解决了，所以以后除了源代码，一些依赖的很大的软件最好就不要commit到本地分支了，你push都得有排等.
   
   但是这种办法仅仅适合个人项目，简单粗暴，像公司项目就要慢慢用git gc还有git filter-branch之类一点点清理了,或者如果你只是关心Jenkins自动部署中git拉取代码体积太大的问题，可以看看jenkins的shadow clone
 
