@@ -48,7 +48,7 @@ P.s.补充一点，其实Lua在Nginx的应用只是Lua应用中很小的一个�
 OpenResty本身没有什么好讲的，它最大的功劳就是把Lua比较舒服地捆绑到了Nginx上，其他特性都是Lua本身的东西，所以想把Nginx玩的更加溜，除了彻底玩转Nginx本身以外(Nginx本身的配置就有点像一门小语言了)，Lua会是你不二的选择。
 
 ##  下载安装OpenResty
-  下载安装可以直接参考官网的教程(看安装和新手上路就可以了，以后有空想稍微深入一点的，可以直接看[OpenResty最佳实践](https://www.gitbook.com/book/moonbingbing/openresty-best-practices))
+下载安装可以直接参考官网的教程(看安装和新手上路就可以了，以后有空想稍微深入一点的，可以直接看[OpenResty最佳实践](https://www.gitbook.com/book/moonbingbing/openresty-best-practices))
 
 P.s因为我目前工作的本本是MBP，所以是用homebrew安装的，感觉会和linux里面的openresty有点不太一样,osx里面是用openresty这条命令启动才算是openresty，而linux貌似是openresty下的nginx启动的才算是openresty，才能用比如access_by_lua_file或者content_by_lua这种openresty语法
 ```
