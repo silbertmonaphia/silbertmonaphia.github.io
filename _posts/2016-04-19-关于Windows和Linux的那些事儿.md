@@ -2,7 +2,7 @@
 title: 关于Windows和Linux的那些事儿
 author: smona
 published: true
-date: '2016-04-19 00:30:36.000'
+date: '2016-04-19 00:30:36'
 layout: post
 ---
 
