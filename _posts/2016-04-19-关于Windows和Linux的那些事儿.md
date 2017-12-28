@@ -247,6 +247,6 @@ layout: post
 　　放录像：MPlayer, RealPlayer.MPlayer 太好了，直接就可以放 VCD, DVD, divx, wma, wmv ... 用 Windows 的同学都很羡慕我，说 Windows 要放这个需要大堆插件.rm 最好还是用 realplayer 放，它也是免费的.
 　　放音乐： xmms(mp3,ogg都可以), mpg321(放mp3), ogg123(放ogg).mpg321 不如xmms管理音乐文件那么方便，但是有时我还是用 mpg321 放 mp3 作为背景音乐，因为懒得开一个xmms窗口
 
-##我的见解    
+##  我的见解    
 这篇文章讲的很到位，也告诉我们为什么我们非要从windows折腾到Linux去.    
 其实，不可否认的是中国很多人都是从windows起步的，习惯了鼠标滑滑点点，搬到Linux中自然也就十分不习惯，本人最近也是搬迁中，当初听了学习计算机的一个友人的建议，从LinuxMint入手的确不错，LinuxMint的图形入口做的很好，十分适合Windows用户搬家到Linux，个人认为还是循序渐进，不要过早消磨掉了对linux的兴趣，不要觉得用xwindows很不好意思，这是刚开始，从xwindows开始学习linux会比较容易熟悉终端命令，直到你可以完全熟悉命令行，那时候应该完全可以抛开图形界面.
