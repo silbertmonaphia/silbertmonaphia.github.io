@@ -6,13 +6,14 @@ email: silbertmonaphia@gmail.com
 twitter_username: silbertmonaphia
 github_username:  silbertmonaphia
 
+
 # Build settings
 markdown: kramdown
 
 # Pagination
-gems: [jekyll-paginate]
-paginate: 20
-paginate_path: "page/:num/"
+#gems: [jekyll-paginate]
+#paginate: 20
+#paginate_path: "page/:num/"
 
 # prose.io config
 prose:
