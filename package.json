@@ -10,10 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/silbertmonaphia/silbertmonaphia.github.io.git"
   },
-  "keywords":[
-      "jekyll",
-      "webpack",
-      "react"
+  "keywords": [
+    "jekyll",
+    "webpack",
+    "react"
   ],
   "author": "smona",
   "license": "ISC",
