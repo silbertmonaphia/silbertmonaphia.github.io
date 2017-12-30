@@ -2,6 +2,7 @@
 layout: default
 title: About
 permalink: /about/
+published: true
 ---
 # Bio
 Hello! 我系@silbertmonaphia, 简写S.Mona或smona   
@@ -24,7 +25,7 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 浏览器:Chrome/Firefox  
 > 代码管理:Git  
 > 虚拟环境:Vagrant  
-> 网络分析:Wireshark | Charles  
+> 网络分析:Wireshark  
 
 技术?  
 > 语言:Python(Web/Spider/NLP)  
@@ -38,4 +39,4 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 最后，其实我之前是在csdn写的，但是csdn老是修改我的主题，然后时不时访问不了，我实在受不了，而且另外一方面来说，可定制程度也不高，了解到github pages后，我就直接把原来csdn的博客放过来了，虽然很多功能得自己重新做，但是和github绑定在一起的这个博客，资源就更加集中了,因为自己平时也要用github，集中意味着更加方便地管理  
 
 最近?  
-> 在学习二外js(怎么也避开不了js的巨坑...  
+> 在学习二外js(怎么也避开不了js的巨坑...
