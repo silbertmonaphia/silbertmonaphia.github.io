@@ -18,4 +18,4 @@ markdown: kramdown
 # prose.io config
 prose:
     rooturl: '_posts'
-    siteurl: 'silbertmonaphia.github.io'
+    siteurl: 'https://silbertmonaphia.github.io/'
