@@ -1,4 +1,5 @@
 ---
+category: OS
 title: LinuxMint安装报错（使用磁盘的最小对齐，这可能造成非常差的性能），安装无法继续
 author: smona
 published: true

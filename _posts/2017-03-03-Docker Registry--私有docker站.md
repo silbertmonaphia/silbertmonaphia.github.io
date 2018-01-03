@@ -1,4 +1,5 @@
 ---
+category: OS
 title: Docker Registry--私有docker站
 author: smona
 published: true

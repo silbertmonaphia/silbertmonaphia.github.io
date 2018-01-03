@@ -1,4 +1,5 @@
 ---
+category: OS
 title: Ubuntu上装windows10结果进不到Ubuntu了- -||
 author: smona
 published: true

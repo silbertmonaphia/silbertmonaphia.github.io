@@ -1,4 +1,5 @@
 ---
+category: OS
 title: 关于Windows和Linux的那些事儿
 author: smona
 published: true

@@ -1,4 +1,5 @@
 ---
+category: Network
 title: '高频访问IP限制 --Openresty(nginx + lua) [反爬虫之旅]'
 author: smona
 published: true

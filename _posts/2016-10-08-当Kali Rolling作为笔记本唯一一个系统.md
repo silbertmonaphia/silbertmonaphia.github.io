@@ -1,4 +1,5 @@
 ---
+category: OS
 title: 当Kali Rolling作为笔记本唯一一个系统
 author: smona
 published: true

@@ -1,4 +1,5 @@
 ---
+category: Python
 title: python爬虫（下）--模拟登录与Captcha识别
 author: smona
 published: true

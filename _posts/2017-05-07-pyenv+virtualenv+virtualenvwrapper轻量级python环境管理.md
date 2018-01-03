@@ -1,4 +1,5 @@
 ---
+category: Python
 title: pyenv+virtualenv+virtualenvwrapper轻量级python环境管理
 author: smona
 published: true
