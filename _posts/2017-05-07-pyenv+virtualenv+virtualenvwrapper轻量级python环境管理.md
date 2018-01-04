@@ -45,7 +45,8 @@ pyenv
 P.s.
 1.
 
-2.export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+2.
+export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
 3.记录一个和python的解释器相关的东西：
 export PYTHONPATH=/usr/local/bin/可以往到python解释器sys.path最前面添加'/usr/local/bin/'的路径。  
 
