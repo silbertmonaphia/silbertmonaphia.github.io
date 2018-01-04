@@ -71,8 +71,9 @@ Virtualenv+Virtualenvwrapper
   
   直到前些日子知道有[virtualenvwrapper](http://virtualenvwrapper.readthedocs.io/en/latest/install.html#basic-installation)这么一个工具以后，才开始觉得在单纯的只有python的开发中，对于python模块依赖管理来说，virtualenv+virtualenvwrapper就够了，没有必要上docker(前提是真的只有python代码和python模块)，virtualenv管理环境，而virtualenvwrapper简化原来的操作(其实我觉得就是拿来包装virtualenv的)，使得原来要先deactivate，再切换到目标的虚拟环境目录下的bin/目录再source activate的操作，现在只用一句workon就搞定在不同python环境之间的切换了  
   
-
+如果你启动`/usr/local/bin/virtualenvwrapper.sh`遇到"No module named virtualenvwrapper"错误，可以尝试以下配置:  
 ```shell
+# append to ~/.zshrc or ~/.bashrc
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
