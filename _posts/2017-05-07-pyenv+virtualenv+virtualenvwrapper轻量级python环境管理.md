@@ -45,7 +45,7 @@ pyenv
 更多指令看官方文档：https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
 ```
 P.s.  
-1.pyenv会在你的$PATH前面加上两个地址,所以在你的输入python/python3的时候，shell会按照$PATH顺序寻找，所以先找到pyenv加上那两个地址下的python,而位于$PATH后面的原来系统的python就不会找到了;  
+1.pyenv会在你的$PATH前面加上两个地址,所以在你的输入python/python3的时候，shell会按照$PATH顺序寻找，所以先找到pyenv加上那两个地址下的python/python3,而位于$PATH后面的原来系统的python/python3就不会找到了;  
 
 2.针对国内访问慢的问题可以在你的.bashrc/.zshrc里面加上下面这句设置七牛python镜像代理:  
 ```shell
