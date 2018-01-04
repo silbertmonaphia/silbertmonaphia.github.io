@@ -13,8 +13,10 @@ layout: post
 
 对比前面写到的一篇[Docker+Git效率工作](http://blog.csdn.net/qq_29245097/article/details/52996911)中提到的docker，我现在认为，虽然docker能牢牢管住整个软件以来环境，但是后来用docker管开发环境这样实践过一段时间后，我倒是觉得每次都要进去docker做操作测试还是显得太笨重了(累)，而现在的这么一套Pyenv+Virtualenv+Virtualenvwrapper管理python开发环境显得轻量得多
 
-Pyenv Py版本管理
+Pyenv
 --
+> Py版本管理
+
   我是今晚才知道这个东西的，今晚我的那个同学的需求是，希望能在ubuntu14.04 用pip安装的时候不会显示下面这个警告，他觉得很脏(嗯，我也觉得)：
   
 
