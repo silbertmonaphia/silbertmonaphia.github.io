@@ -60,7 +60,7 @@ PYTHONPATH变量可以往到python解释器sys.path最前面添加'/usr/local/bi
 
 这个动作影响的是python解释器import的时候，当import一个模块的时候，python解释器会逐一从sys.path提供的路径下寻找是否有相应的模块，所以如果用pyenv设定了当前版本不是系统版本而又想要用系统安装的模块(比如ubuntu中apt安装python-requests)，可以通过指定PYTHONPATH系统环境变量的办法，让python解释器能自己找到系统安装的python模块。
 
-virtualenv+virtualenvwrapper
+Virtualenv+Virtualenvwrapper
 --
   其实以前我用过virtualenv，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin中，然后source activate才能启动，就觉得它不行。后面发现了docker，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，就拼命说docker好。  
   
