@@ -65,14 +65,17 @@ Virtualenv+Virtualenvwrapper
 --
 >Py依赖控制
 
-  其实以前我用过[virtualenv](https://virtualenv.pypa.io/en/stable/installation/#installation)，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin中，然后source activate才能启动，就觉得它不行。后面发现了docker，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，就拼命说docker好。  
+  其实以前我用过[virtualenv](https://virtualenv.pypa.io/en/stable/installation/#installation)，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin/中，还得source activate才能启动，cd了好多轮才能启动特定的虚拟环境，如果你进入了另外一个项目你还得cd几层目录启动后，在cd出来  
   
-  直到前些日子知道有[virtualenvwrapper](http://virtualenvwrapper.readthedocs.io/en/latest/install.html#basic-installation)这么一个工具以后，才开始觉得其实在单纯的只有python的开发中，对于python模块依赖管理来说，virtualenv+virtualenvwrapper就够了，没有必要上docker(前提是真的只有python代码和python模块)，virtualenv管理环境，而virtualenvwrapper简化原来的操作(其实我觉得就是拿来包装virtualenv的)，使得原来要先deactivate，再切换到目标的虚拟环境目录下的bin/目录再source activate的操作，现在只用一句workon就搞定在不同python环境之间的切换了。
+  后面知道了docker后，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，于是当时拼命地说docker的好。  
+  
+  直到前些日子知道有[virtualenvwrapper](http://virtualenvwrapper.readthedocs.io/en/latest/install.html#basic-installation)这么一个工具以后，才开始觉得在单纯的只有python的开发中，对于python模块依赖管理来说，virtualenv+virtualenvwrapper就够了，没有必要上docker(前提是真的只有python代码和python模块)，virtualenv管理环境，而virtualenvwrapper简化原来的操作(其实我觉得就是拿来包装virtualenv的)，使得原来要先deactivate，再切换到目标的虚拟环境目录下的bin/目录再source activate的操作，现在只用一句workon就搞定在不同python环境之间的切换了  
   
 
 ```shell
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
