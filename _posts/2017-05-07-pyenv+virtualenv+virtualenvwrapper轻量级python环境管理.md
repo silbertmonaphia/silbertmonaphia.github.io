@@ -42,7 +42,11 @@ pyenv
 卸载2.7.13版本的python
 更多指令看官方文档：https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
 ```
-P.s.记录一个和python的解释器相关的东西：
+P.s.
+1.
+
+2.export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+3.记录一个和python的解释器相关的东西：
 export PYTHONPATH=/usr/local/bin/可以往到python解释器sys.path最前面添加'/usr/local/bin/'的路径。  
 
 这个动作影响的是python解释器import的时候，当import一个模块的时候，python解释器会逐一从sys.path提供的路径下寻找是否有相应的模块，所以如果用pyenv设定了当前版本不是系统版本而又想要用系统安装的模块(比如ubuntu中apt安装python-requests)，可以通过指定PYTHONPATH系统环境变量的办法，让python解释器能自己找到系统安装的python模块。
