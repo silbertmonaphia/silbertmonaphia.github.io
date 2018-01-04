@@ -6,7 +6,6 @@ published: true
 date: '2017-05-07 20:54:15'
 layout: post
 ---
-
 前言
 --
 
@@ -14,7 +13,7 @@ layout: post
 
 对比前面写到的一篇[Docker+Git效率工作](http://blog.csdn.net/qq_29245097/article/details/52996911)中提到的docker，我现在认为，虽然docker能牢牢管住整个软件以来环境，但是后来用docker管开发环境这样实践过一段时间后，我倒是觉得每次都要进去docker做操作测试还是显得太笨重了(累)，而现在的这么一套Pyenv+Virtualenv+Virtualenvwrapper管理python开发环境显得轻量得多
 
-pyenv
+Pyenv Py版本管理
 --
   我是今晚才知道这个东西的，今晚我的那个同学的需求是，希望能在ubuntu14.04 用pip安装的时候不会显示下面这个警告，他觉得很脏(嗯，我也觉得)：
   
@@ -62,6 +61,8 @@ PYTHONPATH变量可以往到python解释器sys.path最前面添加'/usr/local/bi
 
 Virtualenv+Virtualenvwrapper
 --
+>Py依赖控制
+
   其实以前我用过virtualenv，但是觉得它启动的操作太麻烦了，要先进入用virtualenv虚拟出来的目录下的bin中，然后source activate才能启动，就觉得它不行。后面发现了docker，觉得docker比virtualenv要好很多，而且virtualenv只能管python的包，其他的包啊，模块啊，库啊还有一些软件依赖，它就管不了，而docker都能管，就拼命说docker好。  
   
   直到前些日子知道有virtualenvwrapper这么一个工具以后，才开始觉得其实在单纯的只有python的开发中，对于python模块依赖管理来说，virtualenv+virtualenvwrapper就够了，没有必要上docker(前提是真的只有python代码和python模块)，virtualenv管理环境，而virtualenvwrapper简化原来的操作(其实我觉得就是拿来包装virtualenv的)，使得原来要先deactivate，再切换到目标的虚拟环境目录下的bin/目录再source activate的操作，现在只用一句work on就搞定在不同python环境之间的切换了。
