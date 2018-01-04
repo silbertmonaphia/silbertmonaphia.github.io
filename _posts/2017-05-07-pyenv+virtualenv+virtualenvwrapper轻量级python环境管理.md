@@ -23,9 +23,8 @@ pyenv
   
   由于是ubuntu14.04，我apt-get update以后再apt-get upgrade python以后发现，14.04的源里面(清华大学的镜像源)里面最新的python版本也才2.7.6，而根据warning里面提示的"You can upgrade to a newer version of Python to solve this."得知，它推荐的是升级现在的python版本来解决这个warning问题，那么既然没有办法通过apt-get来更新我们的python，那么我们只能自己另外装一个，当然我们可以下载tar包来解压编译安装，不过这个略显麻烦，我们有更加好的方案——pyenv，关于它是干什么的，我觉得它的GitHub官方文档就写的很清楚:"pyenv lets you easily switch between multiple versions of Python."，所以对付ubuntu14.04里面python只有2.7.6老版本来说，要获取新版本的python，用pyenv简直不要太好- -。  
 
+安装[pyenv](https://github.com/pyenv/pyenv#installation)
 ```
-0.安装[pyenv](https://github.com/pyenv/pyenv#installation)
-
 1.pyenv install --list
 查看可安装的列表
 2.pyenv version
