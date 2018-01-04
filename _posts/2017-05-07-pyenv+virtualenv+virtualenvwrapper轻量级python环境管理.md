@@ -44,9 +44,10 @@ pyenv
 ```
 P.s.
 1.
-
-2.
+2.针对国内访问慢的问题可以在你的.bashrc/.zshrc里面加上下面这句设置七牛python镜像代理:  
+```shell
 export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+```
 3.记录一个和python的解释器相关的东西：
 export PYTHONPATH=/usr/local/bin/可以往到python解释器sys.path最前面添加'/usr/local/bin/'的路径。  
 
