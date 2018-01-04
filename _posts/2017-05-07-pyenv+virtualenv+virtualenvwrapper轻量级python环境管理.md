@@ -10,7 +10,7 @@ layout: post
 前言
 --
 
-今晚帮一个童鞋解决需求，无意中把最近用到virtualenv和virtualenvwrapper串着用了起来，又知道了原来还有pyenv这么一个东西，感觉这样的python环境控制有必要再来一写
+今晚帮一个童鞋解决需求，无意中把最近用到Virtualenv和Virtualenvwrapper串着用了起来，又知道了原来还有pyenv这么一个东西，感觉这样的python环境控制有必要再来一写
 
 对比前面写到的一篇[Docker+Git效率工作](http://blog.csdn.net/qq_29245097/article/details/52996911)中提到的docker，我现在认为，虽然docker能牢牢管住整个软件以来环境，但是后来用docker管开发环境这样实践过一段时间后，我倒是觉得每次都要进去docker做操作测试还是显得太笨重了(累)，而现在的这么一套pyenv+virtualenv+virtualenvwrapper(后面简称pvv)管理python开发环境显得轻量得多
 
