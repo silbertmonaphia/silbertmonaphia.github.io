@@ -79,7 +79,6 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 ```
-----
   下面一些常用的命令
 ```shell
 #在安装virtualenvwrapper之前请确保安装了virtualenv，因为virtualenvwrapper是依赖于virtualenv的。
