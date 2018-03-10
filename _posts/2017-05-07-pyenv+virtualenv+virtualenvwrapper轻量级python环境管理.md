@@ -92,3 +92,11 @@ source /usr/local/bin/virtualenvwrapper.sh
 #删除 blabla虚拟环境
 更多命令：http://pythonguidecn.readthedocs.io/zh/latest/dev/virtualenvs.html
 ```
+
+Pipenv  
+--
+
+18.3.10更新  
+今天玩了一下被讨论很火的pipenv(作者竟然还是那个requests库的作者Kenneth Reitz，牛逼不?!)，就连官方文档也推荐了这款包和环境管理工具，它是pip和virtualenv的结合，给我最大的印象是，它的graph选项，能展现当前的依赖关系，这在pip+virtualenv中是做不到的，还要另外下软件看依赖关系。  
+
+pipenv相当于是一站式解决方案，这是很棒的，但是有一点美中不足的是，它没有实现类似于virtualenvwrapper中的'workon'功能，[在项目社区尚且在讨论中](https://github.com/pypa/pipenv/issues/535),作者虽然觉得是个不错的idea，但是距离今天21天前的comment表示还是处于prototype中，建议用pew的workon来补充，但是我希望是pipenv能自己实现workon功能，而不是通过pew+pipenv这种组合的方式，因为pipenv本身就是趋于一站式解决的方法，原本长时间的使用pip+virtualenv+virtualenvwrapper，大家已经形成了较好的实践了，所以要切换，我的建议是等待pipenv把workon补充上也不迟，不然就得寻求pew的帮助，这对开发方面有一点影响，不过部署因为不涉及多虚拟环境切换，所以没有什么影响。  
