@@ -11,7 +11,7 @@ published: true
 
 ## four-way handshake
 
-# SSL/TLS
+# https
 tls是新一代的ssl，可以这么理解
 CA
 Asymmetric key
@@ -30,4 +30,4 @@ SPDY相对于http1.1的新特性:
 
 而从SPDY到http2的话，最显著的就是头部压缩算法的改变，从dynamic stream-based compression algorithm到fixed huffman code-based compression algorithm，为了防止Compression oracle attack而做的改进，可以说是安全性的改进
 
-值得注意的是，虽然http2在协议上没有要求https，但是在SPDY时代，就已经默认使用https，所以现实中Chrome,Firefox等主流的浏览器一般都是默认http2必须要在ssl/tls上。
+值得注意的是，虽然http2在协议上没有要求https，但是在SPDY时代，就已经默认使用https，所以现实中Chrome,Firefox等主流的浏览器一般都是默认http2必须要在ssl/tls上
