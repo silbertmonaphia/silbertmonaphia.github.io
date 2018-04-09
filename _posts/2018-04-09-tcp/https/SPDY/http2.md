@@ -7,9 +7,9 @@ published: true
 
 # tcp
 
-## three-way handshake
+### three-way handshake
 
-## four-way handshake
+### four-way handshake
 
 # https
 tls是新一代的ssl，可以这么理解
@@ -21,8 +21,10 @@ symmetric key
 要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础。
 
 SPDY相对于http1.1的新特性:
-1.无需FIFO的多路复用(Multiplexing);
-2.二进制分帧;
+1.无需FIFO的多路复用(Multiplexing):
+一个TCP连接就可以处理所有的请求;
+2.二进制分帧:
+将一个TCP连接分成若干个流(Stream)，每个流又分为若干消息(Message)，而每个消息又分为若干帧(Frame)
 3.强制压缩(包括headers);
 4.优先级排序(Priority);
 5.双向通讯;
