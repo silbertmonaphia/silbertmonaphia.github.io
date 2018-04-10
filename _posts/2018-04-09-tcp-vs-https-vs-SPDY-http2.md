@@ -6,7 +6,7 @@ published: true
 之前准备了下面试，发现网络这块几乎都会问http过程,tcp握手过程以及https中的ssl/tls过程，最近随着http2的普及，http2也成为了必问的内容之一，原来不清楚https这块，所以就去学习了一下，发现其实光是https就这一个过程就可以囊括http,tcp三握四挥，ssl/tls加密验证这些知识点，现在来总结一下这一块的内容
 
 # tcp三握四挥
-http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同一层，它是应用层的下一层:运输层，所以应用层的这些协议最后都会走tcp
+http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同一层，它是应用层的下一层:运输层，所以应用层的这些协议最后都会走tcp  
 
 # https
 说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解  
