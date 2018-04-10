@@ -23,7 +23,7 @@ http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同
 
 
 # http2  
-要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的(SPDY is jumping-off point of http2)，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础
+要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的(SPDY is jumping-off point of http2)，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础  
 
 SPDY相对于http1.1的新特性:  
 1.无需FIFO的多路复用(Multiplexing):  
