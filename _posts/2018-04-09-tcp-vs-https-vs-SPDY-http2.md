@@ -9,7 +9,7 @@ published: true
 http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同一层，它是应用层的下一层:运输层，所以http，ssl/tls，SPDY和http2这些应用层协议最后都会走tcp  
 
 # https  
-说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解  
+说https，其实强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解  
 
 下图包括了ssl/tls handshake过程以及上面的tcp三握四挥的过程  
 
@@ -22,7 +22,7 @@ http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同
 3.CA和key exchange  
 
 
-# http2  
+# SPDY & http2  
 要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的(SPDY is jumping-off point of http2)，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础  
 
 SPDY相对于http1.1的新特性:  
