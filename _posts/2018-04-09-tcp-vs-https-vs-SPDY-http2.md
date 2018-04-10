@@ -15,6 +15,12 @@ http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同
 
 ![](https://silbertmonaphia.github.io/assets/images/HTTPS.png)
 
+上图还有几点说得不清楚的，下面来补充:
+①TLS handshake:
+1.client hello
+2.server hello
+3.CA和key exchange
+
 
 # http2  
 要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的(SPDY is jumping-off point of http2)，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础
