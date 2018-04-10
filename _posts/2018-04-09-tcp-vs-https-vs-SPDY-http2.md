@@ -11,7 +11,7 @@ tcp跟http，ssl/tls，SPDY和http2这些不同层，这些都是属于应用层
 # https
 说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解  
 
-下图包括了ssl/tls handshake过程以及上面的tcp三握四挥的过程
+下图包括了ssl/tls handshake过程以及上面的tcp三握四挥的过程  
 
 ![](https://silbertmonaphia.github.io/assets/images/HTTPS.png)
 
