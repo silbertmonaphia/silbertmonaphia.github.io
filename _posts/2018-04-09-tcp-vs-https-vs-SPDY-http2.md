@@ -17,9 +17,9 @@ http，ssl/tls，SPDY和http2这些都是属于应用层，tcp跟它们不在同
 
 上图还有几点说得不清楚的，下面来补充:
 ①TLS handshake:
-1.client hello
-2.server hello
-3.CA和key exchange
+1.client hello  
+2.server hello  
+3.CA和key exchange  
 
 
 # http2  
