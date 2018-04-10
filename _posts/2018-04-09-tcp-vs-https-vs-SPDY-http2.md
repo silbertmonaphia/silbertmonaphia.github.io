@@ -29,7 +29,7 @@ SPDY相对于http1.1的新特性:
 1.无需FIFO的多路复用(Multiplexing):  
 一个TCP连接就可以处理所有的请求;  
 2.二进制分帧:  
-将一个TCP连接分成若干个流(Stream)，每个流又分为若干消息(Message)，而每个消息又分为若干帧(Frame)，每一个SPDY用户都会被分配一个stream ID代表用户和服务器之间只有一个TCP连接
+将一个TCP连接分成若干个流(Stream)，每个流又分为若干消息(Message)，而每个消息又分为若干帧(Frame)，每一个SPDY用户都会被分配一个stream ID代表用户和服务器之间只有一个TCP连接  
 3.强制压缩(包括headers);  
 4.优先级排序(Priority);  
 5.双向通讯;  
