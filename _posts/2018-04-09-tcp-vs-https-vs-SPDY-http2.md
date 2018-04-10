@@ -10,7 +10,7 @@ tcp跟http，ssl/tls，SPDY和http2这些不同层，这些都是属于应用层
 
 # https
 说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解!
-[HTTPS.png]({{site.baseurl}}/_posts/HTTPS.png)
+[HTTPS.png]({{site.baseurl}}/assets/HTTPS.png)
 
 
 
