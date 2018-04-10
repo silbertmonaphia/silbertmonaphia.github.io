@@ -7,13 +7,11 @@ published: true
 
 # tcp三握四挥手
 tcp跟http，ssl/tls，SPDY和http2这些不同层，这些都是属于应用层，而tcp是应用层的下一层:运输层，所以应用层的这些协议最后都会走tcp
-![HTTPS.png]({{site.baseurl}}/_posts/2018-04-09-tcp/https/SPDY/HTTPS.png)
 
 # https
-tls是新一代的ssl，可以这么理解
-CA
-Asymmetric key
-symmetric key
+说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解
+
+![HTTPS.png]({{site.baseurl}}/_posts/2018-04-09-tcp/https/SPDY/HTTPS.png)
 
 # http2  
 要说http2之前，首先要说说SPDY(speedy缩写)，因为http2就是从SPDY改进来的(SPDY is jumping-off point of http2)，SPDY是Google的产物，为了减少网络传输延迟而开发的协议，相比http1.1本质上是在tcp和http之间加了一层SPDY层，这一层把原本http1.1文本传输变为了二进制帧，这一改进是其他新特性的基础
@@ -30,4 +28,4 @@ SPDY相对于http1.1的新特性:
 
 而从SPDY到http2的话，最显著的就是头部压缩算法的改变，从dynamic stream-based compression algorithm到fixed huffman code-based compression algorithm，为了防止Compression oracle attack而做的改进，可以说是安全性的改进  
 
-值得注意的是，虽然http2在协议上没有要求https，但是在SPDY时代，就已经默认使用https，所以现实中Chrome,Firefox等主流的浏览器一般都是默认http2必须要在ssl/tls上  
+值得注意的是，虽然http2在协议上没有要求https，但是在SPDY时代，就已经默认使用https，所以现实中Chrome,Firefox等主流的浏览器一般都是默认http2必须要在ssl/tls上
