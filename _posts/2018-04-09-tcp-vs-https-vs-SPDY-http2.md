@@ -9,7 +9,8 @@ published: true
 tcp跟http，ssl/tls，SPDY和http2这些不同层，这些都是属于应用层，而tcp是应用层的下一层:运输层，所以应用层的这些协议最后都会走tcp
 
 # https
-说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解![HTTPS.png]({{site.baseurl}}/_posts/HTTPS.png)
+说https，强调的主要是ssl/tls，其中tls是新一代的ssl，可以这么理解!
+[HTTPS.png]({{site.baseurl}}/_posts/HTTPS.png)
 
 
 
