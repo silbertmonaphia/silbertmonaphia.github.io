@@ -1,5 +1,6 @@
 ---
 published: true
+category: OS
 ---
 # 前言
 
