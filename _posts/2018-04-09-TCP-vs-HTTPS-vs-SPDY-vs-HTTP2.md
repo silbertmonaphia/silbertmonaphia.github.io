@@ -41,4 +41,5 @@ SPDY相对于http1.1的新特性:
 值得注意的是，虽然http2在协议上没有要求https，但是在SPDY时代，就已经默认使用https，所以现实中Chrome,Firefox等主流的浏览器一般都是默认http2必须要在ssl/tls上  
 
 # Ping过程  
-待补充
+Ping命令是基于ICMP网络层协议的，如果是直接ping一个ip，那么不会走TCP/UDP，只会走IP和ARP，而Ping一个域名，则会走TCP，但是那是由于DNS，因为需要把域名转化为ip  
+待补充  
