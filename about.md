@@ -38,11 +38,12 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 其次，就是我可以把我的所想所得的积累都丢到博客,把博客当成自己的财富,这样以后回顾也不会觉得自己虚度光阴  
 > 最后，其实我之前是在csdn写的，但是csdn老是修改我的主题，然后时不时访问不了，我实在受不了，而且另外一方面来说，可定制程度也不高，了解到github pages后，我就直接把原来csdn的博客放过来了，虽然很多功能得自己重新做，但是和github绑定在一起的这个博客，资源就更加集中了,因为自己平时也要用github，集中意味着更加方便地管理  
 
-Guidline?
+Guideline?
 > 1.The world is full of fascinating problems waiting to be solved(Motive)  
 > 2.No problem should ever have to be solved twice.(Share)  
 > 3.Boredom and drudgery are evil.(Automation).  
-> 4.Attitude is no substitute for competence.(Expertise)  
+> 4.Freedom is good.(Anti-authoritarian)  
+> 5.Attitude is no substitute for competence.(Expertise)  
 > Ref: http://www.catb.org/esr/faqs/hacker-howto.html  
 
 最近?  
