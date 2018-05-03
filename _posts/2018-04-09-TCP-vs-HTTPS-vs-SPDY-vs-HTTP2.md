@@ -2,6 +2,9 @@
 published: true
 category: Network
 ---
+* 目录
+{:toc}
+
 # 前言
 
 之前准备了下面试，发现网络这块几乎都会问http过程,tcp握手过程以及https中的ssl/tls过程，最近随着http2的普及，http2也成为了必问的内容之一，原来不清楚https这块，所以就去学习了一下，发现其实光是https就这一个过程就可以囊括http,tcp三握四挥，ssl/tls加密验证这些知识点，现在来总结一下这一块的内容  
@@ -42,4 +45,4 @@ SPDY相对于http1.1的新特性:
 
 # Ping过程  
 Ping命令是基于ICMP网络层协议的，如果是直接ping一个ip，那么不会走TCP/UDP，只会走IP和ARP，而Ping一个域名，则会走TCP，但是那是由于DNS，因为需要把域名转化为ip  
-待补充  
+待补充
