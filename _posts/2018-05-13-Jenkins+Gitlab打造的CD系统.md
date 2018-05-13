@@ -55,7 +55,7 @@ P.s.因为公司的服务器没有直接访问国外节点的能力，而我自�
 3.构建触发器 => Build when a change is pushed to GitLab. GitLab webhook URL => Allowed branches:在多节点部署的时候遇到一个问题，就是demo分支更新的时候，应该是对应的demo服务器节点部署，但是master对应了那个线上服务器也部署了，后面才知道这个选项的Allow all branches to trigger this job导致的，换成 Filter branches by name或者Filter branches by regex去做隔离即可  
 
 ### gitlab hook配置
-  上面我们在工程中源码管理这栏，勾选git并配置好了我们的gitlab上的项目地址，但是这样并不能达到我们的目的，我们还需要在gitlab上配置钩子，先在jenins工程=>构建触发器栏=>Build when a change is pushed to GitLab. GitLab webhook URL=>Secret token去generate一个密码(后面gitlab上的安全令牌就是这个)，我们可以在gitlab上项目页=>设置=>集成里面，把刚才的密码填上，再把推送的url填上(一般在"Build when a change is pushed to GitLab. GitLab webhook URL"这个后面就会有这个url)，再勾选推送事件，去掉开启SSL证书验证(因为我们没有https...)，最后生成钩子即可，生成后推荐test一下能否触发钩子，返回200说明是OK的，这个test并不会真的让jenkins构建，所以安心test。
+  上面我们在Jenkins工程中源码管理这栏，勾选git并配置好了我们的gitlab上的项目地址，但是这样并不能达到我们的目的，我们还需要在gitlab上配置钩子，先在jenins工程=>构建触发器栏=>Build when a change is pushed to GitLab. GitLab webhook URL=>Secret token去generate一个密码(后面gitlab上的安全令牌就是这个)，我们可以在gitlab上项目页=>设置=>集成里面，把刚才的密码填上，再把推送的url填上(一般在"Build when a change is pushed to GitLab. GitLab webhook URL"这个后面就会有这个url)，再勾选推送事件，去掉开启SSL证书验证(因为我们没有https...)，最后生成钩子即可，生成后推荐test一下能否触发钩子，返回200说明是OK的，这个test并不会真的让jenkins构建，所以安心test。
   
 ### 构建  
   主要是执行一些你本来拉完代码后的系统命令，比如解压，某些服务的重启(e.g. service nginx restart)，比如依赖包的下载(e.g. pip install -r requirements.txt)等等，让原本每次更新代码到服务器后的一些重复的命令操作都交给jenkins自己自动完成  
