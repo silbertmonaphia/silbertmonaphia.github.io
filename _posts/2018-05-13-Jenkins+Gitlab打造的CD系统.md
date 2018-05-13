@@ -18,7 +18,7 @@ category: OS
   Jenkins的安装方法有很多，但是我最推荐的是直接jenkins.war来装，因为这个依赖最少，而且最简洁(深受"less is more"影响啊!)，启动直接`java -war jenkins -http-post=8080`即可，如果是想后台的，那么就`nohup java -war jenkins -http-post=8080 &`，对于本身是java的项目，还可以把jenkins.war包对劲Tomcat启动，但是由于自己现在的项目还是Python，服务器上面没有Tomcat之类的东西，所以就多一事不如少一事，保持简单最重要。  
   P.s.官方下载的jenkins的jenkins.war包装好以后竟然是中文的，有点小惊喜，我还想着怎么汉化，真不知道它是怎么检测系统环境的...  
   
-##　插件  
+## 插件  
   安装好以后就可以访问服务器的8080端口了，比如`http://you_servier_ip:8080`，开始初始化配置，一开始要输入一个管理员密码的，你按照提示到服务器上找就好了，然后还要选择默认插件安装，因为简洁哲学思想影响，默认的插件我插件都没有安装，因为它默认的安装的插件其实对于Jenkins + Gitlab完成自动部署任务来说，有一些不必要的～  
   那么我现在就告诉你，如果想达到" 能够git push到gitlab后，gitlab主动推送到Jenkins部署 "(**这就是我们的目的!**)所必须的插件:　　
 
