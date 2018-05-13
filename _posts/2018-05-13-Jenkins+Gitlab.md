@@ -34,7 +34,7 @@ Optional:
 3.GitHub plugin(如果托管在github)
 ```
 
-P.s.因为公司的服务器没有直接访问国外节点的能力，而我自己
+P.s.因为公司的服务器没有直接访问国外节点的能力，而我自己多次尝试更改为国内的比如清华开源镜像和搜狐开源镜像无果后(可以到[这里](http://mirrors.jenkins-ci.org/status.html)看一些jenkins插件的开源镜像站点)，果断转向自己上[官方插件站](https://plugins.jenkins.io/)去搜索相应的hpi，通过Archive跳转，在找到自己想要的版本来下载，
 
 
   
