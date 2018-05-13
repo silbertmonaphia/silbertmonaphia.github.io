@@ -19,14 +19,14 @@ published: false
   
 ##　插件  
   安装好以后就可以访问服务器的8080端口了，比如`http://you_servier_ip:8080`，开始初始化配置，一开始要输入一个管理员密码的，你按照提示到服务器上找就好了，然后还要选择默认插件安装，因为简洁哲学思想影响，默认的插件我插件都没有安装，因为它默认的安装的插件其实对于Jenkins + Gitlab完成自动部署任务来说，有一些不必要的～  
-  那么我现在就告诉你，如果想达到" 能够git push到gitlab后，gitlab主动推送到Jenkins部署 "所必须的插件:　　
+  那么我现在就告诉你，如果想达到" 能够git push到gitlab后，gitlab主动推送到Jenkins部署 "(**这就是我们的目的!**)所必须的插件:　　
 
 ```
 Requred:  
 1.Git plugin
 2.GitLab Plugin
 3.Gitlab Hook Plugin
-4.Email Extension Plugin(为了能够发送邮件)
+4.Email Extension Plugin(为了能够更好地发送邮件，当然jenkins本身也有邮件功能)
 5.SSH Slaves plugin(为了能够管理多个节点)
 
 Optional:
@@ -47,5 +47,20 @@ P.s.因为公司的服务器没有直接访问国外节点的能力，而我自�
 3.钩子:钩子可以说是触发器这里最佳选择了，上面的轮询的问题是一方面对代码库压力比较大，而且频率最快也只有1min一次，如果在1min的interval里面代码库有提交，那么还是得等完这一分钟才会由轮询方式来监测到代码更新从而触发构建行为，而钩子则改变了主动方，由jenkins主动定期检查代码库，变成代码库一旦监测到有更新，则主动告知jenkins去更新代码，这样就能解决刚才提到的两个问题了
 ```
 
-   
+  配置工程我就按部就班了，因为网上许多教程都有覆盖基本的配置，我就补充几点，那些教程鲜有提及的一些配置点，因为我在试着配置工程的时候，根据那些教程，有些地方会卡壳，所以我觉得我应该在这里去做补充:  
   
+1.general => 使用自定义的工作空间:这个就是确定你的代码要拉到哪里，即当前工程的操作的初始位置;   
+2.general => 限制项目的运行节点:这里后面做多个节点要用到，限制每个工程只在填写的节点部署;    
+3.构建触发器 => Build when a change is pushed to GitLab. GitLab webhook URL => Allowed branches:在多节点部署的时候遇到一个问题，就是demo分支更新的时候，应该是对应的demo服务器节点部署，但是master对应了那个线上服务器也部署了，后面才知道这个选项的Allow all branches to trigger this job导致的，换成 Filter branches by name或者Filter branches by regex去做隔离即可  
+
+## gitlab hook配置
+  上面我们在工程中源码管理这栏，勾选git并配置好了我们的gitlab上的项目地址，但是这样并不能达到我们的目的，我们还需要在gitlab上配置钩子，先在jenins工程=>构建触发器栏=>Build when a change is pushed to GitLab. GitLab webhook URL=>Secret token去generate一个密码(后面gitlab上的安全令牌就是这个)，我们可以在gitlab上项目页=>设置=>集成里面，把刚才的密码填上，再把推送的url填上(一般在"Build when a change is pushed to GitLab. GitLab webhook URL"这个后面就会有这个url)，再勾选推送事件，去掉开启SSL证书验证(因为我们没有https...)，最后生成钩子即可，生成后推荐test一下能否触发钩子，返回200说明是OK的，这个test并不会真的让jenkins构建，所以安心test。
+  
+## 构建
+
+## 构建后操作
+　　这一步可以在构建后做一些任务，我现在用到的只有把构建结构通过邮件发送到开发者，告知本次构建成功，不稳定还是失败了，这些都得依靠Email Extension Plugin这个插件
+  
+## 多节点隔离部署  
+  官方推荐的是通过ssh去远程操作其他Slave节点服务器完成构建行为，这种方式其他Slave无需像Master主节点一样去安装jenkins，干净不污染Slave节点的环境，但是因为我没有安装默认插件，所以默认没有ssh这种方式，所以得要SSH Slaves plugin这个插件安装好后，然后在系统管理=>管理节点=>新建节点=>启动方式中出现"Launch slave agents via SSH"这个选项
+  而在配置Slave节点时候，远程工作目录相当于上面配置工程提到的"general => 使用自定义的工作空间"，是你初始的操作目录
