@@ -15,7 +15,7 @@ category: OS
   Gitlab的搭建我就不详细叙述了，根据官方的Tutorial一步步上就好了。而无论是gitlab,github,gitee，对于jenkins而言，就只是想要一个repo地址和Webhook，这三者都能提供。
 
 ## 安装  
-  Jenkins的安装方法有很多，但是我最推荐的是直接[jenkins.war](http://mirrors.jenkins.io/war-stable/latest/jenkins.war)来装，因为这个依赖最少，而且最简洁(深受"less is more"影响啊!)，启动直接`java -war jenkins.war -http-post=8080`即可，如果是想后台的，那么就`nohup java -war jenkins.war -http-post=8080 &`，对于本身是java的项目，还可以把jenkins.war包对劲Tomcat启动，但是由于自己现在的项目还是Python，服务器上面没有Tomcat之类的东西，所以就多一事不如少一事，保持简单最重要。  
+  Jenkins的安装方法有很多，但是我最推荐的是直接[jenkins.war](http://mirrors.jenkins.io/war-stable/latest/jenkins.war)来装，因为这个依赖最少，而且最简洁(深受"less is more"影响啊!)，启动直接`java -jar jenkins.war -http-post=8080`即可，如果是想后台的，那么就`nohup java -jar jenkins.war -http-post=8080 &`，对于本身是java的项目，还可以把jenkins.war包对劲Tomcat启动，但是由于自己现在的项目还是Python，服务器上面没有Tomcat之类的东西，所以就多一事不如少一事，保持简单最重要。  
   P.s.官方下载的jenkins的jenkins.war包装好以后竟然是中文的，有点小惊喜，我还想着怎么汉化，真不知道它是怎么检测系统环境的...  
   
 ## 插件  
