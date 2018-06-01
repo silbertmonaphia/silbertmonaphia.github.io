@@ -20,6 +20,32 @@ category: OS
   
 ## 插件  
   安装好以后就可以访问服务器的8080端口了，比如`http://you_servier_ip:8080`，开始初始化配置，一开始要输入一个管理员密码的，你按照提示到服务器上找就好了，然后还要选择默认插件安装，因为简洁哲学思想影响，默认的插件我插件都没有安装，因为它默认的安装的插件其实对于Jenkins + Gitlab完成自动部署任务来说，有一些不必要的～  
+
+P.s.  
+默认的插件有:  
+1.Folders;  
+2.OWASP Markup Formatter;  
+3.Build Timeout;  
+4.Credentials Binding;  
+5.Timestamper;  
+6.Workspace Cleanup;  
+7.Ant;  
+8.Gradle;  
+9.Pipeline;  
+10.GitHub Branch Source;  
+11.Pipeline: GitHub Groovy Libraries;  
+12.Pipeline: Stage View;  
+13.git;  
+14.Subversion;  
+15.SSH Slaves;  
+16.Matrix Authorization Strategy;  
+17.PAM Authentication;  
+18.LDAP;  
+19.Email Extension;  
+20.Mailer;  
+可以自己去看看如果默认装的话它都给你装了些什么...  
+
+
   那么我现在就告诉你，如果想达到" 能够git push到gitlab后，gitlab主动推送到Jenkins部署 "(**这就是我们的目的!**)所必须的插件:　　
 
 ```
