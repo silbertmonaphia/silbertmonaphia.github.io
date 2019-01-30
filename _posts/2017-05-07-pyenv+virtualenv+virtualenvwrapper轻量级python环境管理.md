@@ -48,9 +48,10 @@ Pyenv
 P.s.  
 1.pyenv会在你的$PATH前面加上三个地址,所以在你的输入python/python3的时候，shell会按照$PATH顺序寻找，所以先找到pyenv加上那三个地址下的python/python3,而位于$PATH后面的原来系统的python/python3就不会找到了;  
 
-2.针对国内访问慢的问题可以在你的.bashrc/.zshrc里面加上下面这句设置七牛python镜像代理:  
+2.针对国内访问慢的问题可以在你的.bashrc/.zshrc里面加上下面这句设置~~七牛python镜像代理~~搜狐Python镜像代理:  
 ```shell
-export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+# export PYTHONBUILDMIRRORURL="http://pyenv.qiniudn.com/pythons/"
+export PYTHON_BUILD_MIRROR_URL="http://mirrors.sohu.com/python/"
 ```
 
 3.记录一个和python的解释器相关的东西:  
@@ -99,4 +100,4 @@ Pipenv
 18.3.10更新  
 今天玩了一下被讨论很火的pipenv(作者竟然还是那个requests库的作者Kenneth Reitz，牛逼不?!)，就连官方文档也推荐了这款包和环境管理工具，它是pip和virtualenv的结合，给我最大的印象是它的graph选项，能展现当前的包依赖关系，这在pip+virtualenv中是做不到的，如果要看依赖关系就需要另外下软件，非常麻烦，之前我想把网站top-level的包挑出来，愣是没有搞死我。  
 
-pipenv相当于是一站式解决方案，这是很棒的，但是有一点美中不足的是，它没有实现类似于virtualenvwrapper中的'workon'功能，[在项目issue尚且在讨论中](https://github.com/pypa/pipenv/issues/535),作者虽然觉得是个不错的idea，但是距离今天21天前的comment表示还是处于prototype中，建议用pew的workon来补充。但是我希望是pipenv能自己实现workon功能，而不是通过pew+pipenv这种组合的方式，因为pipenv本身就是趋于一站式解决的方法，原本长时间的使用pip+virtualenv+virtualenvwrapper，大家已经形成了较好的实践了，所以要切换，我的建议是等待pipenv把workon补充上也不迟，不然就得寻求pew的帮助，这对开发方面有一点影响，不过部署因为不涉及多虚拟环境切换，所以没有什么影响。  
+pipenv相当于是一站式解决方案，这是很棒的，但是有一点美中不足的是，它没有实现类似于virtualenvwrapper中的'workon'功能，[在项目issue尚且在讨论中](https://github.com/pypa/pipenv/issues/535),作者虽然觉得是个不错的idea，但是距离今天21天前的comment表示还是处于prototype中，建议用pew的workon来补充。但是我希望是pipenv能自己实现workon功能，而不是通过pew+pipenv这种组合的方式，因为pipenv本身就是趋于一站式解决的方法，原本长时间的使用pip+virtualenv+virtualenvwrapper，大家已经形成了较好的实践了，所以要切换，我的建议是等待pipenv把workon补充上也不迟，不然就得寻求pew的帮助，这对开发方面有一点影响，不过部署因为不涉及多虚拟环境切换，所以没有什么影响。
