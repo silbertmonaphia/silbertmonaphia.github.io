@@ -255,18 +255,14 @@ form {
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
-.center {
-  justify-content: center;
-}
-
-.to-shrink {
-  color: #fff;
-  flex-shrink: 2;
-}
-
 .trigger {
   display: flex;
   justify-content: space-between;
+}
+
+.busuanzi {
+  color: #fff;
+  justify-content: flex-start
 }
 
 .outer {
