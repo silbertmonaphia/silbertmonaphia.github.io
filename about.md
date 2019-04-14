@@ -18,20 +18,23 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > Locking & Popping  
 
 工具?  
-> 语言:中文 | 粤语 | 英文(CET-6)  
-> 编辑器:Sublime-Text3/Vim  
-> 系统:Linux/OSX  
-> Shell:Zsh(oh-my-zsh)/bash  
+> 自然语言:中文 | 粤语 | 英文(CET-6)  
+> 编辑器:SublimeText3/Vim/VSCode  
+> 系统:OSX/Linux  
+> Shell:Zsh(oh-my-zsh)/Bash  
 > 浏览器:Chrome/Firefox  
 > 代码管理:Git,SVN  
 > 虚拟环境:Vagrant  
-> 网络分析:Wireshark  
+> 网络分析:Postman/Wireshark/Charles  
+
+软技能?  
+> 时间管理能力  
+> 团队沟通协调能力  
 
 技术?  
-> 语言:Python(Web/Spider/NLP)/ShellScript/Javascript  
-> 数据库:PostgreSQL/Redis/MySQL/MongoDB  
-> 平台:Docker  
-> 网络:OpenResty  
+> 语言:Python(Web/Spider/NLP/Script)/SQL/ShellScript  
+> 数据库:PostgreSQL/MySQL/Redis/MongoDB  
+> 其他:ELK,Kafka,Docker,OpenResty  
 
 为什么要维护一个技术博客?  
 > 首先，是我必须要有一个博客来记录，不然我自己就会乱掉, 也是自我梳理的一个关键动作  
@@ -47,4 +50,5 @@ Guideline?
 > Ref: http://www.catb.org/esr/faqs/hacker-howto.html  
 
 最近?  
-> 在学习js(怎么也避开不了js的巨坑...
+> 恶补数据库啊!  CMU 15-445/645 Intro to Database Systems (Fall 2018)
+> 为了大数据学Java
