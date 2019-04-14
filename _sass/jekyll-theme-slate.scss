@@ -261,6 +261,13 @@ Full-Width Styles
 }
 
 .busuanzi {
+  flex-basis: 20%;
+  color: #fff;
+  justify-content: flex-start;
+}
+
+.foo-bar {
+  flex-basis: 20%;
   color: #fff;
   justify-content: flex-start;
 }
