@@ -261,20 +261,20 @@ Full-Width Styles
 }
 
 .busuanzi {
-  flex-basis: 20%;
-  color: #fff;
-  justify-content: flex-start;
-}
-
-.foo-bar {
-  flex-basis: 20%;
+  flex-grow: 1;
   color: #fff;
   justify-content: flex-start;
 }
 
 .center{
-  flex-basis: 80%;
+  flex-grow: 4;
   justify-content: center;
+}
+
+.foo-bar {
+  flex-grow: 1;
+  color: #fff;
+  justify-content: flex-end;
 }
 
 .outer {
