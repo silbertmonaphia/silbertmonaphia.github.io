@@ -7,14 +7,14 @@ layout: default
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {% assign date_format = site.minima.date_format | default: "%m %d %Y" %}
+        {% assign date_format = site.minima.date_format | default: "%Y%m%d" %}
         {{ page.date | date: date_format }}
       </time>
       {% if page.author %}
-        Author: <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
+         @<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
       {% endif %}
       <span id="busuanzi_container_page_pv">
-        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        阅读<span id="busuanzi_value_page_pv"></span>
       </span>
     </p>
   </header>
