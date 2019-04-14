@@ -257,22 +257,15 @@ Full-Width Styles
 *******************************************************************************/
 .trigger {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .busuanzi {
-  flex-grow: 1;
   color: #fff;
   justify-content: flex-start;
 }
 
-.center{
-  flex-grow: 4;
-  justify-content: center;
-}
-
 .foo-bar {
-  flex-grow: 1;
   color: #fff;
   justify-content: flex-end;
 }
