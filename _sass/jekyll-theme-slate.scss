@@ -257,9 +257,11 @@ Full-Width Styles
 *******************************************************************************/
 #left {
   float: left;
+  color: #fff;
 }
+
 #center {
-  float: center;
+  text-align: center;
 }
 .outer {
   width: 100%;
