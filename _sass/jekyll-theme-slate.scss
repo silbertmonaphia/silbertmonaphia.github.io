@@ -262,7 +262,12 @@ Full-Width Styles
 
 .busuanzi {
   color: #fff;
-  justify-content: flex-start
+  justify-content: flex-start;
+}
+
+.center{
+  flex-basis: 80%;
+  justify-content: center;
 }
 
 .outer {
