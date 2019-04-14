@@ -6,7 +6,7 @@
     {% if page_paths %}
         <div id="trigger" class="trigger">
 
-          <span>
+          <span class="static-busuanzi">
             <span id="busuanzi_container_site_pv" class="busuanzi">
               访问量<span id="busuanzi_value_site_pv"></span>
             </span>
@@ -15,7 +15,7 @@
             </span>
           </span>
 
-          <span class="center">
+          <span>
               <a id="site-title" class="site-title" href="{{ "/" | relative_url }}">Home</a>
               {% for path in page_paths %}
                 {% assign my_page = site.pages | where: "path", path | first %}
@@ -25,7 +25,7 @@
               {% endfor %}
           </span>
 
-          <span class="foo-bar">
+          <span class="complement">
           </span>
 
         </div>
