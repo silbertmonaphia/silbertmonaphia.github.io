@@ -256,18 +256,16 @@ form {
 Full-Width Styles
 *******************************************************************************/
 #busuanzi_container_site_pv {
-  float: left;
   color: #fff;
 }
 
 #busuanzi_container_site_uv {
-  float: left;
   color: #fff;
 }
 
-#center {
-  display: inline;
-  text-align: center;
+.trigger {
+  display: flex;
+  justify-content: space-between;
 }
 
 .outer {
