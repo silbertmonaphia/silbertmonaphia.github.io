@@ -5,13 +5,13 @@
     {% assign page_paths = site.header_pages | default: default_paths %}
 
     {% if page_paths %}
-        <span id="busuanzi_container_site_pv">
-          总访问量<span id="busuanzi_value_site_pv"></span>次
-        </span>
-        <span id="busuanzi_container_site_uv">
-          访客数<span id="busuanzi_value_site_uv"></span>人
-        </span>
         <div class="trigger" style="text-align:center;">
+          <span id="busuanzi_container_site_pv" style="text-align:center;">
+                总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span id="busuanzi_container_site_uv" style="text-align:center;">
+                访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
           <a class="site-title" href="{{ "/" | relative_url }}">Home</a>
           {% for path in page_paths %}
             {% assign my_page = site.pages | where: "path", path | first %}
