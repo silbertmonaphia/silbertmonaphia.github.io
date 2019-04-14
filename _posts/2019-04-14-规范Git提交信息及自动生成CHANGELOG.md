@@ -1,6 +1,6 @@
 ---
 published: true
-category: Others
+category: OS
 title: 规范Git提交信息及自动生成CHANGELOG
 author: smona
 date: '2019-04-14 12:52:47'
