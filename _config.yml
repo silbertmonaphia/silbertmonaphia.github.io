@@ -5,6 +5,7 @@ url: "https://silbertmonaphia.github.io" # the base hostname & protocol for your
 email: silbertmonaphia@gmail.com
 twitter_username: silbertmonaphia
 github_username:  silbertmonaphia
+permalink: /:title.html
 
 # Build settings
 markdown: kramdown
