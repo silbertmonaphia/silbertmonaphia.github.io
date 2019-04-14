@@ -22,7 +22,7 @@ layout: post
 
 # 前言
 
-大学时候就用git管理自己的代码，无论是分支还是工作流都会有规范管理，唯独到git-commit的message就随心所欲了，没有找到章法，还有以前一直都是自己手写`CHANGELOG.md`，每次都是自己一点点地编写，可是当开发完到要写`CHANGELOG.md`的时候就忘记之前自己都做了什么改动了，还得一点点翻看之前的commit记录，然而自己的提交记录简直惨不忍睹，都看不出自己修改了什么东西。  
+大学时候就用git管理自己的代码，无论是分支还是工作流都会有规范，唯独到git-commit的message就随心所欲了，没有找到章法。还有以前一直都是自己手写`CHANGELOG.md`，每次都是自己一点点地编写，可是当开发完到要写`CHANGELOG.md`的时候就忘记之前自己都做了什么改动了，还得一点点翻看之前的commit记录，然而自己的提交记录简直惨不忍睹，都看不出自己修改了什么东西。  
 
 规范git提交信息的好处:
 
@@ -53,7 +53,7 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 
 ## commitlint  
 
-[commitlint](https://github.com/conventional-changelog/commitlint)可以帮助我们校验commit messages是否符合规范，不符合的直接拒绝提交，这是发生在提交行为时刻的工具。  
+[commitlint](https://github.com/conventional-changelog/commitlint)可以帮助我们校验commit messages是否符合规范，不符合的直接拒绝提交。  
 
 一般是项目捆绑以防止项目开发成员出现不规范的提交信息，所以这个`commitlint`一般都会是团队的要求，在开发者本地校验一次，以及在CI集成部署的时候校验一次会是一种比较好的做法。  
 
