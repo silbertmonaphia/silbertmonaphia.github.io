@@ -4,14 +4,14 @@
     {% assign page_paths = site.header_pages | default: default_paths %}
 
     {% if page_paths %}
-        <div class="trigger">
-          <span id="busuanzi_container_site_pv">
+        <div id="trigger" class="trigger">
+          <span id="busuanzi_container_site_pv" class="to-shrink">
             访问量<span id="busuanzi_value_site_pv"></span>
           </span>
-          <span id="busuanzi_container_site_uv">
+          <span id="busuanzi_container_site_uv" class="to-shrink">
             访客数<span id="busuanzi_value_site_uv"></span>
           </span>
-          <span id="center">
+          <span class="center">
               <a id="site-title" class="site-title" href="{{ "/" | relative_url }}">Home</a>
               {% for path in page_paths %}
                 {% assign my_page = site.pages | where: "path", path | first %}
@@ -20,9 +20,9 @@
                 {% endif %}
               {% endfor %}
           </span>
-          <span>
+          <span class="to-shrink">
           </span>
-          <span>
+          <span class="to-shrink">
           </span>
           
         </div>

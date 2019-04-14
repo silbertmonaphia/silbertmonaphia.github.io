@@ -255,12 +255,13 @@ form {
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
-#busuanzi_container_site_pv {
-  color: #fff;
+.center {
+  justify-content: center;
 }
 
-#busuanzi_container_site_uv {
+.to-shrink {
   color: #fff;
+  flex-shrink: 2;
 }
 
 .trigger {
