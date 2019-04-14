@@ -5,16 +5,16 @@
 
     {% if page_paths %}
         <div class="trigger">
-          <span style="text-align: left">
+          <div style="float: left;">
             <span id="busuanzi_container_site_pv">
               访问量<span id="busuanzi_value_site_pv"></span>
             </span>
             <span id="busuanzi_container_site_uv">
               访客数<span id="busuanzi_value_site_uv"></span>
             </span>
-          </span>
+          </div>
 
-          <span style="text-align: center">
+          <div style="float: left;">
               <a id="site-title" class="site-title" href="{{ "/" | relative_url }}">Home</a>
               {% for path in page_paths %}
                 {% assign my_page = site.pages | where: "path", path | first %}
@@ -22,7 +22,7 @@
                 <a id="page-link" class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
                 {% endif %}
               {% endfor %}
-          </span>
+          </div>
           
         </div>
     {% endif %}
