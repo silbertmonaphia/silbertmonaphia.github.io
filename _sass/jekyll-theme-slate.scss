@@ -255,14 +255,21 @@ form {
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
-#left {
+#busuanzi_container_site_pv {
+  float: left;
+  color: #fff;
+}
+
+#busuanzi_container_site_uv {
   float: left;
   color: #fff;
 }
 
 #center {
+  display: inline;
   text-align: center;
 }
+
 .outer {
   width: 100%;
 }

@@ -5,15 +5,12 @@
 
     {% if page_paths %}
         <div class="trigger">
-          <div id="left">
-            <span id="busuanzi_container_site_pv">
-              访问量<span id="busuanzi_value_site_pv"></span>
-            </span>
-            <span id="busuanzi_container_site_uv">
-              访客数<span id="busuanzi_value_site_uv"></span>
-            </span>
-          </div>
-
+          <span id="busuanzi_container_site_pv">
+            访问量<span id="busuanzi_value_site_pv"></span>
+          </span>
+          <span id="busuanzi_container_site_uv">
+            访客数<span id="busuanzi_value_site_uv"></span>
+          </span>
           <div id="center">
               <a id="site-title" class="site-title" href="{{ "/" | relative_url }}">Home</a>
               {% for path in page_paths %}
