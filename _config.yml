@@ -1,5 +1,5 @@
 title: S.Mona
-description: ""
+description: "smona's blog.share everything that I've learn"
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://silbertmonaphia.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 email: silbertmonaphia@gmail.com
@@ -10,12 +10,20 @@ github_username:  silbertmonaphia
 markdown: kramdown
 toc_levels: 1..6
 
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+
 # Pagination
-plugins: [jekyll-paginate]
 paginate: 20
 paginate_path: "page/:num/"
+
+# SiteMap
 
 # prose.io config
 prose:
     rooturl: '_posts'
     siteurl: 'https://silbertmonaphia.github.io/'
+
+# Google Analytics
