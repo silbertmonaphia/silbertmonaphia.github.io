@@ -50,5 +50,5 @@ Guideline?
 > Ref: http://www.catb.org/esr/faqs/hacker-howto.html  
 
 最近?  
-> 恶补数据库啊!  CMU 15-445/645 Intro to Database Systems (Fall 2018)
+> 恶补数据库啊!  CMU 15-445/645 Intro to Database Systems (Fall 2018)  
 > 为了大数据学Java
