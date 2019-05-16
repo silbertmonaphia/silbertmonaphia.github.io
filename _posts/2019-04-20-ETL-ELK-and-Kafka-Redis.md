@@ -17,7 +17,6 @@ layout: post
 	* [输入](#输入)
 	* [过滤](#过滤)
 	* [输出](#输出)
-	* [补充](#补充)
 * [队列](#队列)
 	* [Redis](#redis)
 	* [Kafka](#kafka)
@@ -134,17 +133,15 @@ output:
         reachable_only: false
       keep_alive: 86400
 
-      ssl.enabled: true
-      ssl.certificate_authorities: ["/etc/filebeat/ca-cert"]
-      ssl.verification_mode: none
       timeout: 60
       broker_timeout: 60
 
-      username: "kafka_username"
-      password: "kafka_password"
-      ssl.enabled: true
-      ssl.certificate_authorities: ["/etc/filebeat/ca-cert"]
-      ssl.verification_mode: none
+      # 如果输出到的Kafka开启了安全认证,就需要配置下面这些参数
+      # username: "kafka_username"
+      # password: "kafka_password"
+      # ssl.enabled: true
+      # ssl.certificate_authorities: ["/path_to/ca-cert"]
+      # ssl.verification_mode: none
 ```
 
 ```yaml
@@ -175,9 +172,9 @@ filebeat.prospectors:
     # 若关闭close_removed 必须关闭clean_removed
     clean_removed: true
     fields:
-        kafka_key: foo_bar
-        log_group: foo_bar
-        type: foo_bar
+        kafka_key: foo_bar_kafka_key
+        log_group: foo_bar_group
+        type: foo_bar_type
     fields_under_root: true
 ```
 
@@ -192,14 +189,17 @@ Filebeat层引起数据重复问题的原因:
 - 下游做好去重机制  
 
 # Logstash  
-作为消费者,如果是先处理再提交位点offset,那么就是at-least-once,如果先提交位点在处理就是at-most-once
-一下都是Logstash5.5来说明  
+作为消费者,如果是先处理再提交位点offset,那么就是at-least-once,如果先提交位点在处理就是at-most-once  
+
+以下logstash配置示范都是基于Logstash5.5来说明,logstash编写比较繁琐,如果经常有新的的logstash配置要加入，建议脚本自动生成  
 
 ## 输入	 
-logstash-input-beats:接受filebeat数据(filebeat=>logstash跳过队列)
-logstash-input-file:读取本地文件
-logstash-input-redis:拉取redis数据
-logstash-input-kafka:拉取kafka数据
+logstash-input-beats:接受filebeat数据
+P.s.早期数据不多的时候，我们是filebeat=>logstash，跳过队列，这样调试比较方便，后面上了队列以后，调试的时候也是filebeat=>logstash，甚至只有filebeat或者只有logstash  
+
+logstash-input-file:读取本地文件  
+logstash-input-redis:拉取redis数据  
+logstash-input-kafka:拉取kafka数据  
 
 ```ruby
 input{
@@ -207,7 +207,7 @@ input{
         port => 5044
     }
     file {
-        path => ["/data/logstash/logs/logstash-plain.log"]
+        path => ["/path_to/logstash-plain.log"]
         add_field => { "log_group"=>"logstash-log" }
     }
     redis {
@@ -221,8 +221,8 @@ input{
         batch_count => 500 #返回的事件数量，此属性仅在list模式下起作用
     }
     kafka {
-        bootstrap_servers => "10.10.28.130:9092,10.10.28.128:9092,10.10.28.129:9092"
-        topics => ["topic_2","topci_2"]
+        bootstrap_servers => "100.200.200.100:9093","100.200.200.101:9093","100.200.200.102:9093"
+        topics => ["foo_bar_kafka_key","topci_2"]
         group_id => "GoupID"
 
         consumer_threads => 3
@@ -243,7 +243,7 @@ input{
         # logstash5.5 doesn't have fetch_max_bytes option,use max_partition_fetch_bytes(3*1024k/24 = 131072 advice from alibaba) instead
         max_partition_fetch_bytes => "131072"
 
-        # Security Config
+        # 如果输出到的Kafka开启了安全认证,就需要配置下面这些参数
         # security_protocol => "SASL_SSL"
         # sasl_mechanism => "PLAIN"
         # jaas_path => "/path_to/jaas.conf"
@@ -256,23 +256,206 @@ input{
 ## 过滤
 常用的logstash过滤插件:  
 logstash-filter-grok:非结构化日志文本转化为结构化事件  
-logstash-filter-mutate:强制转换
-logstash-filter-uuid:生成uuid
-logstash-filter-date:日期插件
-logstash-filter-geoip:可以根据IP转化出经纬度和地理位置
-logstash-filter-fingerprint:去重用指纹
-logstash-filter-ruby:自定制代码块
+logstash-filter-mutate:强制转换  
+logstash-filter-uuid:生成uuid  
+logstash-filter-date:日期插件  
+logstash-filter-geoip:可以根据IP转化出经纬度和地理位置  
+logstash-filter-fingerprint:去重用事件指纹  
+logstash-filter-ruby:自定制代码块  
 
+```ruby
+filter{
+  if [log_group] == "foo_bar_group" {
+    if [type] == "for_bar_type" {
+        grok {
+            keep_empty_captures => true
+            match =>{
+                "message" => "^\"(?<ymd>%{NUMBER}|null|)\",\"%{DATA:network}\",\"(?<active_time>%{NUMBER}|null|)\",\"%{DATA:ip}\""
+            }
+            remove_field=>["message"]
+        }
+
+        mutate {
+            convert => ["ymd","integer","active_time","integer"]
+        }
+
+        uuid {
+              target => 'log_uuid'
+        }
+
+        fingerprint {
+            concatenate_sources => true
+            method => "SHA1"
+            key => "KEYKEYKEY"
+            source => ["ymd","network", "active_time", "ip"]
+            target => "log_uuid_fp"
+        }
+
+        geoip {
+            source => "ip"
+            target => "geoip"
+            fields => [city_name, region_name,latitude,longitude]
+        }
+
+        ruby {
+          code=>"
+              path = event.get('source').split('/')
+              event.set('src_path_prefix', path[-2])
+              event.set('src_path_filename', path[-1])
+          "
+        }
+
+        if !("_grokparsefailure" in [tags] or "_groktimeout" in [tags]){
+          if [type] != "foo_bar_type"{
+            ruby {
+              code=>"
+                log_time = Time.local(event.get('year'), event.get('month'), event.get('day'), event.get('hour'), event.get('minute'), '0').to_i
+                event.set('log_time', log_time)
+              "
+            }
+          }
+          if [type] == "foo_bar_type"{
+            ruby {
+              code=>"
+                require 'date';
+                year = Date.parse(event.get('ymd').to_s).strftime('%Y')
+                month = Date.parse(event.get('ymd').to_s).strftime('%m')
+                day = Date.parse(event.get('ymd').to_s).strftime('%d')
+                log_time = Time.local(year, month, day, event.get('hour'), 0, 0).to_i
+                log_ym = Time.at(log_time).strftime('%Y%m').to_i
+                event.set('log_time', log_time)
+                event.set('log_ym', log_ym)
+              "
+            }
+          }
+          date {
+              match => ["log_time", "UNIX"]
+              target => "@timestamp"
+          }
+        }
+    }
+  }
+}
+
+```
 ## 输出
-常用的logstash输出插件:
-logstash-output-file
-logstash-output-kafka
-logstash-output-elasticsearch
-logstash-output-webhdfs
+常用的logstash输出插件:  
+logstash-output-file  
+logstash-output-jdbc:插入(`INSERT`)/更新(UPDATE)支持jdbc的关系型数据库(**注意!这个需要另外安装,非自带**)  
+REF:[Github:logstash-output-jdbc](https://github.com/theangryangel/logstash-output-jdbc)
 
-logstash-output-jdbc:插入/更新实现jdbc的关系型数据库(**注意!这个需要另外安装,非自带**)
+logstash-output-kafka:刷到Kafka  
+logstash-output-elasticsearch:索引到ES  
+logstash-output-webhdfs:写到hdfs  
 
-## 补充
+```ruby
+output{
+  if [log_group] == 'foo_bar_group' {
+    if "_grokparsefailure" in [tags] or "_groktimeout" in [tags]{
+      file {
+        path => "/path_to_error_log/%{src_path_}/%{src_path_filename}"
+        codec => line { format => "%{message}"}
+      }
+    } else {
+      if [type] == "foo_bar_type"{
+        jdbc {
+          connection_string => "jdbc:mysql://db_host:3306/for_bar_db?user=username&password=password&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true"
+          unsafe_statement => true
+          max_flush_exceptions => 10
+          retry_initial_interval => 2
+          retry_max_interval => 128
+          retry_sql_states => ["100","HY00","2015"]
+          statement => ["INSERT INTO for_bar_%{ymd} (log_uuid_fp,log_uuid,log_time,ymd,network,active_time,ip,longitude,latitude,region_name,city_name,source_host) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)","log_uuid_fp","log_uuid","log_time","ymd","network","active_time","ip","geoip[longitude]","geoip[latitude]","geoip[region_name]","geoip[city_name]","beat[hostname]"]
+        }
+        kafka {
+          codec => json
+          bootstrap_servers => "100.200.200.100:9093","100.200.200.101:9093","100.200.200.102:9093"
+          topic_id => "for_bar_json"
+          sasl_mechanism => "ONS"
+          # 如果输出到的Kafka开启了安全认证,就需要配置下面这些参数
+          # jaas_path => "/path_to/jaas.conf"
+          # ssl_truststore_password => "KafkaOnsClient"
+          # ssl_truststore_location => "/path_to/kafka.client.truststore.jks"
+        }
+        elasticsearch {
+          codec => "json"
+          hosts => ["es_host:9200"]
+          user => "user_name"
+          password => "password"
+          index => "foo-bar-%{+YYYY.MM}"
+          document_type=>"info"
+          manage_template => true
+          template_name => "foo-bar"
+          template_overwrite => true
+          template => "/path_to/for_bar.json"
+        }
+      }
+    }
+  }
+}
+```
+
+ES模板:
+1.一旦索引根据模板生成索引，那么即便修改模板内某字段类型，也不会影响索引的该字段类型，除非重建索引，或者删除重新生成;  
+
+2.模板有优先级,比如"foo-bar-2019.04"这个索引,模板"for-bar-\*","foo-\*"都适用，那么就会选择优先级高的模板套上去，如果优先级一致，就会随机选一个套上去  
+3.关于shards,replicas以及字段类型等ElasticSearch相关的配置可以看到下面的ES篇，这里就不展开叙述,此处只是补充logstash-output-elasticsearch配置中template指向的模板配置  
+
+```json
+{
+  "template": "for-bar-*",
+  "settings": {
+    "index.refresh_interval": "2s",
+    "number_of_shards": "3",
+    "number_of_replicas": "1",
+    "max_result_window": "10000"
+  },
+  "mappings": {
+    "info": {
+      "properties": {
+        "log_uuid_fp": {
+          "type": "keyword"
+        },
+        "log_uuid": {
+          "type": "keyword"
+        },
+        "log_time": {
+          "type": "integer"
+        },
+        "ymd":{
+          "type": "integer"
+        },
+        "network":{
+          "type": "keyword"
+        },
+        "active_time":{
+          "type": "integer"
+        },
+        "ip":{
+          "type": "ip"
+        },
+        "longitude":{
+          "type": "float"
+        },
+        "latitude":{
+          "type": "float"
+        },
+        "region_name":{
+          "type": "keyword"
+        },
+        "city_name":{
+          "type": "keyword"
+        },
+        "source_host":{
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
+```
+
+P.s.
 经常遇到一个问题就是，和同事上传logstash新配置如果有问题，会影响线上其他logstash正常的配置,logstash(6.0+) mutiple pipeline,让pipeline之间不互相影响，这个待测试?
 
 
@@ -324,8 +507,11 @@ aka DiskCache,rather than maitain as much as possible in memory,and flush it all
 
 # ElasticSearch  
 本质上是Apapche Lucene，只是在其之上提供了RESTful API以及watcher监控套件
-master_node / data_node
+master_node / data_node  
 2节点的脑裂(brain-split)问题
 shards & replica
 keyword vs text
 倒排索引原理
+字段数据类型
+ES-DSL
+ES在处理节点发现与Master选举等方面没有选择Zookeeper等外部组件，而是自己实现的一套
