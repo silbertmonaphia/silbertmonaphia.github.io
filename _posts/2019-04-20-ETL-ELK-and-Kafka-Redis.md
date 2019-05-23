@@ -1,7 +1,7 @@
 ---
 published: true
 category: DB
-title: 日志收集:ETLELK以及Kafka/Redis
+title: 日志收集:ETL,ELK以及Kafka/Redis
 author: smona
 date: '2019-04-14 12:52:47'
 layout: post
@@ -285,7 +285,7 @@ filter{
 
         fingerprint {
             concatenate_sources => true
-            method => "SHA1"
+            method => "SHA256"
             key => "KEYKEYKEY"
             source => ["ymd","network", "active_time", "ip"]
             target => "log_uuid_fp"
@@ -340,11 +340,11 @@ filter{
 ```
 ## 输出
 常用的logstash输出插件:  
-logstash-output-file  
-logstash-output-jdbc:插入(`INSERT`)/更新(UPDATE)支持jdbc的关系型数据库(**注意!这个需要另外安装,非自带**)  
+logstash-output-file:输出到本地文件  
+logstash-output-jdbc:插入(`INSERT`)/更新(`UPDATE`)支持jdbc的关系型数据库(**注意!这个需要另外安装,非自带**)  
 REF:[Github:logstash-output-jdbc](https://github.com/theangryangel/logstash-output-jdbc)
 
-logstash-output-kafka:刷到Kafka  
+logstash-output-kafka:输出到Kafka  
 logstash-output-elasticsearch:索引到ES  
 logstash-output-webhdfs:写到hdfs  
 
@@ -371,8 +371,9 @@ output{
           codec => json
           bootstrap_servers => "100.200.200.100:9093","100.200.200.101:9093","100.200.200.102:9093"
           topic_id => "for_bar_json"
-          sasl_mechanism => "ONS"
+
           # 如果输出到的Kafka开启了安全认证,就需要配置下面这些参数
+          # sasl_mechanism => "ONS"
           # jaas_path => "/path_to/jaas.conf"
           # ssl_truststore_password => "KafkaOnsClient"
           # ssl_truststore_location => "/path_to/kafka.client.truststore.jks"
@@ -383,7 +384,7 @@ output{
           user => "user_name"
           password => "password"
           index => "foo-bar-%{+YYYY.MM}"
-          document_type=>"info"
+          document_type=>"foobar_doc_type"
           manage_template => true
           template_name => "foo-bar"
           template_overwrite => true
@@ -399,6 +400,7 @@ ES模板:
 1.一旦索引根据模板生成索引，那么即便修改模板内某字段类型，也不会影响索引的该字段类型，除非重建索引，或者删除重新生成;  
 
 2.模板有优先级,比如"foo-bar-2019.04"这个索引,模板"for-bar-\*","foo-\*"都适用，那么就会选择优先级高的模板套上去，如果优先级一致，就会随机选一个套上去  
+
 3.关于shards,replicas以及字段类型等ElasticSearch相关的配置可以看到下面的ES篇，这里就不展开叙述,此处只是补充logstash-output-elasticsearch配置中template指向的模板配置  
 
 ```json
@@ -462,48 +464,91 @@ P.s.
 # 队列  
 
 ## Redis  
-终于找到除了做缓存以后Redis的第二种使用场景:消息队列,Redis做消息队列一般都是用list，用Redis做消息队列看中的是Redis的简单易用，而且速度快，然而Redis的list一旦有消费者消费了一条信息，那么这条信息就没有办法让其他消费者消费了，但是Kafka可以通过不同的goup_id来给不同的消费者消费
-pub-sub
-redis能做到exactly-once么?
 
-扯点Redis缓存问题:
+- Message Queue(lpush + brpop with timeout)
+
+Redis除了做主要作用是缓存(在缓存上对比也是内存型的Memcached只有KV一种类型,而Redis支持的类型则丰富得多)以外也可以做简单的消息队列(Message Queue),Redis做消息队列一般都是用list数据类型，用Redis做消息队列看中的是Redis的简单易用，而且速度快，然而Redis的list一旦有消费者消费了一条信息，那么这条信息就没有办法让其他消费者消费了，但是Kafka可以通过不同的group_id来给不同的消费者消费  
+
+Redis本身比较适合缓存，针对消息队列，Redis作者另外开了个项目Disque  
+
+顺便简单扯点Redis缓存问题:  
 缓存问题本质上就是数据库压力问题，尽量不要让本来在缓存的压力达到数据库  
-
 1.缓存穿透(查询不存在key)  
 解决方案:
-(缓存方案)如果查询不存在key，返回null
-(过滤方案)bloom filter
-
+(缓存方案)如果查询不存在key，返回null  
+(过滤方案)bloom filter  
 2.缓存击穿(多线程查key,key失效,并发打到数据)  
-解决方案:mutex后做缓存，解决db并发思路一致
-
+解决方案:mutex后做缓存，解决db并发思路一致  
 3.缓存雪崩(redis cluster不可用，本质上违背了高可用)  
-本地缓存+限流
+解决方案:本地缓存+限流  
+
+ACK机制:
+**RabbitMQ**
+1.Publisher把消息通知给Consumer，如果Consumer已处理完任务，那么它将向Broker发送ACK消息，告知某条消息已被成功处理，可以从队列中移除。如果Consumer没有发送回ACK消息，那么Broker会认为消息处理失败，会将此消息及后续消息分发给其他Consumer进行处理(redeliver flag置为true)。
+2.这种确认机制和TCP/IP协议确立连接类似。不同的是，TCP/IP确立连接需要经过三次握手，而RabbitMQ只需要一次ACK。
+3.值的注意的是，RabbitMQ当且仅当检测到ACK消息未发出且Consumer的连接终止时才会将消息重新分发给其他Consumer，因此不需要担心消息处理时间过长而被重新分发的情况。
+
+**REDIS**
+1.维护两个队列:pending队列和doing表(hash表)。
+2.workers定义为ThreadPool
+3.由pending队列出队后，workers分配一个线程（单个worker）去处理消息——给目标消息append一个当前时间戳和当前线程名称，将其写入doing表，然后该worker去消费消息，完成后自行在doing表擦除信息
+4.启用一个定时任务，每隔一段时间去扫描doing队列，检查每隔元素的时间戳，如果超时，则由worker的ThreadPoolExecutor去检查线程是否存在，如果存在则取消当前任务执行，并把事务rollback。最后把该任务从doing队列中pop出，再重新push进pending队列
+5.在worker的某线程中，如果处理业务失败，则主动回滚，并把任务从doing队列中移除，重新push进pending队列
+
+- Pub/Sub
+
+当然Redis除了list以外还有Pub/Sub，这种模式是MessageQueue的兄弟，它和观察者设计模式极为类似，支持多消费者的模式。Publish的消息在Redis中不存储，因此必须先执行订阅再等待消息发布，如果消息订阅者中途加入订阅，那么通道中此前的消息将无从获得。  
+
+Publishers =(push)=> Channels =(push)=> Subscribers  
+
+发布者和订阅者之间解耦可以带来更好的扩展能力和更灵活的网络拓扑。  
+Pub/Sub下通道名称是全局的,和客户端连接的Redis数据库没有关系，比如你在db10 发布到channel，在db1订阅这个channel的消费者也可以拿到数据。 
+
+关于Redis持久化:
+1.RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照(point-in-time snapshot)  
+2.AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集  
+3.Redis可以同时使用AOF持久化和RDB持久化。在这种情况下，当Redis重启时， 它会优先使用AOF文件来还原数据集,因为AOF文件保存的数据集通常比RDB文件所保存的数据集更完整  
+4.RDB在恢复大数据集时的速度比AOF的恢复速度要快  
+REF:http://redisdoc.com/topic/persistence.html  
 
 ## Kafka  
-相对于Redis，Kafka提供了更多的保证，比如0.10.0的at-least-once到0.11.0的exactly-once,以及
-有ZooKeeper(分布式锁和ByzantineFault一致性问题&ZAB算法)，分布式事务(solution:2pc,3pc,tcc)
 
-如果是由kafka推给消费者，容易造成消费者过载，所以消费者和kafka之间是pull模式
-kafka是queue和pub-sub的集合体(consumer_group & offset),in-order-garantee(partitions),fault-tolence(replica),write-to-disk(structured commit-log storage),long retention policy(often set to  2 weeks)
+Redis其实不适合正儿八经拿来当消息队列的，一些基本的要求比如顺序保证，EOS(Exaclty Once Semantics)语义，数据可靠性(就上面介绍的无论是list还是pub/sub都是即发即失)等都没有，我们如果要正儿八经的消息队列，可以看看RabbitMQ,Kafka  
 
-kafka 0.11.0实现了EOS语义:
-EOS是流式处理实现正确性的基石,主流的流式处理框架基本都支持EOS(如Storm Trident, Spark Streaming, Flink)
-Kafka streams肯定也要支持的,0.11版本通过3个大的改动支持EOS(exactly-once semantics)：
-1.幂等的producer（这也是千呼万唤始出来的功能)
+相对于Redis，Kafka提供了更多的保证，比如0.10.0的at-least-once到0.11.0的exactly-once,以及内部包含了ZooKeeper，让它具备了强数据一致性，高可用的特性。虽然使用了ZooKeeper,但是Kafka所使用的leader选举算法不是ZK的ZAB，而更像是微软的PacificA算法  
+
+和Redis的Pub/Sub主动消息推给消费者不同，消费者从kafka中pull数据，因为如果是由kafka主动推给消费者，容易造成消费者负载突然增高  
+
+kafka是MessageQueue和Pub/Sub的集合体,通过consumer_group和offset保证消费者能任何时候从任何位置开始读取topic的消息;
+通过partitions分区保证分区内的消息是有序的,并能提升并发消费能力;
+通过副本(replica)带来容错(fault-tolence);
+通过优化过的写入磁盘策略(structured commit-log storage)让它和redis相比能更久地保存更多的消息，而且天然地支持持久化,一般可以设置为保存长达2周的消息
+
+Kafka 0.11.0实现了EOS语义:  
+在0.11.0之前Kafka只是支持at-least-once，不能保证不重复，只能保证不丢(生产者设置request.required.acks=1/0/-1)，如果想要系统EOS，那么就必须在系统层面在下游做去重  
+
+Kafka的ack机制:
+当 producer向leader发送数据时，可以通过request.required.acks参数来设置数据可靠性的级别：
+1(default):这意味着producer在ISR中的leader已成功收到的数据并得到确认后发送下一条message。如果leader宕机了，则会丢失数据。
+0:这意味着producer无需等待来自broker的确认而继续发送下一批消息。这种情况下数据传输效率最高，但是数据可靠性确是最低的。
+-1:producer需要等待ISR中的所有follower都确认接收到数据后才算一次发送完成，可靠性最高。但是这样也不能保证数据不丢失,比如当ISR中只有leader时(前面 ISR那一节讲到，ISR中的成员由于某些情况会增加也会减少，最少就只剩一个 leader),这样就变成了acks=1的情况。
+
+EOS是流式处理实现正确性的基石,主流的流式处理框架基本都支持EOS(如Storm Trident, Spark Streaming, Flink),Kafka streams肯定也要支持的。  
+0.11版本通过3个大的改动支持EOS:
+1.幂等的producer(这也是千呼万唤始出来的功能)
 2.支持事务;
 3.支持EOS的流式处理(保证读-处理-写全链路的EOS)
-
-EOS = Exaclty Once Semantics
-EOS = at-least-once + deduplicate
-
-ack = 0,1,2
 
 Kafka设计:
 1.PageCache:
 aka DiskCache,rather than maitain as much as possible in memory,and flush it all at once to the filesystem in a panic when run out of space, we invert that:All data is immediately written to a persistent log.
 
-2.small IO operations and excessive byte copying(low meesage rate) by using sendfile()
+2.Small IO operations and excessive byte copying(low meesage rate) by using sendfile()
+
+关于ZooKeeper:
+ByzantineFault数据一致性问题(Paxos/ZAB/Raft)
+分布式锁
+分布式事务(solution:2pc,3pc,tcc)
 
 # ElasticSearch  
 本质上是Apapche Lucene，只是在其之上提供了RESTful API以及watcher监控套件
@@ -515,3 +560,11 @@ keyword vs text
 字段数据类型
 ES-DSL
 ES在处理节点发现与Master选举等方面没有选择Zookeeper等外部组件，而是自己实现的一套
+
+ES-head:
+```shell
+cd /data/joygames/elasticsearch-head
+npm run start &
+```
+
+ES sql
