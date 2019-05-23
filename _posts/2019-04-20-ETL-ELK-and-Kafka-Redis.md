@@ -3,7 +3,7 @@ published: true
 category: DB
 title: 日志收集:ETL,ELK以及Kafka/Redis
 author: smona
-date: '2019-04-14 12:52:47'
+date: '2019-04-20 12:52:47'
 layout: post
 ---
 
@@ -189,14 +189,15 @@ Filebeat层引起数据重复问题的原因:
 - 下游做好去重机制  
 
 # Logstash  
-作为消费者,如果是先处理再提交位点offset,那么就是at-least-once,如果先提交位点在处理就是at-most-once  
+作为消费者,如果是先处理再提交位点offset,那么就是at-least-once,如果先提交位点在处理就是at-most-once，而logstash则是at-least-once  
 
 以下logstash配置示范都是基于Logstash5.5来说明,logstash编写比较繁琐,如果经常有新的的logstash配置要加入，建议脚本自动生成  
 
 ## 输入	 
-logstash-input-beats:接受filebeat数据
+logstash-input-beats:接受filebeat数据  
 P.s.早期数据不多的时候，我们是filebeat=>logstash，跳过队列，这样调试比较方便，后面上了队列以后，调试的时候也是filebeat=>logstash，甚至只有filebeat或者只有logstash  
 
+常用的logstash输入插件:
 logstash-input-file:读取本地文件  
 logstash-input-redis:拉取redis数据  
 logstash-input-kafka:拉取kafka数据  
@@ -482,7 +483,7 @@ Redis本身比较适合缓存，针对消息队列，Redis作者另外开了个�
 3.缓存雪崩(redis cluster不可用，本质上违背了高可用)  
 解决方案:本地缓存+限流  
 
-ACK机制:
+ACK机制:  
 **RabbitMQ**
 1.Publisher把消息通知给Consumer，如果Consumer已处理完任务，那么它将向Broker发送ACK消息，告知某条消息已被成功处理，可以从队列中移除。如果Consumer没有发送回ACK消息，那么Broker会认为消息处理失败，会将此消息及后续消息分发给其他Consumer进行处理(redeliver flag置为true)。
 2.这种确认机制和TCP/IP协议确立连接类似。不同的是，TCP/IP确立连接需要经过三次握手，而RabbitMQ只需要一次ACK。
@@ -504,7 +505,7 @@ Publishers =(push)=> Channels =(push)=> Subscribers
 发布者和订阅者之间解耦可以带来更好的扩展能力和更灵活的网络拓扑。  
 Pub/Sub下通道名称是全局的,和客户端连接的Redis数据库没有关系，比如你在db10 发布到channel，在db1订阅这个channel的消费者也可以拿到数据。 
 
-关于Redis持久化:
+关于Redis持久化:  
 1.RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照(point-in-time snapshot)  
 2.AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集  
 3.Redis可以同时使用AOF持久化和RDB持久化。在这种情况下，当Redis重启时， 它会优先使用AOF文件来还原数据集,因为AOF文件保存的数据集通常比RDB文件所保存的数据集更完整  
@@ -527,7 +528,7 @@ kafka是MessageQueue和Pub/Sub的集合体,通过consumer_group和offset保证�
 Kafka 0.11.0实现了EOS语义:  
 在0.11.0之前Kafka只是支持at-least-once，不能保证不重复，只能保证不丢(生产者设置request.required.acks=1/0/-1)，如果想要系统EOS，那么就必须在系统层面在下游做去重  
 
-Kafka的ack机制:
+Kafka的ack机制:  
 当 producer向leader发送数据时，可以通过request.required.acks参数来设置数据可靠性的级别：
 1(default):这意味着producer在ISR中的leader已成功收到的数据并得到确认后发送下一条message。如果leader宕机了，则会丢失数据。
 0:这意味着producer无需等待来自broker的确认而继续发送下一批消息。这种情况下数据传输效率最高，但是数据可靠性确是最低的。
@@ -553,9 +554,9 @@ ByzantineFault数据一致性问题(Paxos/ZAB/Raft)
 # ElasticSearch  
 本质上是Apapche Lucene，只是在其之上提供了RESTful API以及watcher监控套件
 master_node / data_node  
-2节点的脑裂(brain-split)问题
-shards & replica
-keyword vs text
+2节点的脑裂(brain-split)问题  
+shards & replica  
+keyword vs text  
 倒排索引原理
 字段数据类型
 ES-DSL
