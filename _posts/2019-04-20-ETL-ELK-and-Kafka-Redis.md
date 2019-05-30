@@ -79,10 +79,7 @@ REF:[filebeat相关registry文件内容解析](https://www.cnblogs.com/micmouse5
 2.linux inode重用问题:  
 Linux文件系统是通过inode和device来辨认文件的。当一个文件从磁盘移除的时候，它原本的inode有几率重新分配到一个新的文件，比如File Rotation,即一个文件删除后，马上创建一个文件，那么新的文件的inode和刚被删除的文件的inode很可能一模一样，这种情况下，filebeat会认为这俩文件是一个文件，然后从上次offset位置继续读取数据，这很明显是错误的
 解决inode重用问题,推荐的做法是利用好clean_* 配置,特别是clean_inactive(清理指定时间外的注册表记录),比如如果你文件24小时rotate一次，然后旧文件就不再更新，那么你可以设置ignore_older48h以及clean_inactive设置为72h  
-REF:[Inode reuse causes Filebeat to skip lines?](https://www.elastic.co/guide/en/beats/filebeat/master/faq.html#inode-reuse-issue)
-
-3.重试机制(blocked/not confirm):  
-publisher从spooler中接收事件，转换其类型。@timestamp和其他跟日志内容无关的tag就是在这一步打入到发送数据中的，详情看input/event.go。它接着调用PublishEvents把数据发送出去，并注册了通知函数和标志位Guaranteed。**正是由于这个Guaranteed标志位，filebeat的数据会在发送时一直重试到成功为此**。当数据被发送时，发送方调用通知函数，publisher知道可以把这个事件划入到“已确认”的队列中  
+REF:[Inode reuse causes Filebeat to skip lines?](https://www.elastic.co/guide/en/beats/filebeat/master/faq.html#inode-reuse-issue) 
 
 ```yaml
 # Filebeat全局配置
@@ -195,7 +192,7 @@ Filebeat层引起数据重复问题的原因:
 
 ## 输入	 
 logstash-input-beats:接受filebeat数据  
-P.s.早期数据不多的时候，我们是filebeat=>logstash，跳过队列，这样调试比较方便，后面上了队列以后，调试的时候也是filebeat=>logstash，甚至只有filebeat或者只有logstash  
+P.s.早期数据不多的时候，我们是filebeat=>logstash，跳过队列，这样调试比较方便，后面上了队列以后，调试的时候也是filebeat=>logstash  
 
 常用的logstash输入插件:
 logstash-input-file:读取本地文件  
@@ -397,7 +394,7 @@ output{
 }
 ```
 
-ES模板:
+ES模板:  
 1.一旦索引根据模板生成索引，那么即便修改模板内某字段类型，也不会影响索引的该字段类型，除非重建索引，或者删除重新生成;  
 
 2.模板有优先级,比如"foo-bar-2019.04"这个索引,模板"for-bar-\*","foo-\*"都适用，那么就会选择优先级高的模板套上去，如果优先级一致，就会随机选一个套上去  
@@ -459,7 +456,7 @@ ES模板:
 ```
 
 P.s.
-经常遇到一个问题就是，和同事上传logstash新配置如果有问题，会影响线上其他logstash正常的配置,logstash(6.0+) mutiple pipeline,让pipeline之间不互相影响，这个待测试?
+经常遇到一个问题就是，和同事上传logstash新配置如果有问题，会影响线上其他logstash正常的配置,logstash(6.0+) mutiple pipeline,让pipeline之间不互相影响，这个待测试
 
 
 # 队列  
@@ -470,31 +467,20 @@ P.s.
 
 Redis除了做主要作用是缓存(在缓存上对比也是内存型的Memcached只有KV一种类型,而Redis支持的类型则丰富得多)以外也可以做简单的消息队列(Message Queue),Redis做消息队列一般都是用list数据类型，用Redis做消息队列看中的是Redis的简单易用，而且速度快，然而Redis的list一旦有消费者消费了一条信息，那么这条信息就没有办法让其他消费者消费了，但是Kafka可以通过不同的group_id来给不同的消费者消费  
 
-Redis本身比较适合缓存，针对消息队列，Redis作者另外开了个项目Disque  
-
-顺便简单扯点Redis缓存问题:  
-缓存问题本质上就是数据库压力问题，尽量不要让本来在缓存的压力达到数据库  
-1.缓存穿透(查询不存在key)  
-解决方案:
-(缓存方案)如果查询不存在key，返回null  
-(过滤方案)bloom filter  
-2.缓存击穿(多线程查key,key失效,并发打到数据)  
-解决方案:mutex后做缓存，解决db并发思路一致  
-3.缓存雪崩(redis cluster不可用，本质上违背了高可用)  
-解决方案:本地缓存+限流  
+Redis本身比较适合缓存，针对消息队列，Redis作者另外开了个项目Disque   
 
 ACK机制:  
 **RabbitMQ**
-1.Publisher把消息通知给Consumer，如果Consumer已处理完任务，那么它将向Broker发送ACK消息，告知某条消息已被成功处理，可以从队列中移除。如果Consumer没有发送回ACK消息，那么Broker会认为消息处理失败，会将此消息及后续消息分发给其他Consumer进行处理(redeliver flag置为true)。
-2.这种确认机制和TCP/IP协议确立连接类似。不同的是，TCP/IP确立连接需要经过三次握手，而RabbitMQ只需要一次ACK。
-3.值的注意的是，RabbitMQ当且仅当检测到ACK消息未发出且Consumer的连接终止时才会将消息重新分发给其他Consumer，因此不需要担心消息处理时间过长而被重新分发的情况。
+1.Publisher把消息通知给Consumer，如果Consumer已处理完任务，那么它将向Broker发送ACK消息，告知某条消息已被成功处理，可以从队列中移除。如果Consumer没有发送回ACK消息，那么Broker会认为消息处理失败，会将此消息及后续消息分发给其他Consumer进行处理(redeliver flag置为true)。  
+2.这种确认机制和TCP/IP协议确立连接类似。不同的是，TCP/IP确立连接需要经过三次握手，而RabbitMQ只需要一次ACK。  
+3.值的注意的是，RabbitMQ当且仅当检测到ACK消息未发出且Consumer的连接终止时才会将消息重新分发给其他Consumer，因此不需要担心消息处理时间过长而被重新分发的情况。  
 
 **REDIS**
-1.维护两个队列:pending队列和doing表(hash表)。
-2.workers定义为ThreadPool
-3.由pending队列出队后，workers分配一个线程（单个worker）去处理消息——给目标消息append一个当前时间戳和当前线程名称，将其写入doing表，然后该worker去消费消息，完成后自行在doing表擦除信息
-4.启用一个定时任务，每隔一段时间去扫描doing队列，检查每隔元素的时间戳，如果超时，则由worker的ThreadPoolExecutor去检查线程是否存在，如果存在则取消当前任务执行，并把事务rollback。最后把该任务从doing队列中pop出，再重新push进pending队列
-5.在worker的某线程中，如果处理业务失败，则主动回滚，并把任务从doing队列中移除，重新push进pending队列
+1.维护两个队列:pending队列和doing表(hash表)。  
+2.workers定义为ThreadPool  
+3.由pending队列出队后，workers分配一个线程（单个worker）去处理消息——给目标消息append一个当前时间戳和当前线程名称，将其写入doing表，然后该worker去消费消息，完成后自行在doing表擦除信息  
+4.启用一个定时任务，每隔一段时间去扫描doing队列，检查每隔元素的时间戳，如果超时，则由worker的ThreadPoolExecutor去检查线程是否存在，如果存在则取消当前任务执行，并把事务rollback。最后把该任务从doing队列中pop出，再重新push进pending队列  
+5.在worker的某线程中，如果处理业务失败，则主动回滚，并把任务从doing队列中移除，重新push进pending队列  
 
 - Pub/Sub
 
@@ -521,35 +507,34 @@ Redis其实不适合正儿八经拿来当消息队列的，一些基本的要求
 和Redis的Pub/Sub主动消息推给消费者不同，消费者从kafka中pull数据，因为如果是由kafka主动推给消费者，容易造成消费者负载突然增高  
 
 kafka是MessageQueue和Pub/Sub的集合体,通过consumer_group和offset保证消费者能任何时候从任何位置开始读取topic的消息;
-通过partitions分区保证分区内的消息是有序的,并能提升并发消费能力;
+通过partitions分区保证分区内的消息是有序的,并能提升并行消费能力;
 通过副本(replica)带来容错(fault-tolence);
 通过优化过的写入磁盘策略(structured commit-log storage)让它和redis相比能更久地保存更多的消息，而且天然地支持持久化,一般可以设置为保存长达2周的消息
 
-Kafka 0.11.0实现了EOS语义:  
-在0.11.0之前Kafka只是支持at-least-once，不能保证不重复，只能保证不丢(生产者设置request.required.acks=1/0/-1)，如果想要系统EOS，那么就必须在系统层面在下游做去重  
+在0.11.0之前Kafka只是支持at-least-once，不能保证不重复，只能保证不丢(生产者设置request.required.acks=1/0/-1)，如果想要系统EOS，那么就必须在系统层面在下游做去重:  
 
 Kafka的ack机制:  
 当 producer向leader发送数据时，可以通过request.required.acks参数来设置数据可靠性的级别：
-1(default):这意味着producer在ISR中的leader已成功收到的数据并得到确认后发送下一条message。如果leader宕机了，则会丢失数据。
-0:这意味着producer无需等待来自broker的确认而继续发送下一批消息。这种情况下数据传输效率最高，但是数据可靠性确是最低的。
--1:producer需要等待ISR中的所有follower都确认接收到数据后才算一次发送完成，可靠性最高。但是这样也不能保证数据不丢失,比如当ISR中只有leader时(前面 ISR那一节讲到，ISR中的成员由于某些情况会增加也会减少，最少就只剩一个 leader),这样就变成了acks=1的情况。
+1(default):这意味着producer在ISR中的leader已成功收到的数据并得到确认后发送下一条message。如果leader宕机了，则会丢失数据。  
+0:这意味着producer无需等待来自broker的确认而继续发送下一批消息。这种情况下数据传输效率最高，但是数据可靠性确是最低的。  
+-1:producer需要等待ISR中的所有follower都确认接收到数据后才算一次发送完成，可靠性最高。但是这样也不能保证数据不丢失,比如当ISR中只有leader时(前面 ISR那一节讲到，ISR中的成员由于某些情况会增加也会减少，最少就只剩一个 leader),这样就变成了acks=1的情况。  
 
 EOS是流式处理实现正确性的基石,主流的流式处理框架基本都支持EOS(如Storm Trident, Spark Streaming, Flink),Kafka streams肯定也要支持的。  
-0.11版本通过3个大的改动支持EOS:
-1.幂等的producer(这也是千呼万唤始出来的功能)
-2.支持事务;
-3.支持EOS的流式处理(保证读-处理-写全链路的EOS)
+0.11版本通过3个大的改动支持EOS:  
+1.幂等的producer(这也是千呼万唤始出来的功能)  
+2.支持事务;  
+3.支持EOS的流式处理(保证读-处理-写全链路的EOS)  
 
-Kafka设计:
-1.PageCache:
-aka DiskCache,rather than maitain as much as possible in memory,and flush it all at once to the filesystem in a panic when run out of space, we invert that:All data is immediately written to a persistent log.
+Kafka设计:  
+1.PageCache:  
+aka DiskCache,rather than maitain as much as possible in memory,and flush it all at once to the filesystem in a panic when run out of space, we invert that:All data is immediately written to a persistent log.  
 
 2.Small IO operations and excessive byte copying(low meesage rate) by using sendfile()
 
-关于ZooKeeper:
-ByzantineFault数据一致性问题(Paxos/ZAB/Raft)
-分布式锁
-分布式事务(solution:2pc,3pc,tcc)
+关于ZooKeeper:  
+ByzantineFault数据一致性问题(Paxos/ZAB/Raft)  
+分布式锁  
+分布式事务(solution:2pc,3pc,tcc)  
 
 # ElasticSearch  
 本质上是Apapche Lucene，只是在其之上提供了RESTful API以及watcher监控套件
@@ -569,3 +554,4 @@ npm run start &
 ```
 
 ES sql
+待续
