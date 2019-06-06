@@ -220,19 +220,25 @@ input{
     }
     kafka {
         bootstrap_servers => "100.200.200.100:9093","100.200.200.101:9093","100.200.200.102:9093"
-        topics => ["foo_bar_kafka_key","topci_2"]
+        topics => ["foo_bar_kafka_key","topic_2"]
         group_id => "GoupID"
 
         consumer_threads => 3
+        # decorate_events:把Kafka一些元数据(比如topic,partition,offset等)加入事件中
         decorate_events => true
+        # codec:输入数据以json格式解析
         codec => json
+        # type:设置事件的"type"字段值，如果原本有"type"字段，则不会覆盖原本type里面的值
         type => "access"
 
+        # poll_timeout_ms:kafka等待从topic拉取数据的时间
         poll_timeout_ms => 10000
-        # request_timeout_ms should be greater than session_timeout_ms and fetch_max_wait_ms
-        request_timeout_ms => "300000"
-        session_timeout_ms => "150000"
+        # fetch_max_wait_ms:拉取数据最大等待时间,该值应该小于等于poll_timeout_ms
         fetch_max_wait_ms => "10000"
+        session_timeout_ms => "150000"
+        # request_timeout_ms:请求超时时间,应该大于session_timeout_ms + fetch_max_wait_ms
+        request_timeout_ms => "300000"
+
         max_poll_records => "500"
         auto_commit_interval_ms => "5000"
 
@@ -270,6 +276,7 @@ filter{
             match =>{
                 "message" => "^\"(?<ymd>%{NUMBER}|null|)\",\"%{DATA:network}\",\"(?<active_time>%{NUMBER}|null|)\",\"%{DATA:ip}\""
             }
+            # remove_field:去除被解析过的message字段,减少相同信息的传输,减少传输体积
             remove_field=>["message"]
         }
 
@@ -358,7 +365,10 @@ output{
       if [type] == "foo_bar_type"{
         jdbc {
           connection_string => "jdbc:mysql://db_host:3306/for_bar_db?user=username&password=password&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true"
+          # unsafe_statement:允许你在statement中用事件中的变量值,比如for_bar_%{ymd}
           unsafe_statement => true
+          # max_flush_exceptions:最大output异常次数,和retry_initial_interval和retry_max_interval三者可以计算出重试时间
+          # 比如10次output全部失败重试时间 => 2+4+8+16+32+64+128+128+128+128=638s
           max_flush_exceptions => 10
           retry_initial_interval => 2
           retry_max_interval => 128
@@ -366,6 +376,7 @@ output{
           statement => ["INSERT INTO for_bar_%{ymd} (log_uuid_fp,log_uuid,log_time,ymd,network,active_time,ip,longitude,latitude,region_name,city_name,source_host) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)","log_uuid_fp","log_uuid","log_time","ymd","network","active_time","ip","geoip[longitude]","geoip[latitude]","geoip[region_name]","geoip[city_name]","beat[hostname]"]
         }
         kafka {
+          # 输出前格式化为json格式
           codec => json
           bootstrap_servers => "100.200.200.100:9093","100.200.200.101:9093","100.200.200.102:9093"
           topic_id => "for_bar_json"
