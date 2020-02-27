@@ -11,13 +11,13 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 
 三句话形容自己?
 > DevOps & Dancer  
-> 爱折腾的整理控  
+> 爱折腾和整理轻度洁癖处女座  
 > 拥有打破砂锅问到底的好奇心  
 
 爱好特长?  
 > Locking & Popping  
 
-工具?  
+工具偏好?  
 > 自然语言:中文 | 粤语 | 英文(CET-6)  
 > 编辑器:SublimeText3/Vim/VSCode  
 > 系统:OSX/Linux  
@@ -31,7 +31,7 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 时间管理能力  
 > 团队沟通协调能力  
 
-技术?  
+硬技术?  
 > 语言:Python(Web/Spider/NLP/Script)/SQL/ShellScript  
 > 数据库:PostgreSQL/MySQL/Redis/MongoDB  
 > 其他:ELK,Kafka,Docker,OpenResty  
