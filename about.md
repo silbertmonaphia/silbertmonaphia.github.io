@@ -32,7 +32,7 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 时间管理能力  
 
 硬技术?  
-> 语言:Python(Web/Spider/NLP/Ops)/SQL/Shell
+> 语言:Python(Web/Spider/NLP/Ops)/SQL/Shell  
 > 数据库:PostgreSQL/MySQL/Redis/MongoDB  
 > 其他:ELK,Kafka,Docker,OpenResty  
 
@@ -50,5 +50,5 @@ Guideline?
 > Ref: http://www.catb.org/esr/faqs/hacker-howto.html  
 
 最近?  
-> 1.终于要动刀一直都磕磕绊绊的算法和数据结构了;
-> 2.Java的大数据之路
+> 1.终于要动刀一直都磕磕绊绊的算法和数据结构了;  
+> 2.Java的大数据之路  
