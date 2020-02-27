@@ -6,12 +6,12 @@ published: true
 ---
 # Bio
 Hello! 我系@silbertmonaphia, 简写S.Mona或smona   
-一直都妄想做一个出色的Hacker和一名优秀的Dancer  
-喜欢#Cool的, #Swag的,或者是`有味道`的东西  
+一直都企图做一个出色的Hacker和一名优秀的Dancer  
+喜欢`#Cool`的, `#Swag`的,或者是`有味道`的东西  
 
 三句话形容自己?
 > DevOps & Dancer  
-> 爱折腾和整理轻度洁癖处女座  
+> 爱折腾和整理的轻度洁癖处女座  
 > 拥有打破砂锅问到底的好奇心  
 
 爱好特长?  
@@ -28,11 +28,11 @@ Hello! 我系@silbertmonaphia, 简写S.Mona或smona
 > 网络分析:Postman/Wireshark/Charles  
 
 软技能?  
-> 时间管理能力  
 > 团队沟通协调能力  
+> 时间管理能力  
 
 硬技术?  
-> 语言:Python(Web/Spider/NLP/Script)/SQL/ShellScript  
+> 语言:Python(Web/Spider/NLP/Ops)/SQL/Shell
 > 数据库:PostgreSQL/MySQL/Redis/MongoDB  
 > 其他:ELK,Kafka,Docker,OpenResty  
 
@@ -50,5 +50,5 @@ Guideline?
 > Ref: http://www.catb.org/esr/faqs/hacker-howto.html  
 
 最近?  
-> 恶补数据库啊!  CMU 15-445/645 Intro to Database Systems (Fall 2018)  
-> 为了大数据学Java
+> 1.终于要动刀一直都磕磕绊绊的算法和数据结构了;
+> 2.Java的大数据之路
