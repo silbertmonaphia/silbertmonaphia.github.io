@@ -15,8 +15,8 @@ layout: post
     - [新人培养](#新人培养)
     - [在职员工培养](#在职员工培养)
 - [团队管理](#团队管理)
+- [如何科学地给组员做任务安排](#如何科学地给组员做任务安排)
 - [团建活动](#团建活动)
-- [关于给组员做任务安排](#关于给组员做任务安排)
 - [难题](#难题)
 - [实验记录](#实验记录)
 - [Code Review](#code-review)
@@ -172,9 +172,9 @@ BTW,真的一升一级自动和原本的同事瞬间疏远，无论原本关系�
 	  - 推荐建立和关联issue问题解决问题，但issue是可选的，不强制，Teambition工作台也足够了;
 
 * Review评论记号:
-  * [blocker]:在评论前面加上一个[blocker]标记，表示这个代码行的问题必须修改
-  * [optional]:在评论前面加上一个[optional]标记，表示这个代码行的问题可改可不改
-  * [question]:在评论前面加上一个[question]标记，表示对这个代码行不理解，有问题需要问，被审查者需要针对问题进行回复澄清
+  * `[blocker]`:在评论前面加上一个[blocker]标记，表示这个代码行的问题必须修改
+  * `[optional]`:在评论前面加上一个[optional]标记，表示这个代码行的问题可改可不改
+  * `[question]`:在评论前面加上一个[question]标记，表示对这个代码行不理解，有问题需要问，被审查者需要针对问题进行回复澄清
 
 * Review粒度(时间越充分越往下面的阶段进行，但至少覆盖第一到第三阶段)
   * 第一阶段：目录结构是否合理
@@ -196,8 +196,8 @@ BTW,真的一升一级自动和原本的同事瞬间疏远，无论原本关系�
     * 公共项目和公共文件修改要兼容和通知相关的开发者
     * 和现存项目整体规范一致，而不是另起一套
 	
-* Refefrence
-	1.[Google How to do a code review](https://google.github.io/eng-practices/review/reviewer/)
-	2.[[译]Google 官方文章——如何去做code review](https://juejin.im/post/6844903944175484936#heading-9)
+* Refefrence  
+	1.[Google How to do a code review](https://google.github.io/eng-practices/review/reviewer/)  
+	2.[[译]Google 官方文章——如何去做code review](https://juejin.im/post/6844903944175484936#heading-9)  
 
 
