@@ -204,4 +204,5 @@ BTW,真的一升一级自动和原本的同事瞬间疏远，无论原本关系�
 	1.[Google How to do a code review](https://google.github.io/eng-practices/review/reviewer/)  
 	2.[[译]Google 官方文章——如何去做code review](https://juejin.im/post/6844903944175484936#heading-9)  
 
-
+后台狗加班原因:
+开发一个需求=需求评审-数据库设计-接口设计-文档-技术评审-时间估计-具体实现-单元测试-联调提测-测试大佬验收-产品验收-压力测试-渗透测试-上线
