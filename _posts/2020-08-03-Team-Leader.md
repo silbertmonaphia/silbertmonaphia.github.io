@@ -227,7 +227,6 @@ BTW,真的一升一级自动和原本的同事瞬间疏远，无论原本关系�
 * Review注意
     * 上下文：评审者需要对代码所在项目和对应业务有所了解，能参与项目早期的评审会议，需要给评审者提供需求文档，预留出评审时间，提供设计思路或当面讲下更好
     * 公共项目和公共文件修改要兼容和通知相关的开发者
-    * 和现存项目整体规范一致，而不是另起一套
 	
 * Refefrence  
 	1.[Google How to do a code review](https://google.github.io/eng-practices/review/reviewer/)  
