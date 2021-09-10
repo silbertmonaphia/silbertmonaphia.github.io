@@ -1,35 +1,29 @@
 ---
 published: true
 category: DB
-title: 日志收集:ETL,ELK以及Kafka/Redis
+title: 日志分析:ETL和ELK
 author: smona
 date: '2019-04-20 12:52:47'
 layout: post
 ---
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-* [前言](#前言)
-* [Filebeat](#filebeat)
-* [Logstash](#logstash)
-	* [输入](#输入)
-	* [过滤](#过滤)
-	* [输出](#输出)
-* [队列](#队列)
-	* [Redis](#redis)
-	* [Kafka](#kafka)
-* [ElasticSearch](#elasticsearch)
-
-<!-- /code_chunk_output -->
+- [前言](#前言)
+- [Filebeat](#filebeat)
+- [Logstash](#logstash)
+  - [输入](#输入)
+  - [过滤](#过滤)
+  - [输出](#输出)
+- [队列](#队列)
+  - [Redis](#redis)
+  - [Kafka](#kafka)
+- [ElasticSearch](#elasticsearch)
 
 # 前言
 其实一直都想写ELK的，毕竟在公司做了一年的日志ETL的工作，而且经历了上个世纪遗留的日志收集方案到现在流行的日志收集方案的变更，但是一直都没有找到合适的时间和机会写这一篇文章，趁着寒冬需求量下降没有那么忙碌就做了  
 
 ELK是Elastic公司的产品，elastic公司最远近闻名的就是他的ElasticSearch，这也是ELK中的'E'，其他'L'和'K'，分别是指Logstash以及Kibana  
 
-但是现在日志收集其实不止ELK，更多是指Beats => Kafka/Redis => Logstash => ElasticSearch/RDB 这种组合  
+但是现在日志收集其实不止ELK，更多是指Beats => Kafka/Redis => Logstash => ElasticSearch/RDBMS 这种组合  
 
 当然收集日志还有Flume方案:  
 "Flume使用 tail -f 的方式实时收集日志文件中追加的文本内容。通过Flume配置文件中定义的正则表达式对日志文本进行字段分割...Logstash在进行文本数据收集时并没有使用 tail -f 这种简单粗暴的方式，而是在本地文件中记录了日志文件被读取到的位置，完美解决了flume升级重启时丢失数据的问题"  
@@ -68,7 +62,7 @@ REF:[Directory Layout](https://www.elastic.co/guide/en/beats/filebeat/5.5/direct
 ```
 
 source:日志文件完整路径  
-offset:上次读到位置(字节数)  
+offset:上次读到位置(字节数) `wc -c`可以统计字节数  
 inode:linux inode,linux会有inode重用问题  
 device:日志所在磁盘的磁盘编号,和inode一起确定一个唯一的文件  
 timestamp:上次更新时间戳  
@@ -189,6 +183,17 @@ Filebeat层引起数据重复问题的原因:
 作为消费者,如果是先处理再提交位点offset,那么就是at-least-once,如果先提交位点在处理就是at-most-once，而logstash则是at-least-once  
 
 以下logstash配置示范都是基于Logstash5.5来说明,logstash编写比较繁琐,如果经常有新的的logstash配置要加入，建议脚本自动生成  
+Data Resiliency:
+input → queue → filter + output
+1.Persistent Queues:
+  queue.type: persisted # 原本队列持久化在内存，这样设置就持久化到磁盘，避免内存掉电丢失,牺牲了效率换取了一致性
+  queue.checkpoint.writes: 1 # 默认是1024,我们需要高度一致性,所以每一个事件就做一次checkpoint,IO很频繁,注意上面只是存盘,如果没有checkpoint的话,掉电还是会从checkpoint开始  
+  持久化队列不会影响output-jdbc的批量插入
+
+P.s. input-filter-output的pipeline管道配置更新都不需要restart,直接reload(SIGHUP)即可生效,但是除此之外都要restart,比如插件更改和logstash自身配置更新(logstash.yml/jvm.option/log4j2.properties/startup.options等),主要是考虑到在`queue.type: memory`的默认配置下restart容易让logstash产生重复数据
+
+2.Dead Letter Queues:
+  死信队列,很多消息队列也有这个设计,现在Logstash只支持output到ES开启,把诸如mapping error错误的事件保留下来(原本是直接drop掉的,有时候就会莫名其妙少了一些数据)
 
 ## 输入	 
 logstash-input-beats:接受filebeat数据  
@@ -259,12 +264,13 @@ input{
 
 ## 过滤
 常用的logstash过滤插件:  
-logstash-filter-grok:非结构化日志文本转化为结构化事件  
+**logstash-filter-grok:非结构化日志文本转化为结构化事件**  
+**logstash-filter-json:和grok不同，它自带键值对，所以不用写繁琐的grok解析，如果源头日志能自己控制且能容忍csv的两倍左右的数据存储的话，推荐优先打印json格式而非csv**  
 logstash-filter-mutate:强制转换  
 logstash-filter-uuid:生成uuid  
 logstash-filter-date:日期插件  
 logstash-filter-geoip:可以根据IP转化出经纬度和地理位置  
-logstash-filter-fingerprint:去重用事件指纹  
+logstash-filter-fingerprint:去重用事件指纹(存在uuid前提下，还是需要fingerprint的，两者作用不一样)  
 logstash-filter-ruby:自定制代码块  
 
 ```ruby
@@ -343,11 +349,22 @@ filter{
 }
 
 ```
+
+最重要的就是grok插件了,它是日志从非结构化文本变成结构化的功臣,本质就是正则表达式,语法是ruby采用的是oniguruma(鬼车)的regex engine,grok的pattern一般保存在这里`/usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-patterns-core-4.1.2/patterns/`,用户可以自定义，最近为了限制文本长度和数字取值范围,需要重新定义一套grok-pattern,又得过一次正则基本功，一些以前看Mastering Regular Expression看的云里雾里的东西，没想到在ETL里面也会复习到以前做爬虫时候接触到的正则:  
+1.NFA(regex-directed)[现代regex引擎大都这种] and DFA(text-directed)[快,结果一致,缺少可以针对性优化的空间];  
+2.NFA原理——Backtracking;  
+3.NFA特有的Greedy Quantifiers(`.*`),Lazy Quantifiers(`.*?`),Possessive Quantifiers(`*+`)  
+4.NFA的LookBehind(`?<!`/`?<=`),LookAhead(`?!`/`?=`),Atomic Grouping(`?>`),Non-Grouping(`?:`)以及由Grouping带来的Backreferences(Numbered and Named)  
+
+推荐两个工具~  
+1.ruby在线正则调试 https://rubular.com/  
+2.可以生成数字范围限制的正则的在线工具 http://gamon.webfactional.com/regexnumericrangegenerator/  
+
 ## 输出
 常用的logstash输出插件:  
 logstash-output-file:输出到本地文件  
 logstash-output-jdbc:插入(`INSERT`)/更新(`UPDATE`)支持jdbc的关系型数据库(**注意!这个需要另外安装,非自带**)  
-REF:[Github:logstash-output-jdbc](https://github.com/theangryangel/logstash-output-jdbc)
+REF:[Github:logstash-output-jdbc](https://github.com/theangryangel/logstash-output-jdbc)  
 
 logstash-output-kafka:输出到Kafka  
 logstash-output-elasticsearch:索引到ES  
@@ -416,9 +433,9 @@ ES模板:
 {
   "template": "for-bar-*",
   "settings": {
-    "index.refresh_interval": "2s",
-    "number_of_shards": "3",
-    "number_of_replicas": "1",
+    "index.refresh_interval": "30s",
+    "number_of_shards": "4",
+    "number_of_replicas": "2",
     "max_result_window": "10000"
   },
   "mappings": {
@@ -511,21 +528,21 @@ REF:http://redisdoc.com/topic/persistence.html
 
 ## Kafka  
 
-Redis其实不适合正儿八经拿来当消息队列的，一些基本的要求比如顺序保证，EOS(Exaclty Once Semantics)语义，数据可靠性(就上面介绍的无论是list还是pub/sub都是即发即失)等都没有，我们如果要正儿八经的消息队列，可以看看RabbitMQ,Kafka  
+Redis其实不适合正儿八经拿来当消息队列的，一些基本的要求比如顺序保证，EOS(Exaclty Once Semantics)语义，数据可靠性(就上面介绍的无论是list还是pub/sub都是即发即失)等都没有，我们如果要正儿八经的消息队列，应该看看RabbitMQ,Kafka  
 
 相对于Redis，Kafka提供了更多的保证，比如0.10.0的at-least-once到0.11.0的exactly-once,以及内部包含了ZooKeeper，让它具备了强数据一致性，高可用的特性。虽然使用了ZooKeeper,但是Kafka所使用的leader选举算法不是ZK的ZAB，而更像是微软的PacificA算法  
 
 和Redis的Pub/Sub主动消息推给消费者不同，消费者从kafka中pull数据，因为如果是由kafka主动推给消费者，容易造成消费者负载突然增高  
 
-kafka是MessageQueue和Pub/Sub的集合体,通过consumer_group和offset保证消费者能任何时候从任何位置开始读取topic的消息;
-通过partitions分区保证分区内的消息是有序的,并能提升并行消费能力;
-通过副本(replica)带来容错(fault-tolence);
-通过优化过的写入磁盘策略(structured commit-log storage)让它和redis相比能更久地保存更多的消息，而且天然地支持持久化,一般可以设置为保存长达2周的消息
+kafka是MessageQueue和Pub/Sub的集合体,通过consumer_group和offset保证消费者能任何时候从任何位置开始读取topic的消息;  
+通过partitions分区保证分区内的消息是有序的,并能提升并行消费能力;  
+通过副本(replica)带来容错(fault-tolence);  
+通过优化过的写入磁盘策略(structured commit-log storage)让它和redis相比能更久地保存更多的消息，而且天然地支持持久化,一般可以设置为保存长达2周的消息  
 
 在0.11.0之前Kafka只是支持at-least-once，不能保证不重复，只能保证不丢(生产者设置request.required.acks=1/0/-1)，如果想要系统EOS，那么就必须在系统层面在下游做去重:  
 
 Kafka的ack机制:  
-当 producer向leader发送数据时，可以通过request.required.acks参数来设置数据可靠性的级别：
+当 producer向leader发送数据时，可以通过request.required.acks参数来设置数据可靠性的级别：  
 1(default):这意味着producer在ISR中的leader已成功收到的数据并得到确认后发送下一条message。如果leader宕机了，则会丢失数据。  
 0:这意味着producer无需等待来自broker的确认而继续发送下一批消息。这种情况下数据传输效率最高，但是数据可靠性确是最低的。  
 -1:producer需要等待ISR中的所有follower都确认接收到数据后才算一次发送完成，可靠性最高。但是这样也不能保证数据不丢失,比如当ISR中只有leader时(前面 ISR那一节讲到，ISR中的成员由于某些情况会增加也会减少，最少就只剩一个 leader),这样就变成了acks=1的情况。  
@@ -537,32 +554,18 @@ EOS是流式处理实现正确性的基石,主流的流式处理框架基本都�
 3.支持EOS的流式处理(保证读-处理-写全链路的EOS)  
 
 Kafka设计:  
-1.PageCache:  
+1.顺序写磁盘快于随机写内存  
+
+2.PageCache:  
 aka DiskCache,rather than maitain as much as possible in memory,and flush it all at once to the filesystem in a panic when run out of space, we invert that:All data is immediately written to a persistent log.  
 
-2.Small IO operations and excessive byte copying(low meesage rate) by using sendfile()
+3.零拷贝,Small IO operations and excessive byte copying(low meesage rate) by using sendfile()  
 
 关于ZooKeeper:  
 ByzantineFault数据一致性问题(Paxos/ZAB/Raft)  
-分布式锁  
-分布式事务(solution:2pc,3pc,tcc)  
+分布式锁(redis的SETNX)  
+分布式事务(solution:2pc,3pc,tcc),但是一般都是避免分布式事务的  
 
 # ElasticSearch  
-本质上是Apapche Lucene，只是在其之上提供了RESTful API以及watcher监控套件
-master_node / data_node  
-2节点的脑裂(brain-split)问题  
-shards & replica  
-keyword vs text  
-倒排索引原理
-字段数据类型
-ES-DSL
-ES在处理节点发现与Master选举等方面没有选择Zookeeper等外部组件，而是自己实现的一套
-
-ES-head:
-```shell
-cd /data/joygames/elasticsearch-head
-npm run start &
-```
-
-ES sql
-待续
+由于已经篇幅过长了，而且本文的重点不在存储介质上而在数据管道上,关于ElasticSearch回头会另外开一个篇幅来讲
+Ref:日志分析:ElasticSearch
