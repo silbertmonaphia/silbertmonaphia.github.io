@@ -119,7 +119,7 @@ CREATE TABLE `channel_register_all` (
   `minute` tinyint COMMENT '日志分',
   `event_time` bigint COMMENT '事件时间戳(13位毫秒级)',
   `ip` varchar COMMENT 'IP地址',
-  `username` bigint COMMENT '融合渠道用户ID',
+  `username` bigint COMMENT '渠道用户ID',
   `account_id_old` varchar COMMENT '游戏账号(channelId_channelUserId)',
   `account_id` varchar COMMENT '游戏账号(channelUserId.channelName)',
   `device_uid` varchar COMMENT '设备唯一标识符',
@@ -170,11 +170,11 @@ PARTITION BY HASH KEY (`username`) PARTITION NUM 100
 CLUSTERED BY (`ymd`,`phone`,`email`,`birth_year`,`gender`,`idcard`,`username`)
 TABLEGROUP channel
 OPTIONS (UPDATETYPE='realtime')
-COMMENT '渠道(融合)注册表(全量)';
+COMMENT '渠道注册表(全量)';
 ```
 
 ## 最新设计
-(202207版本)结合上面神策、数数的用户User Profile设计，以及我们历史已有的注册表设计，立足于当前奥飞、融合、游戏三个维度的用户，可得如下DDL，系一张大宽表(一般随着游戏发展会逐渐发展到有[300~2000](https://manual.sensorsdata.cn/sa/2.3/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F-1573774.html#id-.%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8Fv1.13-%E5%B1%9E%E6%80%A7%E6%95%B0%E4%B8%8A%E9%99%90)用户属性)
+(202207版本)结合上面神策、数数的用户User Profile设计，以及我们历史已有的注册表设计，立足于当前SDK、游戏两个维度的用户，可得如下DDL，系一张大宽表(一般随着游戏发展会逐渐发展到有[300~2000](https://manual.sensorsdata.cn/sa/2.3/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F-1573774.html#id-.%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8Fv1.13-%E5%B1%9E%E6%80%A7%E6%95%B0%E4%B8%8A%E9%99%90)用户属性)
 
 ```sql
 CREATE TABLE `game_mid_player_profile` (
@@ -182,10 +182,10 @@ CREATE TABLE `game_mid_player_profile` (
   `distinct_id/user_id?/player_id?` varchar comment '用户标识UUID 由下面7个用户识别号计算得出',
   `device_uid`  varchar comemnt 'SDK设备号',
   `udid`  varchar comemnt '游戏设备号(理论上和device_uid一致)',
-  `channel_user_id` varchar comemnt '奥飞SDK账号',
-  `username` varchar comemnt '融合SDK账号',
-  `account_id_old` varchar comemnt '游戏账号(channelId_channelUserId)(取奥飞账号或者融合账号取决接的是哪个SDK)',
-  `account_id` varchar comemnt '游戏账号(channelUserId.channelName)(取奥飞账号或者融合账号取决接的是哪个SDK)',
+  `channel_user_id` varchar comemnt 'SDK账号',
+  `username` varchar comemnt 'SDK账号',
+  `account_id_old` varchar comemnt '游戏账号(channelId_channelUserId)',
+  `account_id` varchar comemnt '游戏账号(channelUserId.channelName)',
   `server` int COMMENT '游戏服ID',
   `role_id` bigint COMMENT '角色唯一标识符',
 -- 固定值.现实身份信息
@@ -261,5 +261,5 @@ COMMENT '用户画像';
 ```
 
 # 问题
-1.根据神策[标识用户](https://manual.sensorsdata.cn/sa/2.3/tech_knowledge_user-7540285.html)文档多次用户标识我们使用一对一还是多对一，一对一就是永远更新为最新的设备号哪怕后面换设备了不记录中间设备变化状态，而多对一则会另外维护一个设备数组(e.g. deviceid_a,deviceid_b,deviceid_c)记录设备变更历史，从左到右为从旧到新。我的建议是采用一对一，因为维护多对一目前(202109)不太有分析场景，而且具备较高维护成本
+1.根据神策[标识用户](https://manual.sensorsdata.cn/sa/2.3/tech_knowledge_user-7540285.html)文档多次用户标识我们使用一对一还是多对一，一对一就是永远更新为最新的设备号哪怕后面换设备了不记录中间设备变化状态，而多对一则会另外维护一个设备数组(e.g. deviceid_a,deviceid_b,deviceid_c)记录设备变更历史，从左到右为从旧到新。我的建议是采用一对一(神策默认也是一对一)，因为维护多对一目前(202109)不太有分析场景，而且具备较高维护成本
 2.上面最新版的设计其实是已经预定义了用户的属性标签，但是用户的标签并非一成不变，后续如果通过纵向学习计算出用户的一些新的标签，这部分标签就无法预先自定义，尽管第一阶段对于用户画像预先定义的标签已经足够，但是必须要考虑后续机器学习对数据挖掘得出标签的情况如何解决，使得技术方案留下可扩展性
