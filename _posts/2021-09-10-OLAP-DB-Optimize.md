@@ -112,23 +112,23 @@ x8.表分区数据倾斜
 
 重新检查我们原本的一些算子发现历史新增(i.e. 以前没有，第一次出现)计算类的算子之间存在比较大的计算重复，而且存在扫描全表去确定是否在历史上存在，在查询维度造成很多不必要的扫描，因为我们在业务上只是想要历史上首次的记录，而事实表里面除了首次记录还有后面每次出现该行为的记录，所以我们决定新增中间表去挤掉事实表上的"水分"，并把原本相关计算的算子都切换到依赖这张表计算，去除算子之间对「历史是否存在」这一全表扫描行为的重复计算  
 
-1.新老玩家留存
-jobs.retention_player.retention_player 14s => 10s(-28.57%)
-jobs.retention_player_no_server.retention_player_no_server 12s => 6s(-50%)
+1.新老玩家留存  
+jobs.retention_player.retention_player 14s => 10s(-28.57%)  
+jobs.retention_player_no_server.retention_player_no_server 12s => 6s(-50%)  
 
-2.剔除广告 新玩家留存
-jobs.retention_player_without_ad.retention_player_without_ad 7s => 4s(-42.86%)
-jobs.retention_player_no_server_without_ad.retention_player_no_server_without_ad 6s => 3s(-50%)
+2.剔除广告 新玩家留存  
+jobs.retention_player_without_ad.retention_player_without_ad 7s => 4s(-42.86%)  
+jobs.retention_player_no_server_without_ad.retention_player_no_server_without_ad 6s => 3s(-50%)  
 
 3.LTV
-jobs.ltv_no_server.ltv_no_server 89s => 57s(-35.95%)
-jobs.ltv_no_server_without_ad.ltv_no_server_without_ad 93s => 47s(-49.46%)
+jobs.ltv_no_server.ltv_no_server 89s => 57s(-35.95%)  
+jobs.ltv_no_server_without_ad.ltv_no_server_without_ad 93s => 47s(-49.46%)  
 
-4.新增充值玩家留存 => 考虑到充值表比较少，而且用到的地方不多，判断优化价值不大，看下上面三个算子计算的优化能带来多少效益，再结合同事对接口的ad-hoc和报表的查询的优化再决定
+4.新增充值玩家留存 => 考虑到充值表比较少，而且用到的地方不多，判断优化价值不大，看下上面三个算子计算的优化能带来多少效益，再结合同事对接口的ad-hoc和报表的查询的优化再决定  
 
-上述可以看出去除算子之间对「历史是否存在」这一全表扫描行为的重复计算，可以把查询时间基本都是优化幅度在28 ~ 50%，因为没办法追踪单条SQL的CPU和内存的计算资源使用情况，只能通过查询耗时推断，查询耗时越低，资源使用情况越少
+上述可以看出去除算子之间对「历史是否存在」这一全表扫描行为的重复计算，可以把查询时间基本都是优化幅度在28 ~ 50%，因为没办法追踪单条SQL的CPU和内存的计算资源使用情况，只能通过查询耗时推断，查询耗时越低，资源使用情况越少  
 
-二.削峰填谷
+二.削峰填谷  
 针对ADB上的两个游戏重新规划了在任务调度平台上的计算频率  
 
 三.「离线统计项目里面的离线算子查询」以及「接口的ad-hoc和报表的查询优化」后监控结果
