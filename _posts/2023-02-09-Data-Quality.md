@@ -7,6 +7,12 @@ date: '2023-02-09 23:49:00'
 layout: post
 ---
 
+- [背景](#背景)
+- [自研](#自研)
+- [开源](#开源)
+- [云商\[推荐\]](#云商推荐)
+- [附录](#附录)
+
 
 # 背景
 1.每次埋点上线都会遇到人工核对日志字段低效的问题？ => 数据测试自动化
@@ -15,8 +21,6 @@ layout: post
 # 自研
 《有赞 埋点质量保障》 https://tech.youzan.com/mai-dian-zhi-liang-bao-zhang/
 > "对于实时性，我们采用「Flink开发校验模块，实现秒级日志校验」；校验规则更新的及时性上，每分钟从埋点平台同步；可沉淀，校验结果除了推送给测试工具外，还会落到druid，用于后续分析"
-
-![](http://docs.15166.com/server/index.php?s=/api/attachment/visitFile/sign/9177e8a7ed7216fd6c2b77ed56ad2673)
 
 《字节跳动 如何保障埋点数据的准确性？》https://k.sina.com.cn/article_2674405451_9f68304b019012zqy.html?from=tech
 > 上报前通过注册埋点的信息开发完埋点后用验证工具去做「自动化测试」以保障埋点开发的准确性和质量，上报后我们也会用一些离线工具对埋点质量进行监控，但从我们的经验上来看，上报前埋点质量的把控会解决大部分的问题，上报后的埋点质量治理目前主要是离线的，也能解决一些场景的问题。
@@ -39,20 +43,12 @@ https://github.com/great-expectations/great_expectations
 https://www.infoq.cn/article/gf5dydmv0eqyky90ylho 《微众银行如何在小团队规模下炼出一套一站式大数据平台》
 https://github.com/WeBankFinTech/Qualitis/blob/master/README_zh.md
 
-<div align="center">
-<img src="http://docs.15166.com/server/index.php?s=/api/attachment/visitFile/sign/dd8fbcd23491b0186a033dd95ffcff38"  width=50%>
-</div>
-
-<div align="center">
-<img src="http://docs.15166.com/server/index.php?s=/api/attachment/visitFile/sign/d2a8432620a20c21dde497ea20af05d5"  width=70%>
-</div>
-
 3.Apache Griffin【Java&Scala，Griffin是大数据质量监控领域唯一的Apache项目】
 https://www.cnblogs.com/tree1123/p/16481069.html
 https://www.cnblogs.com/tree1123/p/16489327.html 《数据质量管理工具预研——Griffin VS Deequ VS Great expectations VS Qualitis》
 
 # 云商[推荐]
-鉴于ADB和DLA、Kafka都是阿里云的，所以首先调研阿里云的产品
+鉴于在用的ADB和DLA、Kafka都是阿里云的，所以首先调研阿里云的产品
 
 1.[阿里云 DataWorks 数据质量CQC](https://help.aliyun.com/document_detail/73660.html)
 费用：
@@ -62,4 +58,4 @@ https://www.cnblogs.com/tree1123/p/16489327.html 《数据质量管理工具预�
 
 # 附录
 2022 数据工程技术图 https://www.cnblogs.com/tree1123/p/16520058.html
-![](http://docs.15166.com/server/index.php?s=/api/attachment/visitFile/sign/89ee0eaeeab92b9c321237a3cd1fe30e)
+![](https://lakefs.io/wp-content/uploads/2022/06/State-of-Data-Engineering-2022-map-1920x1080_31.7-2048x1152.jpg)
