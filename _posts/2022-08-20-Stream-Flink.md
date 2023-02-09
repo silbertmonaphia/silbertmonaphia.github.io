@@ -45,8 +45,9 @@ layout: post
 用户属性值的最早fisrt、最近latest以及累计accumulate，分别用MIN、MAX、ON DUPLICATE UPDATE实现
 
 # 实时数仓架构
-![](http://docs.15166.com/server/index.php?s=/api/attachment/visitFile/sign/58fc89baa7021408fc4810070862d180)
-P.S.上图中的维度表一般表示为dim，即dimension，一般作为翻译事件事实表中字段用，存放映射关系，比如存放渠道ID和渠道中文名字
+![](https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1709238361/p97864.png)
+P.S.上图中的维度表一般表示为dim，即dimension，一般作为翻译事件事实表中字段用，存放映射关系，比如存放渠道ID和渠道中文名字  
+[阿里云-基于Flink的资讯场景实时数仓](https://help.aliyun.com/document_detail/161654.html)
 
 数仓分层设计：自底向上为
 => ODS(什么都不处理，原汁原味)[最底层]
