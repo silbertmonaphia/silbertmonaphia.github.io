@@ -210,7 +210,7 @@ WHAT(业务特有信息，不同业务定义不同，这里只是以登录为例
 | ------- | ---- | --- | ------- | ---- | ---- |
 | 日志元信息字段，数据组负责 | 7个 |  |  |  |  |
 | log_uuid | varchar | 日志uuid | 9692d03d-00e4-48c6-b7bc-4bfb497a8fcc |  |  |
-| source_host | varchar | 日志来源host | afjf\_bk\_gamedb\_0002\_183\-60\-252\-147 |  |  |
+| source_host | varchar | 日志来源host | bk\_gamedb\_0002\_183\-60\-252\-155 |  |  |
 | fingerprint | varchar | 指纹(用户管道实现EOS语义) | 336344e8aaa7a67f3263b50c0022524e7f864e425c534725d69f7943451434f8 |  |  |
 | longitude | varchar | 经度 | 127.79 |  |  |
 | latitude | varchar | 纬度 | 42.02 |  |  |
@@ -253,11 +253,11 @@ WHAT(业务特有信息，不同业务定义不同，这里只是以登录为例
 | ym/log_ym | bigint | 年月（BI需要bigint类型） |  |  |  |
 | hour | tinyint | 时 |  |  |  |
 | minute | tinyint | 分 |  |  |  |
-| channel\_user\_id/username | varchar | 渠道用户ID | afsdk channel_user_id(uid) :14790537， joysdk username :9999015.xiao7ios |  |  |
+| channel\_user\_id/username | varchar | 渠道用户ID | |  |  |
 | account_id | varchar | 非水Q游戏账号 | 渠道ID.渠道标识（9999015.xiao7ios）  | 取SDK值 |  |
 | account\_id\_old | varchar | 水Q游戏账号 | 渠道ID或子渠道ID\_ channel\_user\_id |  |  |
 | lib | varchar | 日志SDK类型 | PHP、Openresty、Python |  |  |
 | lib_version | tinyint | 日志SDK版本 | 整数自增1 |  |  |
 | event | varchar | 事件名 | 事件名由团队负责人跟相关人员统筹分配，切勿自行添加，参考：apiInit、apiResponseJson、apiResponseString |  |  |
 | event_type | varchar | 事件类型 | info、warning、error |  |  |
-| project | varchar | 项目名 | 项目名由团队负责人跟相关人员统筹分配，切勿自行添加，参考：<span class="colour" style="color:rgb(85, 85, 85)">joysdk-pay afsdk-pay joysdk afsdk</span> |  |  |
+| project | varchar | 项目名 | 项目名由团队负责人跟相关人员统筹分配，切勿自行添加，参考：<span class="colour" style="color:rgb(85, 85, 85)"> </span> |  |  |
