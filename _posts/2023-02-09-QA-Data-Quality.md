@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 category: QA
 title: 调研:数据质量工程
 author: smona
