@@ -7,13 +7,16 @@ date: '2026-10-19 10::00'
 layout: post
 ---
 
-用 claude code 搓的项目： https://github.com/silbertmonaphia/nyx  plan+review我用的是glm的coding plan，impl我用的是deepseek的api,coding plan总觉得有点坑，还老是得跟着它5小时窗口走（动不动就没token了），个人感觉还是deepseek这种只提供接口没有coding plan的良心一点，而且ds的api便宜是真便宜
+用 claude code 搓的项目： https://github.com/silbertmonaphia/nyx  
+plan+review我用的是glm的coding plan，impl我用的是deepseek的api,coding plan总觉得有点坑，还老是得跟着它5小时窗口走（动不动就没token了），个人感觉还是deepseek这种只提供接口没有coding plan的良心一点，而且ds的api便宜是真便宜
 
-Gemini cli到Claude Code用了好几个Coding Agent，从一开始vibe coding到现在进入agentic engineering研发深水区，本质上对于agent coding就3个问题
+Gemini cli到Claude Code用了好几个Coding Agent，从一开始vibe coding到现在进入agentic engineering研发深水区，本质上对于agent coding就3个问题：  
 
 # １、AI写的代码怎么敢上线？
 
 答案是：Harness，感觉业界都说烂了，但是对，就是它  
+
+信心 = 双AI对抗 + SDD + TDD + 人肉兜底  
 
 A、开发 和 test_review 的agent是不同AI模型，做AI对抗，比如开发的是deepseek-flash的api，test_review的是glm的模型，当AI成吨成吨产出代码，现在业内共识就是：人类肉眼根本不可能review得过来，只能用AI去review AI。否则软件开发速度的瓶颈就卡在了人类review这里  
 
@@ -29,19 +32,16 @@ C、TDD：测试驱动开发(unitetest, lint, e2e test,perf test,security test) 
 
 D、人肉：对，最后其实还是得人肉验证一次产品行为你才放心，即便有了前面SDD+TDD，可以是 产品PM 或者 测试QA 去亲自人肉对着 基于需求理解去验一次，这步还是必不可少但是可以AI自动化一大部分比如测试用例，前面SDD描述再详细，AI最后落地逻辑总会有些许偏差。很多时候都不需要产品或者测试，开发者自己点开功能，点两下就发现有地方实现和spec期望不太一样。但是不得不说AI对很具体的问题，比如带有报错信息全面的bug，修起来又快又准是真的。  
 
-信心 = 双AI对抗 + SDD + TDD + 人肉兜底  
-
-
 # 2、怎么避免不必要的token浪费？
 
-A、养成经常管理上下文的习惯 /context /clear /compact ：/context 看当前上下文占用谁最多，/clear 一般是一个任务做完了干净了直接/clear清掉拿到一个新的上下文， /compact一般是不想清理前面上下文的时候会压缩一下，一般claude code会有自己的自动上下文压缩，但是如果到了它自己预设的 85%, 95%的压缩阈值，其实前面context已经有很多无关信息了，不仅token消耗大，还会让agent focus偏移也就是所谓的drift，一般现在大模型的上下文窗口1M，但是到50%左右上下文占用就开始drift了，所以你会看到各家厂商虽然说自己模型支持1百万的上下文窗口，但是API文档里面CLAUDE_CODE_AUTO_COMPACT_WINDOW一般只设置到50万到70万  
+A、(每日)养成经常管理上下文的习惯 /context /clear /compact ：/context 看当前上下文占用谁最多，/clear 一般是一个任务做完了干净了直接/clear清掉拿到一个新的上下文， /compact一般是不想清理前面上下文的时候会压缩一下，一般claude code会有自己的自动上下文压缩，但是如果到了它自己预设的 85%, 95%的压缩阈值，其实前面context已经有很多无关信息了，不仅token消耗大，还会让agent focus偏移也就是所谓的drift，一般现在大模型的上下文窗口1M，但是到50%左右上下文占用就开始drift了，所以你会看到各家厂商虽然说自己模型支持1百万的上下文窗口，但是API文档里面CLAUDE_CODE_AUTO_COMPACT_WINDOW一般只设置到50万到70万  
 
 B、(每月)记忆的精简：比如claude code的记忆是3层，个人CLAUDE.md + 项目的CLAUDE.md+它自己的MEMORY索引： 个人和项目CLAUDE.md会膨胀，所以定期把它精简到200行以内，然后MEMORY也会膨胀，而且claude code截止202510月的最新版还是没有自动整理MEMORY的功能，我自己是写了个每个月claude code自己的cron做一次MEMORY的整理把过时的错误的记忆纠正以及精简记忆  
 
 C、(每月) /doctor + /insight：/doctor 能让claude code自己分析自己skill,setting,CLAUDE.md等是不是太长了或者太久了做优化，而 /insight 会基于最近的200次会话分析出一份html报告让你知道token消耗在哪里  
 
-
 # 3、提高并行度？
+1主1副=>到1主2副=>到1主4副，一步步拉高，而不是一步到位
 
 提高并行度这件事得在，前面第二点之后做，或者和第2交叉做，并行度意味着token消耗量会开始直线上升，所以我建议是先做好token消耗的管理工作，也就是熟悉好上下文的管理后才开始提高并行度。  
 
@@ -56,5 +56,5 @@ C、(每月) /doctor + /insight：/doctor 能让claude code自己分析自己ski
 也就是说并行度可以从 业务线、职能线 这两个维度去切分agent，业务线角度就是每一个agent单独负责一个opsx slice所有前端和后端全部开发，职能线就是每一个agent都有自己专门的工作比如前端、后端、测试、review。这种划分其实和公司里面业务-职能划分是类似的，多个业务线对应多个opsx slice，每个业务线里面有多个职能团队对应不同 前端、后端、测试、review agent等  
 
 提高并行度避免冲突的办法现在有2个：  
-一个是 subagent + worktree；  
-另一种是切分只读的agent，写的agent的话就是做到不重叠改代码，也就是把冲突解决前置到前面切分工作，让agent开工的时候改的那部分文件本身就不会和别的agent  
+- 一个是 subagent + worktree  
+- 另一种是Claude Code Agent Team的做法: 也就是切分只读的agent，写的agent的话就是做到不重叠改代码，也就是把冲突解决前置到前面切分工作，让agent开工的时候改的那部分文件本身就不会和别的agent  
