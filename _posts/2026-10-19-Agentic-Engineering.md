@@ -20,7 +20,7 @@ Gemini cli到Claude Code用了好几个Coding Agent，从一开始vibe coding到
 
 A、开发 和 test_review 的agent是不同AI模型，做AI对抗，比如开发的是deepseek-flash的api，test_review的是glm的模型，当AI成吨成吨产出代码，现在业内共识就是：人类肉眼根本不可能review得过来，只能用AI去review AI。否则软件开发速度的瓶颈就卡在了人类review这里  
 
-B、SDD: Spec驱动开发，引入openspec(opsx)，需求先提交 opsx，然后人类针对 /opsx:propasal 的方案做质询，其实我很多时候都不会直接去看opsx原文了，都是让AI告诉我它这opsx怎么设计的，然后把一些边界条件质询的办法去质询AI为什么这么设计如果xxx时候怎么样，其实有点类似原本在小团队当Lead的时候和2个组员讨论设计的时候，类似苏格拉底提问的方式进行的，设计这一步挺重要的，一个完整详尽的opsx可以让后面开发agent实现后不至于返工太多，返工都是token烧钱啊，所以一开始做plan设计的时候反而相对后面返工来说代价更低，对需求的设计要多花功夫，而后面agent去loop自己开发写代码测试的时候就可以不用怎么盯着，等它开发完再通知我。  
+B、SDD: Spec驱动开发，引入openspec(opsx)，需求先提交 opsx，越小越原子越好AI最擅长小而具体的场景。然后人类针对 /opsx:propasal 的方案做质询，其实我很多时候都不会直接去看opsx原文了，都是让AI告诉我它这opsx怎么设计的，然后把一些边界条件质询的办法去质询AI为什么这么设计如果xxx时候怎么样，其实有点类似原本在小团队当Lead的时候和2个组员讨论设计的时候，类似苏格拉底提问的方式进行的，设计这一步挺重要的，一个完整详尽的opsx可以让后面开发agent实现后不至于返工太多，返工都是token烧钱啊，所以一开始做plan设计的时候反而相对后面返工来说代价更低，对需求的设计要多花功夫，而后面agent去loop自己开发写代码测试的时候就可以不用怎么盯着，等它开发完再通知我。  
 
 一旦opsx这份spec完备了，接下来就是 /opsx:apply 让 开发agent从opsx领取任务开发，开发的时候 test_review agent也是根据这个 opsx 去写测试，开发agent 开发完成后交给 test_review agent去 review，这个让其他agent review code的话，其实claude code最近2026年9月上的agent之间通信的功能就挺好，感觉是从还在实验阶段的agent team里面剥离出来的，比agent team更可控一点，开发agent完成了通过这个mailbox发送给 test_review agent去 review,test_review agent就切subagent哼哧哼哧地去review了  
 
